@@ -3,6 +3,9 @@
 #--------------------Aliases-------------------- 
 alias v='vim'
 alias s='sudo'
+alias sp='sudo pacman'
+alias sps='sudo pacman -S'
+alias spr='sudo pacman -Rs'
 #alias vn='vim /mnt/c/Users/berge/OneDrive/Documents/Notes/vim/vim_notes.md'
 #alias f='vim $(fzf-tmux)'
 #alias fn='n && f'
