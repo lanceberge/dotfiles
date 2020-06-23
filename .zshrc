@@ -14,7 +14,7 @@ export LANG=en_US.UTF-8
 HISTSIZE=1000
 SAVEHIST=1000
 
-# vi mode
+# Vi mode
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
 export KEYTIMEOUT=20
@@ -23,21 +23,21 @@ export KEYTIMEOUT=20
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^f' edit-command-line
 
-# tab completion
+# Tab completion
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # include dotfiles
 
-# vim keys in tab complete menu
+# Vim keys in tab complete menu
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M viins '^?' backward-delete-char
 
-#--------------------Prompt-------------------- 
+# Prompt
 export TERM=xterm-256color
 
 autoload -Uz vcs_info
@@ -49,5 +49,10 @@ setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats " %F{108}on %F{208}%b%F{124}[%u%c]"
 prompt='%F{106}%~${vcs_info_msg_0_}%F{white} # '
+
+# Start x at login
+if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  exec startx
+fi
 
 neofetch
