@@ -19,6 +19,7 @@ alias gcam='git commit -a -m'
 alias gca='git commit -a'
 alias gr='git reset'
 alias gl='git log'
+alias gp='git push -u origin master'
 
 # Navigation
 #alias n='cd /mnt/c/Users/berge/OneDrive/Documents/Notes/'
