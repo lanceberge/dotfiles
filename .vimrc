@@ -62,6 +62,8 @@ set nohlsearch " don't highlight searches
 "-----netrw-----"
 let g:netrw_banner = 0
 let g:netrw_liststly=3
+let g:netrw_list_hide='^\./$' " hide ./ in netrw
+let g:netrw_hide=1
 
 "-----Autocomplete-----"
 set completeopt=menuone,longest,noinsert
@@ -90,7 +92,7 @@ set background=dark
 set termguicolors " colors are off in tmux without this
 colorscheme gruvbox
 set cursorline
-set cursorlineopt=number
+set cursorlineopt=number " highlight current line number
 
 "--------------------Mappings--------------------"
 set pastetoggle=<F2> " toggle paste mode
@@ -139,7 +141,7 @@ inoremap jk <esc>
 inoremap kj <esc>
 " give bracket pair with {<cr>
 inoremap {<cr> {<cr>}<esc>O
-" able to undo deleted text with c-u and c-w
+" able to undo text deleted with c-w or c-u
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
