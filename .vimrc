@@ -89,15 +89,20 @@ syntax enable
 set background=dark
 set termguicolors " colors are off in tmux without this
 colorscheme gruvbox
+set cursorline
+set cursorlineopt=number
 
 "--------------------Mappings--------------------"
 set pastetoggle=<F2> " toggle paste mode
 
 "-----Normal Mode-----"
-" ; for command mode, : for external commands, , for next in f or t searches
-noremap ; :
-noremap : :!
-noremap , ;
+nnoremap ; :
+nnoremap : ;
+nnoremap <leader>; :!
+nnoremap H ^
+nnoremap L g_
+nnoremap <leader>H H
+nnoremap <leader>L L
 
 "-----Leader Maps-----"
 map <space> <leader>
@@ -131,6 +136,7 @@ nnoremap <esc>o <c-w>o
 
 "-----Insert Mode-----"
 inoremap jk <esc>
+inoremap kj <esc>
 " give bracket pair with {<cr>
 inoremap {<cr> {<cr>}<esc>O
 " able to undo deleted text with c-u and c-w
@@ -144,7 +150,7 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro " don't continue commen
 
 "-----Command Mode-----"
 cnoremap jk <esc>
-" cnoremap kj <esc>
+cnoremap kj <esc>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 cnoreabbrev v vert
