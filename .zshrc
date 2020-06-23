@@ -49,6 +49,7 @@ setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats " %F{108}on %F{208}%b%F{124}[%u%c]"
 prompt='%F{106}%~${vcs_info_msg_0_}%F{white} # '
+PS2='> '
 
 # Start x at login
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
