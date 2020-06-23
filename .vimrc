@@ -75,8 +75,8 @@ let g:markdown_fenced_languages = ['python', 'bash', 'c']
 
 "--------------------Plugins--------------------"
 call plug#begin('~/.vim/plugged')
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim' " fuzzy finding
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'morhetz/gruvbox' " theme
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete, linting, formatting
@@ -94,6 +94,10 @@ colorscheme gruvbox
 set cursorline
 set cursorlineopt=number " highlight current line number
 
+"-----fzf-----"
+set rtp+=~/.fzf
+let g:fzf_preview_window = '' " no preview window
+
 "--------------------Mappings--------------------"
 set pastetoggle=<F2> " toggle paste mode
 
@@ -110,11 +114,11 @@ nnoremap <leader>L L
 map <space> <leader>
 nnoremap <leader>v :vert sfind<space>
 nnoremap <leader>kp :!python %<cr>
-nnoremap <leader>r :w <bar>source $MYVIMRC<cr>
+nnoremap <leader>r :w <bar>source ~/dotfiles/.vimrc<cr>
 nnoremap <leader>q :wq!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>u :e ~/dotfiles/.vimrc<cr>
-nnoremap <leader>f :find<space>
+nnoremap <leader>kf :find<space>
 " fugitive
 nnoremap <leader>gs :vert botright Git<cr>
 nnoremap <leader>gd :Git diff<cr>
@@ -124,6 +128,22 @@ nnoremap <leader>ga :Gdiffsplit<cr>
 nnoremap <leader>t :10Lexplore<cr>
 "terminal buffer
 nnoremap <leader>T :term<cr>
+" fzf
+nnoremap <leader>F :Files<cr>
+nnoremap <leader>f :GFiles<cr>
+nnoremap <leader>GL :Commits<cr>
+nnoremap <leader>gl :BCommits<cr>
+nnoremap <leader>kn :Notes<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>L :Lines<cr>
+nnoremap <leader>l :BLines<cr>
+nnoremap <leader>m :Maps<cr>
+nnoremap <leader>kc :Commands<cr>
+nnoremap <leader>km :Marks<cr>
+nnoremap <leader>kt :BTags<cr>
+nnoremap <leader>KT :Tags<cr>
+nnoremap <leader>kh :History<cr>
+nnoremap <leader>kw :Windows<cr>
 " buffers
 nnoremap <leader>d :bn<cr>
 nnoremap <leader>s :bp<cr>
