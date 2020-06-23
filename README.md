@@ -6,5 +6,6 @@
 * alacritty - terminal emulator
 * zsh - shell
 * ttf-dejavu - font
-* i3 (all except i3-wm) - window manager
+* bspwm - window manager
+* sxkhd - hotkey manager
 * vim, git, neofetch, compton, tmux
