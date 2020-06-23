@@ -169,6 +169,9 @@ inoremap <c-w> <c-g>u<c-w>
 " x to quit in help menu
 autocmd Filetype help nnoremap <buffer> x :q<cr>
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro " don't continue comments on newlines
+" highlight line in insert mode, number otherwise
+autocmd InsertEnter * set cursorlineopt=both
+autocmd InsertLeave * set cursorlineopt=number
 
 "-----Command Mode-----"
 cnoremap jk <esc>
