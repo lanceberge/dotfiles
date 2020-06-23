@@ -9,6 +9,7 @@ export EDITOR="vim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
+export VIMINIT="source ~/dotfiles/.vimrc"
 
 # History
 HISTSIZE=1000
@@ -17,6 +18,7 @@ SAVEHIST=1000
 # Vi mode
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
+bindkey -M viins 'kj' vi-cmd-mode # remap <esc>
 export KEYTIMEOUT=20
 
 # Edit line in vim with C-f
@@ -56,4 +58,3 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
   exec startx
 fi
 
-neofetch
