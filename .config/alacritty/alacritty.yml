@@ -16,7 +16,6 @@ colors:
     blue:    '#458588'
     magenta: '#b16286'
     cyan:    '#689d6a'
-    # white:   '#a89984'
     white:   '#ebdbb2'
 
   # Bright colors
@@ -28,4 +27,4 @@ colors:
     blue:    '#83a598'
     magenta: '#d3869b'
     cyan:    '#8ec07c'
-    white:   '#ebdbb2'
+    white:   '#a89984'
