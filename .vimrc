@@ -9,7 +9,6 @@ set ttimeoutlen=100
 set display+=lastline " don't show @ when the last line doesn't fit on the screen
 set autoread " automatically read when files have been changed outside of vim
 set history=500 " save last 500 commands
-set undolevels=500 " number of possible undos; default is 1000
 set splitbelow " horizontal split is automatically below
 set splitright " vertical split is automatically right
 set hidden " don't need to write a file to switch buffers
@@ -20,9 +19,17 @@ set updatetime=100
 set formatoptions+=j " Delete comment character when joining commented lines
 set termwinsize=20x200 " terminal buffer size
 set lazyredraw " render changes once macro has finished
+set autochdir " auto change to the directory of a file when switching files
+set browsedir=buffer " netrw uses current files directory
+filetype indent plugin on " determine the type of a file based on contents
 " highlight characters past 80 chars in a line
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+
+"-----Undos-----"
+set undolevels=500 " number of possible undos; default is 1000
+set undodir=~/.vim/undo " undos save between opening and closing vim
+set undofile
 
 "-----Statusline-----"
 set laststatus=2 " show status bar
@@ -58,6 +65,14 @@ set path=.,,** " recursive :find searches relative to cwd
 set wildmenu " <tab> for match menu in :e and :find
 set smartcase " match case if capitals are in a search, otherwise don't
 set nohlsearch " don't highlight searches
+" center search results
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+" 'very magic' searches by default - better support for regular expressions
+nnoremap ? ?\v
+nnoremap / /\v
 
 "-----netrw-----"
 let g:netrw_banner = 0
@@ -75,7 +90,6 @@ let g:markdown_fenced_languages = ['python', 'bash', 'c']
 
 "--------------------Plugins--------------------"
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'morhetz/gruvbox' " theme
@@ -97,6 +111,8 @@ set cursorlineopt=number " highlight current line number
 "-----fzf-----"
 set rtp+=~/.fzf
 let g:fzf_preview_window = '' " no preview window
+" set layout to bottom of screen and roughly 20% of it's height
+let g:fzf_layout = { 'down': '~20%' }
 
 "--------------------Mappings--------------------"
 set pastetoggle=<F2> " toggle paste mode
