@@ -137,6 +137,12 @@ nnoremap <leader>q :wq!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>u :e ~/dotfiles/.vimrc<cr>
 nnoremap <leader>kf :find<space>
+" vim plug
+nnoremap <leader>pi :PlugInstall<cr>
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <leader>pu :PlugUpdate<cr>
+nnoremap <leader>pU :PlugUpgrade<cr>
+nnoremap <leader>ps :PlugStatus<cr>
 " fugitive
 nnoremap <leader>gs :vert botright Git<cr>
 nnoremap <leader>gd :Git diff<cr>
@@ -171,20 +177,47 @@ nnoremap <esc>j <c-w>j
 nnoremap <esc>k <c-w>k
 nnoremap <esc>q :q!<cr>
 nnoremap <esc>o <c-w>o
-" Brackets (taken from tpope's unimpaired - I didn't need the whole plugin)
-nnoremap [<space> O<esc>
-nnoremap ]<space> o<esc>
-nnoremap [e ddkP
-nnoremap ]e ddp
-nnoremap [b :bprevious<cr>
-nnoremap ]b :bnext<cr>
+" Brackets & toggles(taken from tpope's unimpaired - I didn't need the whole plugin)
+nnoremap <silent> [<space> O<esc>
+nnoremap <silent> ]<space> o<esc>
+nnoremap <silent> [b :bprevious<cr>
+nnoremap <silent> ]b :bnext<cr>
+nnoremap <silent> [B :bfirst<cr>
+nnoremap <silent> ]B :blast<cr>
 nnoremap [oh :set nohlsearch<cr>
 nnoremap ]oh :set hlsearch<cr>
-" Toggles
 nnoremap yoh :set hlsearch!<cr>
+nnoremap [ow :set nowrap<cr>
+nnoremap ]ow :set wrap<cr>
+nnoremap yow :set wrap!<cr>
+nnoremap [ou :set colorcolumn=<cr>
+nnoremap ]ou :set colorcolumn=80<cr>
+nnoremap [oi :set ignorecase<cr>
+nnoremap ]oi :set ignorecase<cr>
+nnoremap yoi :set ignorecase!<cr>
+
+function MoveLineUp(count) " only doesn't work on last line
+    let c = a:count
+    while c > 0
+        :normal! ddkP
+        let c -= 1
+    endwhile
+endfunction
+
+function MoveLineDown(count)
+    let c = a:count
+    while c > 0
+        :normal! ddp
+        let c -= 1
+    endwhile
+endfunction
+
+" <count>[e to move current line up <count> times, ]e for down
+nnoremap <silent> [e :<c-u>call MoveLineUp(v:count1)<cr>
+nnoremap  <silent> ]e :<c-u>call MoveLineDown(v:count1)<cr>
 "-----Insert Mode-----"
 inoremap jk <esc>
-inoremap kj <esc>
+" inoremap kj <esc>
 " give bracket pair with {<cr>
 inoremap {<cr> {<cr>}<esc>O
 " able to undo text deleted with c-w or c-u
