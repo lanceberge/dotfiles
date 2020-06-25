@@ -116,13 +116,15 @@ let g:fzf_layout = { 'down': '~20%' }
 
 "--------------------Mappings--------------------"
 set pastetoggle=<F2> " toggle paste mode
+" C-l to clear highlight search (taken from tpope's sensible)
+nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 "-----Normal Mode-----"
 nnoremap ; :
 nnoremap : ;
 nnoremap <leader>; :!
 nnoremap H ^
-nnoremap L g_
+nnoremap L $
 nnoremap <leader>H H
 nnoremap <leader>L L
 
@@ -161,8 +163,6 @@ nnoremap <leader>KT :Tags<cr>
 nnoremap <leader>kh :History<cr>
 nnoremap <leader>kw :Windows<cr>
 " buffers
-nnoremap <leader>d :bn<cr>
-nnoremap <leader>s :bp<cr>
 nnoremap <leader>x :bd!<cr>
 " Windows
 nnoremap <esc>h <c-w>h
@@ -171,7 +171,17 @@ nnoremap <esc>j <c-w>j
 nnoremap <esc>k <c-w>k
 nnoremap <esc>q :q!<cr>
 nnoremap <esc>o <c-w>o
-
+" Brackets (taken from tpope's unimpaired - I didn't need the whole plugin)
+nnoremap [<space> O<esc>
+nnoremap ]<space> o<esc>
+nnoremap [e ddkP
+nnoremap ]e ddp
+nnoremap [b :bprevious<cr>
+nnoremap ]b :bnext<cr>
+nnoremap [oh :set nohlsearch<cr>
+nnoremap ]oh :set hlsearch<cr>
+" Toggles
+nnoremap yoh :set hlsearch!<cr>
 "-----Insert Mode-----"
 inoremap jk <esc>
 inoremap kj <esc>
@@ -183,7 +193,7 @@ inoremap <c-w> <c-g>u<c-w>
 
 "-----Autocommands-----"
 " x to quit in help menu
-autocmd Filetype help nnoremap <buffer> x :q<cr>
+autocmd Filetype help nnoremap <buffer> q :q<cr>
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro " don't continue comments on newlines
 " highlight line in insert mode, number otherwise
 autocmd InsertEnter * set cursorlineopt=both
