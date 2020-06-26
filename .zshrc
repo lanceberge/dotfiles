@@ -14,6 +14,7 @@ export VIMINIT="source ~/dotfiles/.vimrc"
 # History
 HISTSIZE=1000
 SAVEHIST=1000
+HISTFILE=~/.zsh_history
 
 # Vi mode
 bindkey -v
