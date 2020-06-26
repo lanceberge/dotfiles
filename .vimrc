@@ -98,6 +98,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'wellle/targets.vim'
 call plug#end()
 
 "-----Colorscheme-----"
@@ -132,7 +133,8 @@ nnoremap <leader>L L
 map <space> <leader>
 nnoremap <leader>v :vert sfind<space>
 nnoremap <leader>kp :!python %<cr>
-nnoremap <leader>r :w <bar>source ~/dotfiles/.vimrc<cr>
+nnoremap <leader>r :normal! gg=G<cr>| " reformat
+nnoremap <leader>R :w <bar>source ~/dotfiles/.vimrc<cr>
 nnoremap <leader>q :wq!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>u :e ~/dotfiles/.vimrc<cr>
@@ -159,7 +161,7 @@ nnoremap <leader>GL :Commits<cr>
 nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>kn :Notes<cr>
 nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>L :Lines<cr>
+nnoremap <leader><esc>l :Lines<cr>
 nnoremap <leader>l :BLines<cr>
 nnoremap <leader>m :Maps<cr>
 nnoremap <leader>kc :Commands<cr>
@@ -196,25 +198,23 @@ nnoremap [oi :set ignorecase<cr>
 nnoremap ]oi :set ignorecase<cr>
 nnoremap yoi :set ignorecase!<cr>
 
-function MoveLineUp(count) " only doesn't work on last line
+function! MoveLineUp(count) " only doesn't work on last line
     let c = a:count
-    while c > 0
+    for i in range(c)
         :normal! ddkP
-        let c -= 1
-    endwhile
+    endfor
 endfunction
 
-function MoveLineDown(count)
+function! MoveLineDown(count)
     let c = a:count
-    while c > 0
+    for i in range(c)
         :normal! ddp
-        let c -= 1
-    endwhile
+    endfor
 endfunction
 
 " <count>[e to move current line up <count> times, ]e for down
-nnoremap <silent> [e :<c-u>call MoveLineUp(v:count1)<cr>
 nnoremap  <silent> ]e :<c-u>call MoveLineDown(v:count1)<cr>
+nnoremap <silent> [e :<c-u>call MoveLineUp(v:count1)<cr>
 "-----Insert Mode-----"
 inoremap jk <esc>
 " inoremap kj <esc>
@@ -225,16 +225,35 @@ inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
 "-----Autocommands-----"
-" x to quit in help menu
-autocmd Filetype help nnoremap <buffer> q :q<cr>
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro " don't continue comments on newlines
+" q to quit in help menu
+augroup help_menu
+    autocmd!
+    autocmd Filetype help nnoremap <buffer> q :q<cr> | nnoremap <buffer> K 5k
+                \ | nnoremap <buffer> J 5j
+augroup END
+
+augroup auto_source
+    autocmd!
+    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro " don't continue comments on newlines
+    autocmd BufWritePost ~/dotfiles/.vimrc source ~/dotfiles/.vimrc " auto source 
+    " .vimrc when writing it
+augroup END
+
 " highlight line in insert mode, number otherwise
-autocmd InsertEnter * set cursorlineopt=both
-autocmd InsertLeave * set cursorlineopt=number
+augroup insert_mode
+    autocmd!
+    autocmd InsertEnter * set cursorlineopt=both
+    autocmd InsertLeave * set cursorlineopt=number
+augroup END
+
+augroup python
+    autocmd!
+    autocmd Filetype python iabbrev <buffer> iff if:<cr>
+augroup END
 
 "-----Command Mode-----"
 cnoremap jk <esc>
-cnoremap kj <esc>
+" cnoremap kj <esc>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 cnoreabbrev v vert
