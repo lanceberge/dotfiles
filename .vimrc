@@ -131,6 +131,7 @@ nnoremap H ^
 nnoremap L $
 nnoremap <leader>H H
 nnoremap <leader>L L
+nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
@@ -142,6 +143,7 @@ nnoremap <leader>q :wq!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>u :e ~/dotfiles/.vimrc<cr>
 nnoremap <leader>kf :find<space>
+nnoremap <leader>s :source %<cr>
 " toggle netrw
 nnoremap <leader>t :10Lexplore<cr>
 "terminal buffer
@@ -174,8 +176,9 @@ nnoremap <leader>kc :Commands<cr>
 nnoremap <leader>km :Marks<cr>
 nnoremap <leader>kt :BTags<cr>
 nnoremap <leader>KT :Tags<cr>
-nnoremap <leader>kh :History<cr>
+nnoremap <leader>KH :History<cr>
 nnoremap <leader>kw :Windows<cr>
+nnoremap <leader>kh :Helptags<cr>
 " }}}
 " Windows/buffers -------------------- {{{
 nnoremap <leader>x :bd!<cr>
@@ -205,8 +208,7 @@ nnoremap ]ou :set colorcolumn=80<cr>
 nnoremap [oi :set ignorecase<cr>
 nnoremap ]oi :set ignorecase<cr>
 nnoremap yoi :set ignorecase!<cr>
-" }}}
-" Move Line Up/Down -------------------- {{{
+" Move Line Up/Down ---------- {{{
 function! MoveLineUp(count) " only doesn't work on last line
     let c = a:count
     for i in range(c)
@@ -225,6 +227,7 @@ endfunction
 nnoremap  <silent> ]e :<c-u>call MoveLineDown(v:count1)<cr>
 nnoremap <silent> [e :<c-u>call MoveLineUp(v:count1)<cr>
 " }}}
+" }}}
 " Insert Mode -------------------- {{{
 inoremap jk <esc>
 " inoremap kj <esc>
@@ -234,22 +237,33 @@ inoremap {<cr> {<cr>}<esc>O
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 " }}}
+" Command Mode-------------------- {{{
+cnoremap jk <esc>
+" cnoremap kj <esc>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoreabbrev v vert
+" }}}
+" Visual Mode-------------------- {{{
+vnoremap jk <esc>
+" }}}
 
 "--------------------Autocommands--------------------"
 " Help Menu -------------------- {{{
 " q to quit in help menu
 augroup help_menu
     autocmd!
-    autocmd Filetype help nnoremap <buffer> q :q<cr> | nnoremap <buffer> K 5k
-                \ | nnoremap <buffer> J 5j
+    autocmd Filetype help nnoremap <buffer> q :q<cr> | nnoremap <buffer> K <c-u> |
+                \ nnoremap <buffer> J <c-d>
 augroup END
 " }}}
 " Automatically Source -------------------- {{{
 augroup auto_source
     autocmd!
-    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro " don't continue comments on newlines
-    autocmd BufWritePost ~/dotfiles/.vimrc source ~/dotfiles/.vimrc " auto source 
-    " .vimrc when writing it
+    " don't continue comments on newlines
+    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro 
+    " auto source .vimrc when writing it
+    autocmd BufWritePost ~/dotfiles/.vimrc source ~/dotfiles/.vimrc 
 augroup END
 " }}}
 " Insert Mode -------------------- {{{
@@ -263,7 +277,7 @@ augroup END
 " Python file settings -------------------- {{{
 augroup python
     autocmd!
-    autocmd Filetype python iabbrev <buffer> iff if:<cr>
+    autocmd Filetype python iabbrev <buffer> iff if:<cr> | set textwidth=80
 augroup END
 " }}}
 " Vimscript settings -------------------- {{{
@@ -271,11 +285,4 @@ augroup filetype_vim
     autocmd!
     autocmd Filetype vim setlocal foldmethod=marker
 augroup END
-" }}}
-" Command Mode-------------------- {{{
-cnoremap jk <esc>
-" cnoremap kj <esc>
-cnoremap <c-j> <down>
-cnoremap <c-k> <up>
-cnoreabbrev v vert
 " }}}
