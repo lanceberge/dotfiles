@@ -2,6 +2,7 @@
 
 #--------------------Aliases-------------------- 
 alias v='vim'
+alias nv='nvim'
 alias s='sudo'
 alias sp='sudo pacman'
 alias sps='sudo pacman -S'
@@ -47,6 +48,7 @@ alias so='source ~/.zshrc'
 alias tso='tmux source ~/.tmux.conf'
 alias zrc='vim ~/dotfiles/.zshrc'
 alias vrc='vim ~/dotfiles/.vimrc'
+alias nrc='nvim ~/dotfiles/.config/nvim/init.vim'
 alias trc='vim ~/dotfiles/.tmux.conf'
 
 # Listing Files
@@ -60,4 +62,6 @@ alias ls='command ls ${colorflag}'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+# Miscellaneous
 alias nf=neofetch
