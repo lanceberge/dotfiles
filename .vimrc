@@ -22,6 +22,7 @@ set termwinsize=20x200 " terminal buffer size
 set lazyredraw " render changes once macro has finished
 set autochdir " auto change to the directory of a file when switching files
 set browsedir=buffer " netrw uses current files directory
+set gdefault " default /g for substitutions
 filetype indent plugin on " determine the type of a file based on contents
 " highlight characters past 80 chars in a line
 highlight ColorColumn ctermbg=magenta
@@ -64,6 +65,7 @@ set showmatch " show matching (, {, [, etc.
 set incsearch  " show matches without needing <cr>
 set path=.,,** " recursive :find searches relative to cwd
 set wildmenu " <tab> for match menu in :e and :find
+set ignorecase
 set smartcase " match case if capitals are in a search, otherwise don't
 set nohlsearch " don't highlight searches
 " center search results
@@ -91,6 +93,7 @@ let g:markdown_fenced_languages = ['python', 'bash', 'c']
 " }}}
 " Plugins -------------------- {{{
 call plug#begin('~/.vim/plugged')
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'morhetz/gruvbox' " theme
@@ -122,6 +125,7 @@ let g:fzf_layout = { 'down': '~20%' }
 set pastetoggle=<F2> " toggle paste mode
 " C-l to clear highlight search (taken from tpope's sensible)
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+nnoremap <leader><cr> <c-^>
 " }}}
 " Normal Mode -------------------- {{{
 nnoremap ; :
@@ -156,6 +160,15 @@ nnoremap <leader>pu :PlugUpdate<cr>
 nnoremap <leader>pU :PlugUpgrade<cr>
 nnoremap <leader>ps :PlugStatus<cr>
 " }}}
+" Vim-Tmux-Navigator -------------------- {{{
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+" }}}
 " Fugitive -------------------- {{{
 nnoremap <leader>gs :vert botright Git<cr>
 nnoremap <leader>gd :Git diff<cr>
@@ -181,13 +194,18 @@ nnoremap <leader>kw :Windows<cr>
 nnoremap <leader>kh :Helptags<cr>
 " }}}
 " Windows/buffers -------------------- {{{
-nnoremap <leader>x :bd!<cr>
-nnoremap <esc>h <c-w>h
-nnoremap <esc>l <c-w>l
-nnoremap <esc>j <c-w>j
-nnoremap <esc>k <c-w>k
+nnoremap <silent> <leader>x :bd!<cr>
+" nnoremap <esc>h <c-w>h
+" nnoremap <esc>l <c-w>l
+" nnoremap <esc>j <c-w>j
+" nnoremap <esc>k <c-w>k
 nnoremap <esc>q :q!<cr>
-nnoremap <esc>o <c-w>o
+nnoremap <silent>  <esc>o :wincmd o<cr>
+nnoremap <silent> <esc>= :wincmd =<cr>
+nnoremap <silent> <esc>+ :wincmd +<cr>
+nnoremap <silent> <esc>- :wincmd -<cr>
+nnoremap <silent> <esc>s :wincmd s<cr>
+nnoremap <silent> <esc>v :wincmd v<cr>
 " }}}
 " Brackets -------------------- {{{
 " Brackets & toggles(taken from tpope's unimpaired - I didn't need the whole plugin)
@@ -208,6 +226,8 @@ nnoremap ]ou :set colorcolumn=80<cr>
 nnoremap [oi :set ignorecase<cr>
 nnoremap ]oi :set ignorecase<cr>
 nnoremap yoi :set ignorecase!<cr>
+nnoremap [Q :cfirst<cr>
+nnoremap ]Q :clast<cr>
 " Move Line Up/Down ---------- {{{
 function! MoveLineUp(count) " only doesn't work on last line
     let c = a:count
@@ -284,5 +304,18 @@ augroup END
 augroup filetype_vim
     autocmd!
     autocmd Filetype vim setlocal foldmethod=marker
+augroup END
+" }}}
+" Markdown  -------------------- {{{
+augroup markdown
+    autocmd!
+    autocmd BufRead,BufNewFile *.md set filetype=markdown | setlocal spell |
+                \ setlocal textwidth=100
+augroup END
+" }}}
+" Git Commit  -------------------- {{{
+augroup gitcommit
+    autocmd!
+    autocmd Filetype gitcommit setlocal spell
 augroup END
 " }}}
