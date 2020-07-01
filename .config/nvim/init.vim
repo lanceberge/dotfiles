@@ -1,6 +1,6 @@
 "--------------------Settings--------------------" 
 " General-------------------- {{{
-set runtimepath^=~/dotfiles/.vim runtimepath+=~/.vim/after
+set runtimepath^=~/dotfiles/.vim
 let &packpath = &runtimepath
 set noerrorbells
 set clipboard=unnamedplus
@@ -60,7 +60,7 @@ set shiftwidth=4
 " }}}
 " Searching -------------------- {{{
 set incsearch  " show matches without needing <cr>
-set path=.,,** " recursive :find searches relative to cwd
+set path=.,, " :find searches relative to cwd
 set wildmenu " <tab> for match menu in :e and :find
 set ignorecase
 set smartcase " match case if capitals are in a search, otherwise don't
@@ -90,17 +90,17 @@ let g:markdown_fenced_languages = ['python', 'bash', 'c']
 " }}}
 " Plugins -------------------- {{{
 call plug#begin('~/dotfiles/.vim/plugged')
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator' " navigate tmux panes and vim windows with C-{h,j,k,l}
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'morhetz/gruvbox' " theme
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete, linting, formatting
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary' " comment with gc{motion}
+Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-surround'
-Plug 'wellle/targets.vim'
+Plug 'tpope/vim-vinegar' " improves netrw
+Plug 'tpope/vim-surround' " s as a motion for surrounding characters
+Plug 'wellle/targets.vim' " adds new text obects, also all text objects work outside of the object like ci' does
 call plug#end()
 " }}}
 " Colorscheme -------------------- {{{
@@ -115,8 +115,6 @@ let g:fzf_preview_window = '' " no preview window
 let g:fzf_layout = { 'down': '~20%' }
 " }}}
 " Folding -------------------- {{{
-" set nofoldenable " don't fold by default
-" set foldmethod=syntax " fold by indent
 set foldnestmax=10 " deepest fold is 10 levels
 set foldignore=
 " }}}
@@ -147,19 +145,17 @@ nnoremap <silent>yp :let @" = fnamemodify('', ':p')<c-f>0ci'| " copy a file path
 " Leader Maps -------------------- {{{
 map <space> <leader>
 nnoremap <leader>v :vert sfind<space>
-nnoremap <leader>kp :!python %<cr>
-nnoremap <leader>r :normal! gg=G<cr>| " reformat
-nnoremap <leader>R :w <bar>source ~/dotfiles/.vimrc<cr>
 nnoremap <leader>q :update<bar>q!<cr>
 nnoremap <leader>w :w<cr>
-nnoremap <leader>u :e ~/dotfiles/.vimrc<cr>
+nnoremap <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <leader>kf :find<space>
 nnoremap <leader>s :source %<cr>
 " toggle netrw
 nnoremap <leader>t :10Lexplore<cr>
 "terminal buffer
 nnoremap <leader>T :term<cr>
-nnoremap <leader>o :call QuickfixToggle()<cr>
+nnoremap <leader>u :call QuickfixToggle()<cr>
 " QuickfixToggle ---------- {{{
 let g:quickfix_is_open = 0
 
@@ -216,22 +212,21 @@ function! GFilesOrFiles()
     else
         Files
     endif
-  endfunction
-  " }}}
-" nnoremap <leader>F :Files<cr>
-" nnoremap <leader>f :GFiles<cr>
+endfunction
+" }}}
+nnoremap <leader>F :Files<cr>
 nnoremap <leader>f :call GFilesOrFiles()<cr>
-nnoremap <leader>GL :Commits<cr>
+nnoremap <leader>gL :Commits<cr>
 nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>kn :Notes<cr>
 nnoremap <leader>b :Buffers<cr>
-nnoremap <leader><C-l> :Lines<cr>
+nnoremap <leader><c-l> :Lines<cr>
 nnoremap <leader>l :BLines<cr>
 nnoremap <leader>kc :Commands<cr>
 nnoremap <leader>km :Marks<cr>
 nnoremap <leader>kt :BTags<cr>
-nnoremap <leader>KT :Tags<cr>
-nnoremap <leader>KH :History<cr>
+nnoremap <leader>kT :Tags<cr>
+nnoremap <leader>kH :History<cr>
 nnoremap <leader>kw :Windows<cr>
 nnoremap <leader>kh :Helptags<cr>
 nmap <A-m> <plug>(fzf-maps-n)
@@ -272,25 +267,6 @@ nnoremap ]oi :set ignorecase<cr>
 nnoremap yoi :set ignorecase!<cr>
 nnoremap [Q :cfirst<cr>
 nnoremap ]Q :clast<cr>
-" Move Line Up/Down ---------- {{{
-function! MoveLineUp(count) " only doesn't work on last line
-    let c = a:count
-    for i in range(c)
-        :normal! ddkP
-    endfor
-endfunction
-
-function! MoveLineDown(count)
-    let c = a:count
-    for i in range(c)
-        :normal! ddp
-    endfor
-endfunction
-
-" <count>[e to move current line up <count> times, ]e for down
-nnoremap  <silent> ]e :<c-u>call MoveLineDown(v:count1)<cr>
-nnoremap <silent> [e :<c-u>call MoveLineUp(v:count1)<cr>
-" }}}
 " }}}
 " Insert Mode -------------------- {{{
 inoremap jk <esc>
