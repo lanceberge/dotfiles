@@ -1,5 +1,6 @@
 "--------------------General Settings--------------------" 
 " General-------------------- {{{
+set runtimepath^=~/dotfiles/.vim
 set nocompatible
 set noerrorbells
 set foldenable
@@ -92,7 +93,7 @@ set complete-=i
 let g:markdown_fenced_languages = ['python', 'bash', 'c'] 
 " }}}
 " Plugins -------------------- {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/dotfiles/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
@@ -316,6 +317,6 @@ augroup END
 " Git Commit  -------------------- {{{
 augroup gitcommit
     autocmd!
-    autocmd Filetype gitcommit setlocal spell
+    autocmd Filetype gitcommit setlocal spell | set complete+=kspell
 augroup END
 " }}}

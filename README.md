@@ -8,4 +8,4 @@
 * ttf-dejavu - font
 * bspwm - window manager
 * sxkhd - hotkey manager
-* vim, git, neofetch, compton, tmux
+* vim, git, neofetch, compton, tmux, fzf

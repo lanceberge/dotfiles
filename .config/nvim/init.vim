@@ -1,8 +1,7 @@
 "--------------------General Settings--------------------" 
 " General-------------------- {{{
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
+set runtimepath^=~/dotfiles/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-set nocompatible
 set noerrorbells
 set clipboard=unnamedplus
 set timeoutlen=500 " 500ms to do mapped commands
@@ -30,7 +29,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 " }}}
 " Undos -------------------- {{{
 set undolevels=500 " number of possible undos; default is 1000
-set undodir=~/.vim/undo " undos save between opening and closing vim
+set undodir=~/dotfiles/.vim/undo " undos save between opening and closing vim
 set undofile
 " }}}
 " Statusline -------------------- {{{
@@ -47,7 +46,6 @@ set relativenumber " relative line numbering
 set showcmd
 set scrolloff=5 " 5 line buffer when scrolling up
 set sidescrolloff=5 " 5 line buffer when scrolling to the side
-set ttyfast
 set signcolumn=yes " always show column to the left of numbers
 set nowrap
 " }}}
@@ -91,7 +89,7 @@ set complete-=i
 let g:markdown_fenced_languages = ['python', 'bash', 'c'] 
 " }}}
 " Plugins -------------------- {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/dotfiles/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
