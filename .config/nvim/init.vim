@@ -1,4 +1,4 @@
-"--------------------General Settings--------------------" 
+"--------------------Settings--------------------" 
 " General-------------------- {{{
 set runtimepath^=~/dotfiles/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -77,8 +77,8 @@ nnoremap / /\v
 " Netrw -------------------- {{{
 let g:netrw_banner = 0
 let g:netrw_liststly=3
-let g:netrw_list_hide='^\./$' " hide ./ in netrw
-let g:netrw_hide=1
+" let g:netrw_list_hide='^\./$' " hide ./ in netrw
+" let g:netrw_hide=1
 " }}}
 " Autocomplete -------------------- {{{
 set completeopt=menuone,longest,noinsert
@@ -110,7 +110,6 @@ set termguicolors " colors are off in tmux without this
 colorscheme gruvbox
 " }}}
 " FZF -------------------- {{{
-set rtp+=~/.fzf
 let g:fzf_preview_window = '' " no preview window
 " set layout to bottom of screen and roughly 20% of it's height
 let g:fzf_layout = { 'down': '~20%' }
@@ -119,6 +118,7 @@ let g:fzf_layout = { 'down': '~20%' }
 " set nofoldenable " don't fold by default
 " set foldmethod=syntax " fold by indent
 set foldnestmax=10 " deepest fold is 10 levels
+set foldignore=
 " }}}
 
 "--------------------Mappings--------------------"
@@ -136,12 +136,13 @@ nnoremap H ^
 nnoremap L $
 nnoremap <leader>H H
 nnoremap <leader>L L
-" Inserts/registers
+" Inserts/registers ----------  {{{
 nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
 nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers below cursor
 nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers above cursor
 nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers around a body of text
 nnoremap <silent>yp :let @" = fnamemodify('', ':p')<c-f>0ci'| " copy a file path in cwd
+" }}}
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
@@ -192,10 +193,10 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
-nnoremap <leader>gs :Git<cr>:wincmd o<cr>| " open git in its own buffer
-nnoremap <leader>gd :vert botright Git diff<cr>
-nnoremap <leader>gl :Git log<cr>
-nnoremap <leader>ga :Gdiffsplit<cr>
+nnoremap <silent><leader>gs :Git<cr>:wincmd o<cr>| " open git in its own buffer
+nnoremap <silent><leader>gd :vert botright Git diff<cr>
+nnoremap <silent><leader>gl :Git log<cr>
+nnoremap <silent><leader>ga :Gdiffsplit<cr>
 " }}}
 " FZF -------------------- {{{
 " IsInsideGitRepo ----------  {{{
@@ -310,14 +311,6 @@ vnoremap jk <esc>
 " }}}
 
 "--------------------Autocommands--------------------"
-" Help Menu -------------------- {{{
-" q to quit in help menu
-augroup help_menu
-    autocmd!
-    autocmd Filetype help nnoremap <buffer> q :q<cr> | nnoremap <buffer> K <c-u> |
-                \ nnoremap <buffer> J <c-d>
-augroup END
-" }}}
 " Automatically Source -------------------- {{{
 augroup auto_source
     autocmd!
@@ -333,30 +326,5 @@ augroup insert_mode
     autocmd!
     autocmd InsertEnter * set cursorline
     autocmd InsertLeave * set nocursorline
-augroup END
-" }}}
-" Python file settings -------------------- {{{
-augroup python
-    autocmd!
-    autocmd Filetype python iabbrev <buffer> iff if:<cr> | set textwidth=80
-augroup END
-" }}}
-" Vimscript settings -------------------- {{{
-augroup filetype_vim
-    autocmd!
-    autocmd Filetype vim setlocal foldmethod=marker | setlocal foldenable
-augroup END
-" }}}
-" Markdown  -------------------- {{{
-augroup markdown
-    autocmd!
-    autocmd BufRead,BufNewFile *.md set filetype=markdown | setlocal spell |
-                \ setlocal textwidth=100
-augroup END
-" }}}
-" Git Commit  -------------------- {{{
-augroup gitcommit
-    autocmd!
-    autocmd Filetype gitcommit setlocal spell | set complete+=kspell
 augroup END
 " }}}
