@@ -61,7 +61,6 @@ set backspace=indent,eol,start
 set shiftwidth=4
 " }}}
 " Searching -------------------- {{{
-set showmatch " show matching (, {, [, etc.
 set incsearch  " show matches without needing <cr>
 set path=.,,** " recursive :find searches relative to cwd
 set wildmenu " <tab> for match menu in :e and :find
@@ -101,6 +100,7 @@ Plug 'morhetz/gruvbox' " theme
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 call plug#end()
@@ -200,8 +200,28 @@ nnoremap <leader>gl :Git log<cr>
 nnoremap <leader>ga :Gdiffsplit<cr>
 " }}}
 " FZF -------------------- {{{
-nnoremap <leader>F :Files<cr>
-nnoremap <leader>f :GFiles<cr>
+" IsInsideGitRepo ----------  {{{
+function! IsInsideGitRepo()
+  let result=systemlist('git rev-parse --is-inside-work-tree')
+  if v:shell_error
+    return 0
+  else
+    return 1
+  fi
+endfunction
+" }}}
+" GFilesOrFiles ----------  {{{
+function! GFilesOrFiles()
+    if IsInsideGitRepo()
+        GFiles
+    else
+        Files
+    endif
+  endfunction
+  " }}}
+" nnoremap <leader>F :Files<cr>
+" nnoremap <leader>f :GFiles<cr>
+nnoremap <leader>f :call GFilesOrFiles()<cr>
 nnoremap <leader>GL :Commits<cr>
 nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>kn :Notes<cr>
@@ -220,6 +240,7 @@ imap <A-m> <plug>(fzf-maps-i)
 xmap <A-m> <plug>(fzf-maps-x)
 omap <A-m> <plug>(fzf-maps-o)
 imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 " }}}
 " Windows/buffers -------------------- {{{
 nnoremap <silent> <leader>x :bd!<cr>
