@@ -341,6 +341,3 @@ augroup gitcommit
     autocmd Filetype gitcommit setlocal spell | set complete+=kspell
 augroup END
 " }}}
-
-" random
-"2 
