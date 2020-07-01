@@ -138,6 +138,12 @@ nnoremap H ^
 nnoremap L $
 nnoremap <leader>H H
 nnoremap <leader>L L
+" Inserts/registers
+nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
+nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers below cursor
+nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers above cursor
+nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers around a body of text
+nnoremap <silent>yp :let @" = fnamemodify('', ':p')<c-f>0ci'| " copy a file path in cwd
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
@@ -145,7 +151,7 @@ nnoremap <leader>v :vert sfind<space>
 nnoremap <leader>kp :!python %<cr>
 nnoremap <leader>r :normal! gg=G<cr>| " reformat
 nnoremap <leader>R :w <bar>source ~/dotfiles/.vimrc<cr>
-nnoremap <leader>q :wq!<cr>
+nnoremap <leader>q :update<bar>q!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>u :e ~/dotfiles/.vimrc<cr>
 nnoremap <leader>kf :find<space>
@@ -155,11 +161,6 @@ nnoremap <leader>t :10Lexplore<cr>
 "terminal buffer
 nnoremap <leader>T :term<cr>
 nnoremap <leader>o :call QuickfixToggle()<cr>
-" Inserts
-nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
-nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers below cursor
-nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers above cursor
-nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers around a body of text
 " QuickfixToggle ---------- {{{
 let g:quickfix_is_open = 0
 
@@ -222,7 +223,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 " }}}
 " Windows/buffers -------------------- {{{
 nnoremap <silent> <leader>x :bd!<cr>
-nnoremap <A-q> :wincmd q<cr>
+nnoremap <A-q> :q!<cr>
 nnoremap <silent>  <A-o> :wincmd o<cr>
 nnoremap <silent> <A-=> :wincmd =<cr>
 nnoremap <silent> <A-+> :wincmd +<cr>
@@ -340,3 +341,6 @@ augroup gitcommit
     autocmd Filetype gitcommit setlocal spell | set complete+=kspell
 augroup END
 " }}}
+
+" random
+"2 
