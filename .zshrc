@@ -9,7 +9,7 @@ export EDITOR="vim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
-export VIMINIT="source ~/dotfiles/.vimrc"
+export XDG_CONFIG_HOME=~/dotfiles/.config
 
 # History
 HISTSIZE=1000
