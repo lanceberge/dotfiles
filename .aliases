@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
 #--------------------Aliases-------------------- 
-alias v='vim'
-alias nv='nvim'
+alias v='nvim'
 alias s='sudo'
 alias sp='sudo pacman'
 alias sps='sudo pacman -S'
 alias spr='sudo pacman -Rs'
-#alias vn='vim /mnt/c/Users/berge/OneDrive/Documents/Notes/vim/vim_notes.md'
-#alias f='vim $(fzf-tmux)'
-#alias fn='n && f'
+alias f='nvim $(fzf-tmux)'
 
 # Git
 alias g='git'
@@ -26,9 +23,6 @@ alias gl='git log'
 alias gp='git push -u origin master'
 
 # Navigation
-#alias n='cd /mnt/c/Users/berge/OneDrive/Documents/Notes/'
-#alias wh='cd /mnt/c/Users/berge/' # Windows home
-#alias p='cd /mnt/c/Users/berge/OneDrive/Documents/Projects/'
 alias df='cd ~/dotfiles'
 alias dfc='cd ~/dotfiles/.config'
 alias ..='cd ..'
@@ -39,7 +33,7 @@ alias 3..='cd ../../..'
 alias tl='tmux attach-session' # Last tmux session
 alias tls='tmux ls' # list all sessions
 alias t='tmux'
-# alias tn='tmux new -t' # new tmux session
+alias tn='tmux new -t' # new tmux session
 alias ta='tmux attach -t' # attatch tmux session
 alias tk='tmux kill-session -t' # kill session
 
@@ -47,7 +41,6 @@ alias tk='tmux kill-session -t' # kill session
 alias so='source ~/.zshrc'
 alias tso='tmux source ~/.tmux.conf'
 alias zrc='vim ~/dotfiles/.zshrc'
-alias vrc='vim ~/dotfiles/.vimrc'
 alias nrc='nvim ~/dotfiles/.config/nvim/init.vim'
 alias trc='vim ~/dotfiles/.tmux.conf'
 
