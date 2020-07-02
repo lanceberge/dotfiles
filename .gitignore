@@ -1,1 +1,6 @@
-.vim/
+.vimrc
+.config/nvim/plugin/expr-folding.vim
+.config/nvim/undo
+.config/nvim/.netrwhist
+.config/nvim/plugged
+.config/nvim/autoload/plug.vim.old
