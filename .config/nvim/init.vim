@@ -1,7 +1,7 @@
 "--------------------Settings--------------------" 
 " General-------------------- {{{
 set runtimepath^=~/dotfiles/.vim
-let &packpath = &runtimepath
+" let &packpath = &runtimepath
 set noerrorbells
 set clipboard=unnamedplus
 set timeoutlen=500 " 500ms to do mapped commands
@@ -24,8 +24,8 @@ set browsedir=buffer " netrw uses current files directory
 set gdefault " default /g for substitutions
 filetype indent plugin on " determine the type of a file based on contents
 " highlight characters past 80 chars in a line
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%81v', 100)
 " }}}
 " Undos -------------------- {{{
 set undolevels=500 " number of possible undos; default is 1000
@@ -65,14 +65,6 @@ set wildmenu " <tab> for match menu in :e and :find
 set ignorecase
 set smartcase " match case if capitals are in a search, otherwise don't
 set nohlsearch " don't highlight searches
-" center search results
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-" 'very magic' searches by default - better support for regular expressions
-nnoremap ? ?\v
-nnoremap / /\v
 " }}}
 " Netrw -------------------- {{{
 let g:netrw_banner = 0
@@ -122,25 +114,25 @@ set foldignore=
 "--------------------Mappings--------------------"
 " General -------------------- {{{
 set pastetoggle=<F2> " toggle paste mode
+noremap H ^
+noremap L $
+noremap <leader><c-h> H
+noremap <leader><c-l> L
+noremap ; :
+noremap : ;
+" }}}
+" Normal Mode -------------------- {{{
+nnoremap <leader>; :!
 " C-l to clear highlight search (taken from tpope's sensible)
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 nnoremap <leader><cr> <c-^>
 " }}}
-" Normal Mode -------------------- {{{
-nnoremap ; :
-nnoremap : ;
-nnoremap <leader>; :!
-nnoremap H ^
-nnoremap L $
-nnoremap <leader>H H
-nnoremap <leader>L L
-" Inserts/registers ----------  {{{
+" Inserts/registers --------------------  {{{
 nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
 nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers below cursor
 nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers above cursor
 nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers around a body of text
 nnoremap <silent>yp :let @" = fnamemodify('', ':p')<c-f>0ci'| " copy a file path in cwd
-" }}}
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
@@ -178,6 +170,16 @@ nnoremap <leader>pc :PlugClean<cr>
 nnoremap <leader>pu :PlugUpdate<cr>
 nnoremap <leader>pU :PlugUpgrade<cr>
 nnoremap <leader>ps :PlugStatus<cr>
+" }}}
+" Searching -------------------- {{{
+" center search results
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+" 'very magic' searches by default - better support for regular expressions
+noremap ? ?\v
+noremap / /\v
 " }}}
 " Vim-Tmux-Navigator -------------------- {{{
 let g:tmux_navigator_no_mappings = 1
@@ -220,7 +222,7 @@ nnoremap <leader>gL :Commits<cr>
 nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>kn :Notes<cr>
 nnoremap <leader>b :Buffers<cr>
-nnoremap <leader><c-l> :Lines<cr>
+nnoremap <leader>L :Lines<cr>
 nnoremap <leader>l :BLines<cr>
 nnoremap <leader>kc :Commands<cr>
 nnoremap <leader>km :Marks<cr>
@@ -287,13 +289,13 @@ vnoremap jk <esc>
 " }}}
 
 "--------------------Autocommands--------------------"
-" Automatically Source -------------------- {{{
-augroup auto_source
+" All Filetypes -------------------- {{{
+augroup all
     autocmd!
     " don't continue comments on newlines
     autocmd BufNewFile,BufRead * setlocal formatoptions-=cro 
     " auto source .vimrc when writing it
-    autocmd BufWritePost ~/dotfiles/.config/nvim/init.vim source ~/dotfiles/.config/nvim/init.vim
+    " autocmd BufWritePost ~/dotfiles/.config/nvim/init.vim source ~/dotfiles/.config/nvim/init.vim
 augroup END
 " }}}
 " Insert Mode -------------------- {{{
