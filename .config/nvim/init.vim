@@ -1,6 +1,5 @@
 "--------------------Settings--------------------" 
 " General-------------------- {{{
-set runtimepath^=~/dotfiles/.vim
 set noerrorbells
 set clipboard=unnamedplus
 set timeoutlen=500 " 500ms to do mapped commands
@@ -24,13 +23,10 @@ set gdefault " default /g for substitutions
 filetype indent plugin on " determine the type of a file based on contents
 set shortmess=as
 set virtualedit=block
-" highlight characters past 80 chars in a line
-" highlight ColorColumn ctermbg=magenta
-" call matchadd('ColorColumn', '\%81v', 100)
 " }}}
 " Undos -------------------- {{{
 set undolevels=500 " number of possible undos; default is 1000
-set undodir=~/dotfiles/.vim/undo " undos save between opening and closing vim
+set undodir=$XDG_CONFIG_HOME/nvim/undo " undos save between opening and closing vim
 set undofile
 " }}}
 " Statusline -------------------- {{{
@@ -82,7 +78,7 @@ set complete-=i
 let g:markdown_fenced_languages = ['python', 'bash', 'c'] 
 " }}}
 " Plugins -------------------- {{{
-call plug#begin('~/dotfiles/.vim/plugged')
+call plug#begin('~/dotfiles/.config/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator' " navigate tmux panes and vim windows with C-{h,j,k,l}
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
@@ -117,8 +113,8 @@ set foldignore=
 set pastetoggle=<F2> " toggle paste mode
 noremap H ^
 noremap L $
-noremap <silent><leader><c-h> H
-noremap <silent><leader><c-l> L
+noremap <silent> <leader><c-h> H
+noremap <silent> <leader><c-l> L
 noremap ; :
 noremap : ;
 " }}}
@@ -132,19 +128,19 @@ nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
 nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers below cursor
 nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers above cursor
 nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers around a body of text
-nnoremap <silent>yp :let @" = fnamemodify('', ':p')<c-f>0ci'| " copy a file path in cwd
+nnoremap <silent>yp :let @+ = fnamemodify('', ':p')<c-f>0ci'| " copy a file path in cwd
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
 nnoremap <leader>v :vert sfind<space>
-nnoremap <silent><leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
-nnoremap <silent><leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <leader>kf :find<space>
 " toggle netrw
-nnoremap <silent><leader>t :10Lexplore<cr>
+nnoremap <silent> <leader>t :10Lexplore<cr>
 "terminal buffer
 nnoremap <leader>T :term<cr>
-nnoremap <silent><leader>u :call QuickfixToggle()<cr>
+nnoremap <silent> <leader>u :call QuickfixToggle()<cr>
 " QuickfixToggle ---------- {{{
 let g:quickfix_is_open = 0
 
@@ -193,10 +189,10 @@ inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
 inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
-nnoremap <silent><leader>gs :Git<cr>:wincmd o<cr>| " open git in its own buffer
-nnoremap <silent><leader>gd :vert botright Git diff<cr>
-nnoremap <silent><leader>gl :Git log<cr>
-nnoremap <silent><leader>ga :Gdiffsplit<cr>
+nnoremap <silent> <leader>gs :Git<cr>:wincmd o<cr>| " open git in its own buffer
+nnoremap <silent> <leader>gd :vert botright Git diff<cr>
+nnoremap <silent> <leader>gl :Git log<cr>
+nnoremap <silent> <leader>ga :Gdiffsplit<cr>
 " }}}
 " FZF -------------------- {{{
 " IsInsideGitRepo ----------  {{{
@@ -242,10 +238,10 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " }}}
 " Windows/buffers -------------------- {{{
 nnoremap <silent> <leader>x :bd!<cr>
-nnoremap <silent><leader>w :w<cr>
+nnoremap <silent> <leader>w :w<cr>
 nnoremap <leader>q :update<bar>q!<cr>
-nnoremap <silent><leader>Q :q!<cr>
-nnoremap <silent>  <A-o> :wincmd o<cr>
+nnoremap <silent> <leader>Q :q!<cr>
+nnoremap <silent> <A-o> :wincmd o<cr>
 nnoremap <silent> <A-=> :wincmd =<cr>
 nnoremap <silent> <A-+> :wincmd +<cr>
 nnoremap <silent> <A--> :wincmd -<cr>
