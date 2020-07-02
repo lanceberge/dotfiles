@@ -1,7 +1,6 @@
 "--------------------Settings--------------------" 
 " General-------------------- {{{
 set runtimepath^=~/dotfiles/.vim
-" let &packpath = &runtimepath
 set noerrorbells
 set clipboard=unnamedplus
 set timeoutlen=500 " 500ms to do mapped commands
@@ -23,6 +22,8 @@ set autochdir " auto change to the directory of a file when switching files
 set browsedir=buffer " netrw uses current files directory
 set gdefault " default /g for substitutions
 filetype indent plugin on " determine the type of a file based on contents
+set shortmess=as
+set virtualedit=block
 " highlight characters past 80 chars in a line
 " highlight ColorColumn ctermbg=magenta
 " call matchadd('ColorColumn', '\%81v', 100)
@@ -116,16 +117,15 @@ set foldignore=
 set pastetoggle=<F2> " toggle paste mode
 noremap H ^
 noremap L $
-noremap <leader><c-h> H
-noremap <leader><c-l> L
+noremap <silent><leader><c-h> H
+noremap <silent><leader><c-l> L
 noremap ; :
 noremap : ;
 " }}}
 " Normal Mode -------------------- {{{
 nnoremap <leader>; :!
-" C-l to clear highlight search (taken from tpope's sensible)
-nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-nnoremap <leader><cr> <c-^>
+" A-l to clear highlight search (taken from tpope's sensible)
+nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
 " }}}
 " Inserts/registers --------------------  {{{
 nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
@@ -137,17 +137,14 @@ nnoremap <silent>yp :let @" = fnamemodify('', ':p')<c-f>0ci'| " copy a file path
 " Leader Maps -------------------- {{{
 map <space> <leader>
 nnoremap <leader>v :vert sfind<space>
-nnoremap <leader>q :update<bar>q!<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
-nnoremap <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <silent><leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <silent><leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <leader>kf :find<space>
-nnoremap <leader>s :source %<cr>
 " toggle netrw
-nnoremap <leader>t :10Lexplore<cr>
+nnoremap <silent><leader>t :10Lexplore<cr>
 "terminal buffer
 nnoremap <leader>T :term<cr>
-nnoremap <leader>u :call QuickfixToggle()<cr>
+nnoremap <silent><leader>u :call QuickfixToggle()<cr>
 " QuickfixToggle ---------- {{{
 let g:quickfix_is_open = 0
 
@@ -189,6 +186,11 @@ nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+inoremap <silent> <c-h> <esc>:TmuxNavigateLeft<cr>
+inoremap <silent> <c-j> <esc>:TmuxNavigateDown<cr>
+inoremap <silent> <c-k> <esc>:TmuxNavigateUp<cr>
+inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
+inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
 nnoremap <silent><leader>gs :Git<cr>:wincmd o<cr>| " open git in its own buffer
@@ -240,7 +242,9 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " }}}
 " Windows/buffers -------------------- {{{
 nnoremap <silent> <leader>x :bd!<cr>
-nnoremap <A-q> :q!<cr>
+nnoremap <silent><leader>w :w<cr>
+nnoremap <leader>q :update<bar>q!<cr>
+nnoremap <silent><leader>Q :q!<cr>
 nnoremap <silent>  <A-o> :wincmd o<cr>
 nnoremap <silent> <A-=> :wincmd =<cr>
 nnoremap <silent> <A-+> :wincmd +<cr>
@@ -294,8 +298,6 @@ augroup all
     autocmd!
     " don't continue comments on newlines
     autocmd BufNewFile,BufRead * setlocal formatoptions-=cro 
-    " auto source .vimrc when writing it
-    " autocmd BufWritePost ~/dotfiles/.config/nvim/init.vim source ~/dotfiles/.config/nvim/init.vim
 augroup END
 " }}}
 " Insert Mode -------------------- {{{
