@@ -125,21 +125,26 @@ nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr
 " }}}
 " Inserts/registers --------------------  {{{
 nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
-nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers below cursor
-nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers above cursor
-nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>| " add fold markers around a body of text
-nnoremap <silent>yp :let @+ = fnamemodify('', ':p')<c-f>0ci'| " copy a file path in cwd
+" add fold markers below cursor
+nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>
+" add fold markers above cursor
+nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>
+" add fold markers around a body of text
+nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>
+" copy a file path in cwd
+nnoremap yp :let @+ = fnamemodify('', ':p')<c-f>0ci'
+" split a line at the cursor and move it below the current line
+nnoremap gs i<cr><esc>
+" split a line at the cursor and move it above the current line
+nmap gS i<cr><esc>[e
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
-nnoremap <leader>v :vert sfind<space>
 nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
-nnoremap <leader>kf :find<space>
 " toggle netrw
 nnoremap <silent> <leader>t :10Lexplore<cr>
 "terminal buffer
-nnoremap <leader>T :term<cr>
 nnoremap <silent> <leader>u :call QuickfixToggle()<cr>
 " QuickfixToggle ---------- {{{
 let g:quickfix_is_open = 0
@@ -175,6 +180,7 @@ noremap ? ?\v
 noremap / /\v
 " }}}
 " Vim-Tmux-Navigator -------------------- {{{
+" Navigate tmux panes and vim windows as one with c-{h,j,k,l}
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
@@ -189,7 +195,8 @@ inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
 inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
-nnoremap <silent> <leader>gs :Git<cr>:wincmd o<cr>| " open git in its own buffer
+" open git in its own buffer
+nnoremap <silent> <leader>gs :Git<cr>:wincmd o<cr>
 nnoremap <silent> <leader>gd :vert botright Git diff<cr>
 nnoremap <silent> <leader>gl :Git log<cr>
 nnoremap <silent> <leader>ga :Gdiffsplit<cr>
@@ -214,8 +221,8 @@ function! GFilesOrFiles()
     endif
 endfunction
 " }}}
-nnoremap <leader>F :Files<cr>
 nnoremap <leader>f :call GFilesOrFiles()<cr>
+nnoremap <leader>F :Files<cr>
 nnoremap <leader>gL :Commits<cr>
 nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>kn :Notes<cr>
@@ -250,6 +257,8 @@ nnoremap <silent> <A-v> :wincmd v<cr>
 " }}}
 " Brackets -------------------- {{{
 " Brackets & toggles(taken from tpope's unimpaired - I didn't need the whole plugin)
+
+" insert a newline above the current line
 nnoremap <silent> [<space> O<esc>
 nnoremap <silent> ]<space> o<esc>
 nnoremap <silent> [b :bprevious<cr>
@@ -286,6 +295,8 @@ cnoreabbrev v vert
 " }}}
 " Visual Mode-------------------- {{{
 vnoremap jk <esc>
+" }}}
+" Split Lines --------------------  {{{
 " }}}
 
 "--------------------Autocommands--------------------"
