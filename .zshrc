@@ -5,7 +5,7 @@ source ~/dotfiles/.aliases
 setopt autocd
 
 # Exports
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
@@ -14,12 +14,11 @@ export XDG_CONFIG_HOME=~/dotfiles/.config
 # History
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=~/dotfiles/.zsh_history
 
 # Vi mode
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
-bindkey -M viins 'kj' vi-cmd-mode # remap <esc>
 export KEYTIMEOUT=20
 
 # Edit line in vim with C-f
@@ -58,7 +57,7 @@ PS2='> '
 
 # Start x at login
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
+  exec startx ~/dotfiles/.xinitrc
 fi
 
 # Load zsh-syntax-highlighting; should be last.
