@@ -1,4 +1,4 @@
-#usr/share/nvim/runtime/syntax/markdown.vim/usr/share/nvim/runtime/syntax/markdown.vim: Lance's Dotfiles
+# Lance's Dotfiles
 
 ## Necessary Packages
 
