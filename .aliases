@@ -42,6 +42,7 @@ alias so='source ~/.zshrc'
 alias tso='tmux source ~/.tmux.conf'
 alias zrc='nvim ~/dotfiles/.zshrc'
 alias nrc='nvim ~/dotfiles/.config/nvim/init.vim'
+alias nvd='cd ~/dotfiles/.config/nvim'
 alias trc='nvim ~/dotfiles/.tmux.conf'
 
 # Listing Files
