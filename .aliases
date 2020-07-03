@@ -40,9 +40,9 @@ alias tk='tmux kill-session -t' # kill session
 # RC Files
 alias so='source ~/.zshrc'
 alias tso='tmux source ~/.tmux.conf'
-alias zrc='vim ~/dotfiles/.zshrc'
+alias zrc='nvim ~/dotfiles/.zshrc'
 alias nrc='nvim ~/dotfiles/.config/nvim/init.vim'
-alias trc='vim ~/dotfiles/.tmux.conf'
+alias trc='nvim ~/dotfiles/.tmux.conf'
 
 # Listing Files
 alias l='ls -AF ${colorflag}'
