@@ -3,5 +3,6 @@
 .config/nvim/undo
 .config/nvim/.netrwhist
 .config/nvim/plugged
-.config/nvim/autoload
+.config/nvim/autoload/plug.vim
+.config/nvim/autoload/plug.vim.old
 .zsh_history
