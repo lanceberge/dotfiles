@@ -1,4 +1,5 @@
 "--------------------Settings--------------------" 
+" set runtimepath+=$XDG_CONFIG_HOME/nvim/after
 " General-------------------- {{{
 set noerrorbells
 set clipboard=unnamedplus
@@ -15,7 +16,6 @@ set noswapfile " no swap files
 set nobackup
 set nowritebackup
 set updatetime=100
-set formatoptions+=j " Delete comment character when joining commented lines
 set lazyredraw " render changes once macro has finished
 set autochdir " auto change to the directory of a file when switching files
 set browsedir=buffer " netrw uses current files directory
@@ -66,8 +66,7 @@ set nohlsearch " don't highlight searches
 " Netrw -------------------- {{{
 let g:netrw_banner = 0
 let g:netrw_liststly=3
-" let g:netrw_list_hide='^\./$' " hide ./ in netrw
-" let g:netrw_hide=1
+let g:netrw_list_hide='^\.\.\=/\=$' " hide ./ and ../ in netrw
 " }}}
 " Autocomplete -------------------- {{{
 set completeopt=menuone,longest,noinsert
@@ -87,7 +86,7 @@ Plug 'morhetz/gruvbox' " theme
 Plug 'tpope/vim-commentary' " comment with gc{motion}
 Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar' " improves netrw
+" Plug 'tpope/vim-vinegar' " improves netrw
 Plug 'tpope/vim-surround' " s as a motion for surrounding characters
 Plug 'wellle/targets.vim' " adds new text obects, also all text objects work outside of the object like ci' does
 call plug#end()
@@ -124,14 +123,9 @@ nnoremap <leader>; :!
 nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
 " }}}
 " Inserts/registers --------------------  {{{
-nnoremap y; mqA;<esc>`q| " append a semicolon to the end of a line
-" add fold markers below cursor
-nnoremap yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>
-" add fold markers above cursor
-nnoremap yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>
-" add fold markers around a body of text
-nnoremap ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>
-" copy a file path in cwd
+" append a semicolon to the end of a line
+nnoremap y; mqA;<esc>`q
+" copy the path of a file in cwd by specifying the filename
 nnoremap yp :let @+ = fnamemodify('', ':p')<c-f>0ci'
 " split a line at the cursor and move it below the current line
 nnoremap gs i<cr><esc>
@@ -303,8 +297,8 @@ vnoremap jk <esc>
 " All Filetypes -------------------- {{{
 augroup all
     autocmd!
-    " don't continue comments on newlines
-    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro 
+    " don't continue comments on newlines, needed because the vim rtp is wonky
+    autocmd Filetype * setlocal formatoptions=jql 
 augroup END
 " }}}
 " Insert Mode -------------------- {{{
