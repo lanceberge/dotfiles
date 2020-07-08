@@ -1,5 +1,4 @@
 "--------------------Settings--------------------" 
-" set runtimepath+=$XDG_CONFIG_HOME/nvim/after
 " General-------------------- {{{
 set noerrorbells
 set clipboard=unnamedplus
@@ -82,13 +81,13 @@ Plug 'christoomey/vim-tmux-navigator' " navigate tmux panes and vim windows with
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'morhetz/gruvbox' " theme
-"Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete, linting, formatting
 Plug 'tpope/vim-commentary' " comment with gc{motion}
 Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-vinegar' " improves netrw
 Plug 'tpope/vim-surround' " s as a motion for surrounding characters
 Plug 'wellle/targets.vim' " adds new text obects, also all text objects work outside of the object like ci' does
+" Language specific
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 " }}}
 " Colorscheme -------------------- {{{
@@ -106,6 +105,13 @@ let g:fzf_layout = { 'down': '~20%' }
 set foldnestmax=10 " deepest fold is 10 levels
 set foldignore=
 " }}}
+" Formatoptions -------------------- {{{
+augroup all
+    autocmd!
+    " don't continue comments on newlines, autocommand needed because the vim rtp is wonky
+    autocmd Filetype * setlocal formatoptions=jql 
+augroup END
+" }}}
 
 "--------------------Mappings--------------------"
 " General -------------------- {{{
@@ -121,10 +127,13 @@ noremap : ;
 nnoremap <leader>; :!
 " A-l to clear highlight search (taken from tpope's sensible)
 nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
+" delete character to the right of cursor
+nnoremap <silent> <c-x> mqlx`q
 " }}}
 " Inserts/registers --------------------  {{{
 " append a semicolon to the end of a line
-nnoremap y; mqA;<esc>`q
+nnoremap <silent> <A-;> :call setline('.', getline('.') . ';')<cr>
+inoremap <silent> <A-;> <esc>:call setline('.', getline('.') . ';')<cr>
 " copy the path of a file in cwd by specifying the filename
 nnoremap yp :let @+ = fnamemodify('', ':p')<c-f>0ci'
 " split a line at the cursor and move it below the current line
@@ -138,23 +147,6 @@ nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 " toggle netrw
 nnoremap <silent> <leader>t :10Lexplore<cr>
-"terminal buffer
-nnoremap <silent> <leader>u :call QuickfixToggle()<cr>
-" QuickfixToggle ---------- {{{
-let g:quickfix_is_open = 0
-
-function! QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
-endfunction
-" }}}
 " }}}
 " Vim Plug -------------------- {{{
 nnoremap <leader>pi :PlugInstall<cr>
@@ -176,17 +168,16 @@ noremap / /\v
 " Vim-Tmux-Navigator -------------------- {{{
 " Navigate tmux panes and vim windows as one with c-{h,j,k,l}
 let g:tmux_navigator_no_mappings = 1
-
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
-inoremap <silent> <c-h> <esc>:TmuxNavigateLeft<cr>
-inoremap <silent> <c-j> <esc>:TmuxNavigateDown<cr>
-inoremap <silent> <c-k> <esc>:TmuxNavigateUp<cr>
-inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
-inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
+" inoremap <silent> <c-h> <esc>:TmuxNavigateLeft<cr>
+" inoremap <silent> <c-j> <esc>:TmuxNavigateDown<cr>
+" inoremap <silent> <c-k> <esc>:TmuxNavigateUp<cr>
+" inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
+" inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
 " open git in its own buffer
@@ -246,30 +237,23 @@ nnoremap <silent> <A-o> :wincmd o<cr>
 nnoremap <silent> <A-=> :wincmd =<cr>
 nnoremap <silent> <A-+> :wincmd +<cr>
 nnoremap <silent> <A--> :wincmd -<cr>
-nnoremap <silent> <A-s> :wincmd s<cr>
-nnoremap <silent> <A-v> :wincmd v<cr>
 " }}}
 " Brackets -------------------- {{{
 " Brackets & toggles(taken from tpope's unimpaired - I didn't need the whole plugin)
 
 " insert a newline above the current line
-nnoremap <silent> [<space> O<esc>
-nnoremap <silent> ]<space> o<esc>
+nnoremap <silent> [<space> O<esc>j
+nnoremap <silent> ]<space> o<esc>k
 nnoremap <silent> [b :bprevious<cr>
 nnoremap <silent> ]b :bnext<cr>
 nnoremap <silent> [B :bfirst<cr>
 nnoremap <silent> ]B :blast<cr>
 nnoremap [oh :set nohlsearch<cr>
 nnoremap ]oh :set hlsearch<cr>
-nnoremap yoh :set hlsearch!<cr>
 nnoremap [ow :set nowrap<cr>
 nnoremap ]ow :set wrap<cr>
-nnoremap yow :set wrap!<cr>
-nnoremap [ou :set colorcolumn=<cr>
-nnoremap ]ou :set colorcolumn=80<cr>
 nnoremap [oi :set ignorecase<cr>
-nnoremap ]oi :set ignorecase<cr>
-nnoremap yoi :set ignorecase!<cr>
+nnoremap ]oi :set noignorecase<cr>
 nnoremap [Q :cfirst<cr>
 nnoremap ]Q :clast<cr>
 " }}}
@@ -290,22 +274,9 @@ cnoreabbrev v vert
 " Visual Mode-------------------- {{{
 vnoremap jk <esc>
 " }}}
-" Split Lines --------------------  {{{
-" }}}
-
-"--------------------Autocommands--------------------"
-" All Filetypes -------------------- {{{
-augroup all
-    autocmd!
-    " don't continue comments on newlines, needed because the vim rtp is wonky
-    autocmd Filetype * setlocal formatoptions=jql 
-augroup END
-" }}}
-" Insert Mode -------------------- {{{
-" highlight line in insert mode, number otherwise
-augroup insert_mode
-    autocmd!
-    autocmd InsertEnter * set cursorline
-    autocmd InsertLeave * set nocursorline
-augroup END
+" Snippets --------------------  {{{
+" I use [!] to mark the next point to jump to in custom snippets,
+" then use <A-s> to edit it
+inoremap <silent> <A-s> <esc>:call search('[!]')<cr>ca[
+nnoremap <silent> <A-s> :call search('[!]')<cr>ca[
 " }}}
