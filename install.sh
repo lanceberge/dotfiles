@@ -1,4 +1,5 @@
 # Necessary packages
+sudo pacman -S --noconfirm base-devel
 sudo pacman -S --noconfirm xorg
 sudo pacman -S --noconfirm alacritty
 sudo pacman -S --noconfirm zsh
@@ -19,7 +20,8 @@ ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
 
-chsh -s $(which zsh) # Use zsh
+# Use zsh
+chsh -s $(which zsh) 
 
 # Set up vim plug
 curl -fLo ~/dotfiles/.config/nvim/autoload/plug.vim --create-dirs \

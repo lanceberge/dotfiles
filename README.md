@@ -14,6 +14,6 @@
 
 1. Download all the above packages using your distro's package manager
 1. Clone this repository into your home directory
-1. run cd ~/archdotfiles && chmod +x setup.sh
-1. run ./setup.sh
+1. run cd ~/archdotfiles && chmod +x install.sh
+1. run ./install.sh
 1. reboot
