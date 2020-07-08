@@ -7,7 +7,6 @@ nnoremap <buffer> yf o" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>
 nnoremap <buffer> yF O" }}}<esc>O"  <esc>20i-<esc>A {{{<esc>F"a<space>
 " add fold markers around a body of text
 nnoremap <buffer> ysf }O" }}}<esc>{o"  <esc>20i-<esc>A {{{<esc>F"a<space>
-" copy a file path in cwd
 
 augroup auto_source " automatically source all vim files on write
     autocmd! BufWritePost <buffer>
@@ -15,4 +14,4 @@ augroup auto_source " automatically source all vim files on write
 augroup END
 
 " Snippets
-inoremap <c-s>func function!<cr>endfunction<esc>kA<space>
+inoremap <buffer> <c-s>func function!<cr>endfunction<esc>kA<space>

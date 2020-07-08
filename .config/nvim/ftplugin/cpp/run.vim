@@ -12,6 +12,7 @@ function! s:Compile()
     if len(l:output) !=# 0
         silent edit output
         setlocal buftype=nofile
+        nnoremap <buffer> q :bd<cr>
         call append(0, l:output)
         normal! gg
     else
