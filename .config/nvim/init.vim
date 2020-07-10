@@ -221,10 +221,10 @@ nnoremap <leader>kT :Tags<cr>
 nnoremap <leader>kH :History<cr>
 nnoremap <leader>kw :Windows<cr>
 nnoremap <leader>kh :Helptags<cr>
-nmap <A-m> <plug>(fzf-maps-n)
-imap <A-m> <plug>(fzf-maps-i)
-xmap <A-m> <plug>(fzf-maps-x)
-omap <A-m> <plug>(fzf-maps-o)
+nmap <A-k> <plug>(fzf-maps-n)
+imap <A-k> <plug>(fzf-maps-i)
+xmap <A-k> <plug>(fzf-maps-x)
+omap <A-k> <plug>(fzf-maps-o)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 " }}}
@@ -269,14 +269,15 @@ inoremap <c-w> <c-g>u<c-w>
 cnoremap jk <esc>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
+cnoremap <A-m> %
 cnoreabbrev v vert
 " }}}
 " Visual Mode-------------------- {{{
 vnoremap jk <esc>
 " }}}
 " Snippets --------------------  {{{
-" I use [!] to mark the next point to jump to in custom snippets,
-" then use <A-s> to edit it
-inoremap <silent> <A-s> <esc>:call search('[!]')<cr>ca[
-nnoremap <silent> <A-s> :call search('[!]')<cr>ca[
+" [!] to mark the next point to jump to in custom snippets,
+" then <A-i> to edit it
+inoremap <silent> <A-m> <esc>:call search('[!]')<cr>ca[
+nnoremap <silent> <A-m> :call search('[!]')<cr>ca[
 " }}}
