@@ -1,5 +1,5 @@
 " Snippets --------------------  {{{
-inoremap <buffer> <c-m>if if:<cr>
+inoremap <buffer> <c-f>if if:<cr>
 " }}}
 " Settings --------------------  {{{
 setlocal textwidth=80
