@@ -106,7 +106,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set foldignore=
 " }}}
 " Formatoptions -------------------- {{{
-augroup all
+augroup formatoptions
     autocmd!
     " don't continue comments on newlines, autocommand needed because the vim rtp is wonky
     autocmd Filetype * setlocal formatoptions=jql 
@@ -210,7 +210,6 @@ nnoremap <leader>f :call GFilesOrFiles()<cr>
 nnoremap <leader>F :Files<cr>
 nnoremap <leader>gL :Commits<cr>
 nnoremap <leader>gl :BCommits<cr>
-nnoremap <leader>kn :Notes<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>L :Lines<cr>
 nnoremap <leader>l :BLines<cr>
@@ -221,17 +220,18 @@ nnoremap <leader>kT :Tags<cr>
 nnoremap <leader>kH :History<cr>
 nnoremap <leader>kw :Windows<cr>
 nnoremap <leader>kh :Helptags<cr>
-nmap <A-k> <plug>(fzf-maps-n)
-imap <A-k> <plug>(fzf-maps-i)
-xmap <A-k> <plug>(fzf-maps-x)
-omap <A-k> <plug>(fzf-maps-o)
+nmap <A-m> <plug>(fzf-maps-n)
+imap <A-m> <plug>(fzf-maps-i)
+xmap <A-m> <plug>(fzf-maps-x)
+omap <A-m> <plug>(fzf-maps-o)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 " }}}
 " Windows/buffers -------------------- {{{
 nnoremap <silent> <leader>x :bd!<cr>
 nnoremap <silent> <leader>w :w<cr>
-nnoremap <leader>q :update<bar>q!<cr>
+nnoremap <leader><A-q> :bufdo update<bar>qa!<cr>
+nnoremap <leader>q :x<cr>
 nnoremap <silent> <leader>Q :q!<cr>
 nnoremap <silent> <A-o> :wincmd o<cr>
 nnoremap <silent> <A-=> :wincmd =<cr>
@@ -277,7 +277,12 @@ vnoremap jk <esc>
 " }}}
 " Snippets --------------------  {{{
 " [!] to mark the next point to jump to in custom snippets,
-" then <A-i> to edit it
-inoremap <silent> <A-m> <esc>:call search('[!]')<cr>ca[
-nnoremap <silent> <A-m> :call search('[!]')<cr>ca[
+" then <A-f> to edit it
+inoremap <silent> <A-f> <esc>:call search('[!]')<cr>ca[
+nnoremap <silent> <A-f> :call search('[!]')<cr>ca[
+" }}}
+" Commenting --------------------  {{{
+" comment until the end of the line using tpope's commentary
+nmap gC i<cr><esc>gcckJ
+" nnoremap gC i<c-r>=&commentstring<cr><bs><bs><space><esc>
 " }}}
