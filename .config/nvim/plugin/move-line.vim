@@ -1,5 +1,5 @@
-nnoremap <script> <silent>[e :<c-u>call <SID>MoveLineUp(v:count1)<cr>
-nnoremap <script> <silent> ]e :<c-u>call <SID>MoveLineDown(v:count1)<cr>
+nnoremap <script> <silent>[e :<c-u>call <SID>MoveLineUp(v:count1)<cr>==
+nnoremap <script> <silent> ]e :<c-u>call <SID>MoveLineDown(v:count1)<cr>==
 
 function! s:MoveLineUp(count)
     for i in range(a:count)
