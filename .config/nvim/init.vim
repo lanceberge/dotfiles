@@ -42,7 +42,7 @@ set relativenumber " relative line numbering
 set showcmd
 set scrolloff=5 " 5 line buffer when scrolling up
 set sidescrolloff=5 " 5 line buffer when scrolling to the side
-set signcolumn=yes " always show column to the left of numbers
+" set signcolumn=yes " always show column to the left of numbers
 set nowrap
 " }}}
 " Tabs, Indentation, etc. -------------------- {{{
@@ -80,6 +80,7 @@ call plug#begin('~/dotfiles/.config/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator' " navigate tmux panes and vim windows with C-{h,j,k,l}
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
+Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox' " theme
 Plug 'tpope/vim-commentary' " comment with gc{motion}
 Plug 'tpope/vim-fugitive' " git support
@@ -101,6 +102,12 @@ let g:fzf_preview_window = '' " no preview window
 " set layout to bottom of screen and roughly 20% of it's height
 let g:fzf_layout = { 'down': '~20%' }
 " }}}
+" Sneak --------------------  {{{
+map <A-;> <Plug>Sneak_;
+map <A-,> <Plug>Sneak_,
+" map gs <Plug>Sneak_;
+" map gS <Plug>Sneak_,
+" }}}
 " Folding -------------------- {{{
 set foldnestmax=10 " deepest fold is 10 levels
 set foldignore=
@@ -121,25 +128,24 @@ noremap L $
 noremap <silent> <leader><c-h> H
 noremap <silent> <leader><c-l> L
 noremap ; :
-noremap : ;
+noremap : :!
+" noremap <A-;> ;
+" noremap <A-,> ,
+nnoremap Y y$
 " }}}
 " Normal Mode -------------------- {{{
-nnoremap <leader>; :!
 " A-l to clear highlight search (taken from tpope's sensible)
 nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
-" delete character to the right of cursor
-nnoremap <silent> <c-x> mqlx`q
 " }}}
 " Inserts/registers --------------------  {{{
 " append a semicolon to the end of a line
-nnoremap <silent> <A-;> :call setline('.', getline('.') . ';')<cr>
-inoremap <silent> <A-;> <esc>:call setline('.', getline('.') . ';')<cr>
+nnoremap <silent> y; :call setline('.', getline('.') . ';')<cr>
 " copy the path of a file in cwd by specifying the filename
 nnoremap yp :let @+ = fnamemodify('', ':p')<c-f>0ci'
 " split a line at the cursor and move it below the current line
-nnoremap gs i<cr><esc>
+nnoremap ys i<cr><esc>
 " split a line at the cursor and move it above the current line
-nmap gS i<cr><esc>[e
+nmap yS i<cr><esc>[e
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
@@ -147,6 +153,8 @@ nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 " toggle netrw
 nnoremap <silent> <leader>t :10Lexplore<cr>
+" reindent
+nnoremap <silent> <leader>= gg=G
 " }}}
 " Vim Plug -------------------- {{{
 nnoremap <leader>pi :PlugInstall<cr>
@@ -173,11 +181,11 @@ nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
-" inoremap <silent> <c-h> <esc>:TmuxNavigateLeft<cr>
-" inoremap <silent> <c-j> <esc>:TmuxNavigateDown<cr>
-" inoremap <silent> <c-k> <esc>:TmuxNavigateUp<cr>
-" inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
-" inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
+inoremap <silent> <c-h> <esc>:TmuxNavigateLeft<cr>
+inoremap <silent> <c-j> <esc>:TmuxNavigateDown<cr>
+inoremap <silent> <c-k> <esc>:TmuxNavigateUp<cr>
+inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
+inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
 " open git in its own buffer
@@ -243,7 +251,7 @@ nnoremap <silent> <A--> :wincmd -<cr>
 
 " insert a newline above the current line
 nnoremap <silent> [<space> O<esc>j
-nnoremap <silent> ]<space> o<esc>k
+nnoremap <silent> ]<space> o<esc>
 nnoremap <silent> [b :bprevious<cr>
 nnoremap <silent> ]b :bnext<cr>
 nnoremap <silent> [B :bfirst<cr>
@@ -267,8 +275,8 @@ inoremap <c-w> <c-g>u<c-w>
 " }}}
 " Command Mode-------------------- {{{
 cnoremap jk <esc>
-cnoremap <c-j> <down>
-cnoremap <c-k> <up>
+cnoremap <A-j> <down>
+cnoremap <A-k> <up>
 cnoremap <A-m> %
 cnoreabbrev v vert
 " }}}
@@ -276,13 +284,13 @@ cnoreabbrev v vert
 vnoremap jk <esc>
 " }}}
 " Snippets --------------------  {{{
-" [!] to mark the next point to jump to in custom snippets,
-" then <A-f> to edit it
-inoremap <silent> <A-f> <esc>:call search('[!]')<cr>ca[
-nnoremap <silent> <A-f> :call search('[!]')<cr>ca[
+" [!] to mark the next point to jump to in custom snippets, then <A-f> to edit it
+" nnoremap <silent> ,d :call search('[!]')<cr>ca[
+" inoremap <silent> ,d <esc>:call search('[!]')<cr>ca[
+nnoremap <silent> <A-j> :call search('[!]')<cr>ca[
+inoremap <silent> <A-j> <esc>:call search('[!]')<cr>ca[
 " }}}
 " Commenting --------------------  {{{
 " comment until the end of the line using tpope's commentary
 nmap gC i<cr><esc>gcckJ
-" nnoremap gC i<c-r>=&commentstring<cr><bs><bs><space><esc>
 " }}}
