@@ -23,5 +23,5 @@ function! s:Compile()
 endfunction
 " }}}
 " Snippets --------------------  {{{
-inoremap <buffer> <c-f>iis #include <iostream><cr>
+inoremap <buffer> <A-k>iis #include <iostream><cr>
 " }}}
