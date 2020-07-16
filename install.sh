@@ -26,3 +26,6 @@ chsh -s $(which zsh)
 # Set up vim plug
 curl -fLo ~/dotfiles/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Set up tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
