@@ -30,7 +30,7 @@ set undofile
 " }}}
 " Statusline -------------------- {{{
 set laststatus=2 " show status bar
-set statusline=\%F " full file path
+set statusline=\%f " relative file path
 set statusline+=%15{FugitiveStatusline()} " git branch
 set statusline+=%= " left/right separator
 set statusline+=%-15c " cursor column
@@ -42,7 +42,6 @@ set relativenumber " relative line numbering
 set showcmd
 set scrolloff=5 " 5 line buffer when scrolling up
 set sidescrolloff=5 " 5 line buffer when scrolling to the side
-" set signcolumn=yes " always show column to the left of numbers
 set nowrap
 " }}}
 " Tabs, Indentation, etc. -------------------- {{{
@@ -80,7 +79,7 @@ call plug#begin('~/dotfiles/.config/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator' " navigate tmux panes and vim windows with C-{h,j,k,l}
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
-Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak' " s for two character searches, like how f is for one character searches
 Plug 'morhetz/gruvbox' " theme
 Plug 'tpope/vim-commentary' " comment with gc{motion}
 Plug 'tpope/vim-fugitive' " git support
@@ -103,19 +102,18 @@ let g:fzf_preview_window = '' " no preview window
 let g:fzf_layout = { 'down': '~20%' }
 " }}}
 " Sneak --------------------  {{{
+" <A-;> and <A-,> for next in f and sneak searches, as ; is mapped to :
 map <A-;> <Plug>Sneak_;
 map <A-,> <Plug>Sneak_,
-" map gs <Plug>Sneak_;
-" map gS <Plug>Sneak_,
 " }}}
 " Folding -------------------- {{{
-set foldnestmax=10 " deepest fold is 10 levels
-set foldignore=
+set foldignore= " folding ignores nothing
 " }}}
 " Formatoptions -------------------- {{{
 augroup formatoptions
     autocmd!
-    " don't continue comments on newlines, autocommand needed because the vim rtp is wonky
+    " don't continue comments on newlines, autocommand needed because this is
+    " set by the vim rtp after the vimrc is sourced
     autocmd Filetype * setlocal formatoptions=jql 
 augroup END
 " }}}
@@ -266,7 +264,7 @@ nnoremap [Q :cfirst<cr>
 nnoremap ]Q :clast<cr>
 " }}}
 " Insert Mode -------------------- {{{
-inoremap jk <esc>
+inoremap fj <esc>
 " give bracket pair with {<cr>
 inoremap {<cr> {<cr>}<esc>O
 " able to undo text deleted with c-w or c-u
@@ -285,8 +283,6 @@ vnoremap jk <esc>
 " }}}
 " Snippets --------------------  {{{
 " [!] to mark the next point to jump to in custom snippets, then <A-f> to edit it
-" nnoremap <silent> ,d :call search('[!]')<cr>ca[
-" inoremap <silent> ,d <esc>:call search('[!]')<cr>ca[
 nnoremap <silent> <A-j> :call search('[!]')<cr>ca[
 inoremap <silent> <A-j> <esc>:call search('[!]')<cr>ca[
 " }}}
