@@ -1,2 +1,2 @@
 setlocal nofoldenable
-nnoremap <buffer> x :q<cr>
+nnoremap <buffer> q :q<cr>

@@ -1,5 +1,5 @@
 " Run Command --------------------  {{{
-nnoremap <buffer> <silent> <leader>r :call <SID>Compile()<cr>
+nnoremap <buffer> <silent> <leader>rr :call <SID>Compile()<cr>
 
 " A function to run cpp scripts. Either shows the output, or 
 " the error stack in a new buffer if it fails to compile
