@@ -141,9 +141,9 @@ nnoremap <silent> y; :call setline('.', getline('.') . ';')<cr>
 " copy the path of a file in cwd by specifying the filename
 nnoremap yp :let @+ = fnamemodify('', ':p')<c-f>0ci'
 " split a line at the cursor and move it below the current line
-nnoremap ys i<cr><esc>
+nnoremap gs i<cr><esc>
 " split a line at the cursor and move it above the current line
-nmap yS i<cr><esc>[e
+nmap gS i<cr><esc>[e
 " }}}
 " Leader Maps -------------------- {{{
 map <space> <leader>
@@ -152,7 +152,7 @@ nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 " toggle netrw
 nnoremap <silent> <leader>t :10Lexplore<cr>
 " reindent
-nnoremap <silent> <leader>= gg=G
+nnoremap <silent> <leader>= magg=G`a
 " }}}
 " Vim Plug -------------------- {{{
 nnoremap <leader>pi :PlugInstall<cr>
@@ -179,11 +179,6 @@ nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
-inoremap <silent> <c-h> <esc>:TmuxNavigateLeft<cr>
-inoremap <silent> <c-j> <esc>:TmuxNavigateDown<cr>
-inoremap <silent> <c-k> <esc>:TmuxNavigateUp<cr>
-inoremap <silent> <c-l> <esc>:TmuxNavigateRight<cr>
-inoremap <silent> <c-\> <esc>:TmuxNavigatePrevious<cr>
 " }}}
 " Fugitive -------------------- {{{
 " open git in its own buffer
@@ -264,12 +259,14 @@ nnoremap [Q :cfirst<cr>
 nnoremap ]Q :clast<cr>
 " }}}
 " Insert Mode -------------------- {{{
-inoremap fj <esc>
+inoremap jk <esc>
 " give bracket pair with {<cr>
 inoremap {<cr> {<cr>}<esc>O
 " able to undo text deleted with c-w or c-u
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
+" delete until the end of the next word (like <c-w> but in the other direction)
+inoremap <c-e> <esc>ldei
 " }}}
 " Command Mode-------------------- {{{
 cnoremap jk <esc>
