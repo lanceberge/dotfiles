@@ -17,5 +17,7 @@ augroup auto_source " automatically source all vim files on write
 augroup END
 " }}}
 " Snippets --------------------  {{{
-inoremap <buffer> <A-k>func function!<cr>endfunction<esc>kA<space>
+inoremap <buffer> <silent> <A-k>func function!<cr>endfunction<esc>kA<space>
+inoremap <buffer> <silent> <A-k>snip inoremap <buffer> <silent> <A- <bs>k>
+inoremap <buffer> <silent> <A-k>bs <space><buffer> <silent><space>
 " }}}
