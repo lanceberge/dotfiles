@@ -10,6 +10,7 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
+export VIM_SNIPPETS_DIR=$XDG_CONFIG_HOME/nvim/snippets
 
 # History
 HISTSIZE=1000
@@ -57,7 +58,7 @@ PS2='> '
 
 # Start x at login
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx ~/dotfiles/.xinitrc
+ exec startx ~/dotfiles/.xinitrc
 fi
 
 # Load zsh-syntax-highlighting; should be last.
