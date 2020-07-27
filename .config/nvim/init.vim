@@ -67,8 +67,14 @@ let g:netrw_liststly=3
 let g:netrw_list_hide='^\.\.\=/\=$' " hide ./ and ../ in netrw
 " }}}
 " Autocomplete -------------------- {{{
-set completeopt=menuone,longest,noinsert
-set complete-=i
+set completeopt=menuone,longest
+set omnifunc=syntaxcomplete#Complete
+" keep a menu item highlighted
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>c-n>" : ""<CR>' 
+" keep menu item always highlighted by simulating <Up> on pu visible
+inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
+  \ '<C-p><C-r>=pumvisible() ? "\<lt>c-p>" : ""<CR>'
 " }}}
 " Markdown -------------------- {{{
 " syntax highlighting in markdown code blocks
@@ -207,41 +213,60 @@ function! GFilesOrFiles()
     endif
 endfunction
 " }}}
-nnoremap <leader>f :call GFilesOrFiles()<cr>
-nnoremap <leader>F :Files<cr>
-nnoremap <leader>gL :Commits<cr>
-nnoremap <leader>gl :BCommits<cr>
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>L :Lines<cr>
-nnoremap <leader>l :BLines<cr>
-nnoremap <leader>kc :Commands<cr>
-nnoremap <leader>km :Marks<cr>
-nnoremap <leader>kt :BTags<cr>
-nnoremap <leader>kT :Tags<cr>
-nnoremap <leader>kH :History<cr>
-nnoremap <leader>kw :Windows<cr>
-nnoremap <leader>kh :Helptags<cr>
-nmap <A-m> <plug>(fzf-maps-n)
-imap <A-m> <plug>(fzf-maps-i)
-xmap <A-m> <plug>(fzf-maps-x)
-omap <A-m> <plug>(fzf-maps-o)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+nnoremap <leader>. :call GFilesOrFiles()<cr>
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fgL :Commits<cr>
+nnoremap <leader>fgl :BCommits<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>fL :Lines<cr>
+nnoremap <leader>fl :BLines<cr>
+nnoremap <leader>fc :Commands<cr>
+nnoremap <leader>fm :Marks<cr>
+nnoremap <leader>ft :BTags<cr>
+nnoremap <leader>fT :Tags<cr>
+nnoremap <leader>fH :History<cr>
+nnoremap <leader>fw :Windows<cr>
+nnoremap <leader>fh :Helptags<cr>
+nnoremap <leader>fs :Snippets<cr>
+nmap <leader>fMn <plug>(fzf-maps-n)
+nmap <leader>fMi <plug>(fzf-maps-i)
+nmap <leader>fMx <plug>(fzf-maps-x)
+nmap <leader>fMo <plug>(fzf-maps-o)
+imap <A-x><A-f> <plug>(fzf-complete-path)
+imap <A-x><A-l> <plug>(fzf-complete-buffer-line)
+imap <A-x><A-L> <plug>(fzf-complete-line)
 " }}}
-" Windows/buffers -------------------- {{{
-nnoremap <silent> <leader>x :bd!<cr>
-nnoremap <silent> <leader>w :w<cr>
-nnoremap <leader><A-q> :bufdo update<bar>qa!<cr>
-nnoremap <leader>q :x<cr>
-nnoremap <silent> <leader>Q :q!<cr>
+" Windows -------------------- {{{
+nnoremap <leader>w <c-w>
+" save and quit window
+nnoremap <leader>wq :x<cr>
+" delete window
+nnoremap <silent> <leader>wd :q!<cr>
 nnoremap <silent> <A-o> :wincmd o<cr>
 nnoremap <silent> <A-=> :wincmd =<cr>
-nnoremap <silent> <A-+> :wincmd +<cr>
-nnoremap <silent> <A--> :wincmd -<cr>
+nnoremap <silent> <A-]> :wincmd +<cr>
+nnoremap <silent> <A-[> :wincmd -<cr>
+" }}}
+" Buffers --------------------  {{{
+nnoremap <silent> <leader>bd :bd!<cr>
+nnoremap <silent> <leader>bs :w<cr>
+nnoremap <silent> <leader>bq :w<bar>bd!<cr>
+" }}}
+" Tabs --------------------  {{{
+nnoremap <silent> <leader>tn :tabnew<cr>
+nnoremap <silent> <leader>td :tabclose<cr>
+" }}}
+" Sessions --------------------  {{{
+" quit and make session
+nnoremap <leader>q :bufdo update<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/Session.vim<bar>qa!<cr>
+nnoremap <leader>vq :exec "bufdo update<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/" . 
+            \expand('%:t') . ".vim<bar>qa!"<cr>
+" load session
+nnoremap <leader>vl :so $XDG_CONFIG_HOME/nvim/sessions/Session.vim<cr>
+nnoremap <leader>vL :so $XDG_CONFIG_HOME/nvim/sessions/<c-d>
 " }}}
 " Brackets -------------------- {{{
 " Brackets & toggles(taken from tpope's unimpaired - I didn't need the whole plugin)
-
 " insert a newline above the current line
 nnoremap <silent> [<space> O<esc>j
 nnoremap <silent> ]<space> o<esc>
