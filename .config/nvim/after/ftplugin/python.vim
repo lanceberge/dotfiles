@@ -1,6 +1,6 @@
-" Snippets --------------------  {{{
+" Snippets {{{
 inoremap <buffer> <A-k>if if:<cr>
 " }}}
-" Settings --------------------  {{{
+" Settings {{{
 setlocal textwidth=80
 " }}}

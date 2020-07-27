@@ -1,4 +1,4 @@
-" Snippets --------------------  {{{
+" Snippets {{{
 " Miscellaneous
 inoremap <buffer> <silent> <A-k>print println!("");<esc>F"i
 inoremap <buffer> <silent> <A-k>str; String::from("")<esc>F"ci"
@@ -27,7 +27,7 @@ inoremap <buffer> <silent> <A-k>adc #![allow(dead_code)]
 inoremap <buffer> <silent> <A-k>auv #![allow(unused_variables)]
 inoremap <buffer> <silent> <A-k>drv #[derive()]<esc>F(ci(
 " }}}
-" Mappings --------------------  {{{
+" Mappings {{{
 nnoremap <buffer> <silent> <leader>rb :w <bar> !cargo build<cr>
 nnoremap <buffer> <silent> <leader>rB :w <bar> !cargo build -release<cr>
 nnoremap <buffer> <silent> <leader>rc :w <bar> !cargo check<cr>

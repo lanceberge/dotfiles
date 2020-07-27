@@ -1,4 +1,4 @@
-" Run Command --------------------  {{{
+" Run Command {{{
 nnoremap <buffer> <silent> <leader>rn :call <SID>Compile()<cr>
 
 " A function to run cpp scripts. Either shows the output, or 
@@ -22,6 +22,6 @@ function! s:Compile()
     endif
 endfunction
 " }}}
-" Snippets --------------------  {{{
+" Snippets {{{
 inoremap <buffer> <A-k>iis #include <iostream><cr>
 " }}}
