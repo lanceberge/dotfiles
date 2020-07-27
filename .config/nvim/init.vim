@@ -158,7 +158,7 @@ map <space> <leader>
 nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
 " toggle netrw
-nnoremap <silent> <leader>t :10Lexplore<cr>
+nnoremap <silent> <leader>on :10Lexplore<cr>
 " reindent
 nnoremap <silent> <leader>= magg=G`a
 " }}}
@@ -276,6 +276,10 @@ nnoremap <silent> [b :bprevious<cr>
 nnoremap <silent> ]b :bnext<cr>
 nnoremap <silent> [B :bfirst<cr>
 nnoremap <silent> ]B :blast<cr>
+nnoremap <silent> [t :tabprevious<cr>
+nnoremap <silent> ]t :tabnext<cr>
+nnoremap <silent> [T :tabfirst<cr>
+nnoremap <silent> ]T :tablast<cr>
 nnoremap [oh :set nohlsearch<cr>
 nnoremap ]oh :set hlsearch<cr>
 nnoremap [ow :set nowrap<cr>
@@ -287,8 +291,6 @@ nnoremap ]Q :clast<cr>
 " }}}
 " Insert Mode -------------------- {{{
 inoremap jk <esc>
-" give bracket pair with {<cr>
-inoremap {<cr> {<cr>}<esc>O
 " able to undo text deleted with c-w or c-u
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
@@ -305,12 +307,25 @@ cnoreabbrev v vert
 " Visual Mode-------------------- {{{
 vnoremap jk <esc>
 " }}}
+" Tags --------------------  {{{
+nnoremap <silent> <leader>gt :silent exec "!ctags -R"<cr>
+" }}}
 " Snippets --------------------  {{{
-" [!] to mark the next point to jump to in custom snippets, then <A-f> to edit it
+" [!] to mark the next point to jump to in custom snippets, then <A-j> to edit it
 nnoremap <silent> <A-j> :call search('[!]')<cr>ca[
 inoremap <silent> <A-j> <esc>:call search('[!]')<cr>ca[
+" <A-J> to clear all [!]
+nnoremap <silent> <A-J> ma:%s/\[!\]//g<cr>`a
+inoremap <silent> <A-J> <esc>ma:%s/\[!\]//g<cr>`a
 " }}}
 " Commenting --------------------  {{{
 " comment until the end of the line using tpope's commentary
 nmap gC i<cr><esc>gcckJ
+" }}}
+" Terminal --------------------  {{{
+" open terminal
+nnoremap <silent> <leader>ot :terminal<cr>i
+nnoremap <silent> <leader>ovt :vsplit term://zsh<cr>i
+" go to normal mode
+tnoremap <esc> <c-\><c-n>
 " }}}
