@@ -19,7 +19,7 @@ set lazyredraw " render changes once macro has finished
 set autochdir " auto change to the directory of a file when switching files
 set browsedir=buffer " netrw uses current files directory
 set gdefault " default /g for substitutions
-filetype indent plugin on " determine the type of a file based on contents
+filetype plugin indent on " determine the type of a file based on contents
 set shortmess=as
 set virtualedit=block
 " }}}
@@ -83,10 +83,12 @@ let g:markdown_fenced_languages = ['python', 'bash', 'c']
 " Plugins -------------------- {{{
 call plug#begin('~/dotfiles/.config/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator' " navigate tmux panes and vim windows with C-{h,j,k,l}
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'justinmk/vim-sneak' " s for two character searches, like how f is for one character searches
 Plug 'morhetz/gruvbox' " theme
+Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' " snippets
 Plug 'tpope/vim-commentary' " comment with gc{motion}
 Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
@@ -139,7 +141,7 @@ nnoremap Y y$
 " }}}
 " Normal Mode -------------------- {{{
 " A-l to clear highlight search (taken from tpope's sensible)
-nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
+" nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
 " }}}
 " Inserts/registers --------------------  {{{
 " append a semicolon to the end of a line
