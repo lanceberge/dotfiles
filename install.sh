@@ -12,6 +12,7 @@ sudo pacman -S --noconfirm neofetch
 sudo pacman -S --noconfirm compton
 sudo pacman -S --noconfirm tmux
 sudo pacman -S --noconfirm fzf
+sudo pacman -S --noconfirm ctags
 
 mv ~/archdotfiles ~/dotfiles
 
