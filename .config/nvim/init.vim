@@ -212,6 +212,8 @@ noremap ; :
 noremap : :!
 " }}}
 " g and y Prefix {{{
+" repeat last macro
+nmap gm @@
 nnoremap Y y$
 " append a semicolon to the end of a line
 nnoremap <silent> y; :call setline('.', getline('.') . ';')<cr>
@@ -255,8 +257,8 @@ nnoremap <leader>q :wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/Session.vi
 nnoremap <leader>vq :exec "wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/" . 
             \expand('%:t') . ".vim<bar>qa!"<cr>
 " load session
-nnoremap <leader>vl :so $XDG_CONFIG_HOME/nvim/sessions/Session.vim<cr>
-nnoremap <leader>vL :so $XDG_CONFIG_HOME/nvim/sessions/<c-d>
+nnoremap <leader>vl :so $XDG_CONFIG_HOME/nvim/sessions/<c-d>
+nnoremap <leader>vL :so $XDG_CONFIG_HOME/nvim/sessions/Session.vim<cr>
 " }}}
 " }}}
 " Brackets {{{
@@ -280,6 +282,10 @@ nnoremap [oi :set ignorecase<cr>
 nnoremap ]oi :set noignorecase<cr>
 nnoremap [Q :cfirst<cr>
 nnoremap ]Q :clast<cr>
+nnoremap [osr :set nosplitright<cr>
+nnoremap ]osr :set splitright<cr>
+nnoremap [osb :set nosplitbelow<cr>
+nnoremap ]osb :set splitbelow<cr>
 " }}}
 " Insert, Visual, Command Mode {{{
 " Insert Mode {{{
@@ -316,6 +322,6 @@ tnoremap <esc> <c-\><c-n>
 " no line numbers for terminal
 augroup terminal
     autocmd!
-    autocmd TermOpen * setlocal nornu|setlocal nonu
+    autocmd TermOpen * setlocal norelativenumber|setlocal nonumber
 augroup END
 " }}}

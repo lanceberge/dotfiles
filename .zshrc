@@ -1,6 +1,8 @@
 # Aliases
 source ~/dotfiles/.aliases
 
+# Path
+# PATH=$HOME/git/emacs/src:$PATH
 # Settings
 setopt autocd
 
