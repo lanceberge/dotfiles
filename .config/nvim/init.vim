@@ -116,6 +116,10 @@ set gdefault " default /g for substitutions
 filetype plugin indent on " determine the type of a file based on contents
 set shortmess=as
 set virtualedit=block
+if has('vim')
+    set termwinsize=20x200
+    set ttyfast
+endif
 " }}}
 " Undos {{{
 set undolevels=500 " number of possible undos; default is 1000
@@ -179,7 +183,6 @@ inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
 " Colorscheme {{{
 syntax enable
 set background=dark
-set termguicolors " colors are off in tmux without this
 colorscheme gruvbox
 " }}}
 " Folding {{{
@@ -313,15 +316,17 @@ nnoremap <silent> <leader>gt :silent exec "!ctags -R"<cr>
 nnoremap <silent> <leader>on :10Lexplore<cr>
 " }}}
 " Terminal {{{
-" open terminal
-nnoremap <silent> <leader>ot :terminal<cr>i
-nnoremap <silent> <leader>ovt :vsplit term://zsh<cr>i
-" go to normal mode
-tnoremap <esc> <c-\><c-n>
+if has ('nvim')
+    " open terminal
+    nnoremap <silent> <leader>ot :terminal<cr>i
+    nnoremap <silent> <leader>ovt :vsplit term://zsh<cr>i
+    " go to normal mode
+    tnoremap <esc> <c-\><c-n>
 
-" no line numbers for terminal
-augroup terminal
-    autocmd!
-    autocmd TermOpen * setlocal norelativenumber|setlocal nonumber
-augroup END
+    " no line numbers for terminal
+    augroup terminal
+        autocmd!
+        autocmd TermOpen * setlocal norelativenumber|setlocal nonumber
+    augroup END
+endif
 " }}}
