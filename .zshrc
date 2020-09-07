@@ -12,12 +12,11 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
-export VIM_SNIPPETS_DIR=$XDG_CONFIG_HOME/nvim/snippets
 
 # History
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/dotfiles/.zsh_history
+HISTFILE=~/.zsh_history
 
 # Vi mode
 bindkey -v
