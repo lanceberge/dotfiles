@@ -1,3 +1,7 @@
+if [[ -f /etc/bashrc && ! $BASH_SOURCED ]]; then
+   . /etc/bashrc
+fi
+
 set -o vi
 
 for file in ~/dotfiles/.{aliases,prompt}; do
