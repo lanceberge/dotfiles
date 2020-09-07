@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 #--------------------Aliases-------------------- 
-alias v='nvim'
+alias v='vim'
+alias nv='nvim'
 alias vl='nvim -S $XDG_CONFIG_HOME/nvim/sessions/Session.vim'
 alias s='sudo'
 alias sp='sudo pacman'
@@ -40,7 +41,8 @@ alias ta='tmux attach -t' # attatch tmux session
 alias tk='tmux kill-session -t' # kill session
 
 # RC Files
-alias so='source ~/.zshrc'
+alias sb='source ~/.bashrc'
+alias sz='source ~/.zshrc'
 alias tso='tmux source ~/.tmux.conf'
 alias zrc='nvim ~/dotfiles/.zshrc'
 alias nrc='nvim $XDG_CONFIG_HOME/nvim/init.vim'
