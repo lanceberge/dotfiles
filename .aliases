@@ -5,10 +5,12 @@ alias v='vim'
 alias nv='nvim'
 alias vl='nvim -S $XDG_CONFIG_HOME/nvim/sessions/Session.vim'
 alias s='sudo'
+
+# Pacman
 alias sp='sudo pacman'
 alias sps='sudo pacman -S'
 alias spr='sudo pacman -Rs'
-alias f='nvim $(fzf-tmux)'
+alias syu='sudo pacman -Syu'
 
 # Git
 alias g='git'
@@ -65,3 +67,4 @@ alias egrep='egrep --color=auto'
 
 # Miscellaneous
 alias nf=neofetch
+alias f='nvim $(fzf-tmux)'
