@@ -203,6 +203,7 @@ augroup END
 map <space> <leader>
 nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <silent> <leader>vs :w <bar>source ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <leader>; :!
 " reindent
 nnoremap <silent> <leader>= magg=G`a
 " }}}
@@ -212,7 +213,7 @@ noremap L $
 noremap <silent> <leader><c-h> H
 noremap <silent> <leader><c-l> L
 noremap ; :
-noremap : :!
+noremap : ;
 " }}}
 " g and y Prefix {{{
 " repeat last macro
