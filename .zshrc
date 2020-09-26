@@ -12,6 +12,7 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
+export PATH=$PATH:.
 
 # History
 HISTSIZE=1000

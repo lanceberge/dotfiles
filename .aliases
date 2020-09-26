@@ -36,18 +36,11 @@ alias ..='cd ..'
 alias 2..='cd ../..'
 alias 3..='cd ../../..'
 
-# Tmux
-alias tl='tmux attach-session' # Last tmux session
-alias tls='tmux ls' # list all sessions
-alias t='tmux'
-alias tn='tmux new -t' # new tmux session
-alias ta='tmux attach -t' # attatch tmux session
-alias tk='tmux kill-session -t' # kill session
-
 # RC Files
 alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
 alias tso='tmux source ~/.tmux.conf'
+alias so='source ~/dotfiles/.zshrc'
 alias zrc='nvim ~/dotfiles/.zshrc'
 alias nrc='nvim $XDG_CONFIG_HOME/nvim/init.vim'
 alias ve='nvim ~/dotfiles/.config/nvim/init.vim'

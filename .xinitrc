@@ -1,2 +1,2 @@
 xwallpaper --zoom ~/Downloads/futurama.jpg
-exec bspwm
+exec emacs
