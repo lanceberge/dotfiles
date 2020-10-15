@@ -9,3 +9,5 @@ for file in ~/dotfiles/.{aliases,prompt}; do
         source "$file";
 done;
 unset file;
+
+export HISTFILE=~/dotfiles/etc/.bash_history

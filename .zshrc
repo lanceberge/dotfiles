@@ -17,7 +17,10 @@ export PATH=$PATH:.
 # History
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=~/dotfiles/etc/.zsh_history
+
+# Miscellaneous files
+compinit -d ~/dotfiles/etc/.zcompdump
 
 # Vi mode
 bindkey -v
@@ -60,11 +63,11 @@ PS2='> '
 
 # Start x at login
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
- exec startx ~/dotfiles/.xinitrc
+      exec startx ~/dotfiles/.xinitrc
 fi
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # List files every time you change directory
 function chpwd {

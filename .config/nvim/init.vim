@@ -119,6 +119,7 @@ set virtualedit=block
 if has('vim')
     set termwinsize=20x200
     set ttyfast
+    set viminfo+=n~/.vim/viminfo
 endif
 " }}}
 " Undos {{{
