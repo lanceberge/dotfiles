@@ -1,8 +1,6 @@
 # Aliases
 source ~/dotfiles/.aliases
 
-# Path
-# PATH=$HOME/git/emacs/src:$PATH
 # Settings
 setopt autocd
 
@@ -12,15 +10,12 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
-export PATH=$PATH:.
+# export PATH=$PATH:~/.local/bin/:/usr/local/MATLAB/R2020b/bin:.
 
 # History
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/dotfiles/etc/.zsh_history
-
-# Miscellaneous files
-compinit -d ~/dotfiles/etc/.zcompdump
 
 # Vi mode
 bindkey -v
@@ -35,7 +30,6 @@ bindkey '^f' edit-command-line
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
 _comp_options+=(globdots) # include dotfiles
 
 # Vim keys in tab complete menu
@@ -73,3 +67,18 @@ fi
 function chpwd {
     ls -AF
 }
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/lance/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/lance/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/lance/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/lance/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
