@@ -1,2 +1,2 @@
-xwallpaper --zoom ~/Downloads/futurama.jpg
+xwallpaper --zoom ~/dotfiles/.config/misc/futurama.jpg
 exec bspwm
