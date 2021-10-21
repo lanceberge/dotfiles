@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#--------------------Aliases-------------------- 
+#--------------------Aliases--------------------
 alias v='vim'
 alias nv='nvim'
 alias vl='nvim -S $XDG_CONFIG_HOME/nvim/sessions/Session.vim'
@@ -62,3 +62,7 @@ alias egrep='egrep --color=auto'
 # Miscellaneous
 alias nf=neofetch
 alias f='nvim $(fzf-tmux)'
+
+# ssh
+alias node="ssh cmda02@pascal.math.vt.edu"
+alias node02="ssh -J cmda02@pascal.math.vt.edu cmda02@node02"
