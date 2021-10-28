@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Symlinks
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
@@ -12,6 +14,6 @@ ln -sf ~/dotfiles/.config/nvim/init.vim ~/.vimrc
 
 ## Set up vim plug
 # curl -fLo ~/dotfiles/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # nvim +PlugInstall +qall
