@@ -1,4 +1,6 @@
 #!/bin/bash
 
-pacman -S xwallpaper
-pacman -S zsh
+pacman -S --noconfirm xwallpaper
+pacman -S --noconfirm zsh
+pacman -S --noconfirm emacs
+pacman -S --noconfirm bspwm

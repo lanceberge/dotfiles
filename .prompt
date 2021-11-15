@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 #--------------------Aliases-------------------- 
-export TERM=xterm-256color
 prompt_git() {
 	local s='';
 	local branchName='';
