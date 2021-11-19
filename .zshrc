@@ -1,5 +1,10 @@
 # Aliases
-source ~/dotfiles/.aliases
+# source ~/dotfiles/.aliases
+for file in ~/dotfiles/.{aliases,local_aliases}; do
+    [ -r "$file" ] && [ -f "$file" ] &&
+        source "$file";
+done;
+unset file;
 
 # Settings
 setopt autocd
@@ -70,15 +75,15 @@ function chpwd {
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/lance/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/lance/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/lance/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/lance/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/home/lance/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+    # eval "$__conda_setup"
+# else
+    # if [ -f "/home/lance/anaconda3/etc/profile.d/conda.sh" ]; then
+        # . "/home/lance/anaconda3/etc/profile.d/conda.sh"
+    # else
+        # export PATH="/home/lance/anaconda3/bin:$PATH"
+    # fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<

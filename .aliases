@@ -2,8 +2,6 @@
 
 #--------------------Aliases--------------------
 alias v='vim'
-alias nv='nvim'
-alias vl='nvim -S $XDG_CONFIG_HOME/nvim/sessions/Session.vim'
 alias s='sudo'
 
 # Pacman
@@ -20,13 +18,11 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias ga='git add'
 alias gaa='git add -A'
-alias gsa='git stage -A'
 alias gcam='git commit -a -m'
 alias gca='git commit -a'
 alias gr='git reset'
-alias grs='git reset --soft HEAD~1'
 alias gl='git log'
-alias gp='git push -u origin master'
+alias gp='git push'
 alias gP='git pull'
 
 # Navigation
@@ -39,29 +35,15 @@ alias 3..='cd ../../..'
 # RC Files
 alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
-alias tso='tmux source ~/.tmux.conf'
-alias so='source ~/dotfiles/.zshrc'
-alias zrc='nvim ~/dotfiles/.zshrc'
-alias nrc='nvim $XDG_CONFIG_HOME/nvim/init.vim'
-alias ve='nvim ~/dotfiles/.config/nvim/init.vim'
 alias nvd='cd ~/dotfiles/.config/nvim'
-alias trc='nvim ~/dotfiles/.tmux.conf'
 
 # Listing Files
 alias l='ls -AF ${colorflag}'
 alias ll='ls -lF ${colorflag}'
+alias lsa='ls -aF ${colorflag}'
 alias la='ls -lAF ${colorflag}'
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 alias ls='command ls ${colorflag}'
-
-# Grep
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# Miscellaneous
-alias nf=neofetch
-alias f='nvim $(fzf-tmux)'
 
 # ssh
 alias node="ssh cmda02@pascal.math.vt.edu"
