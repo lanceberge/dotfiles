@@ -22,6 +22,10 @@ arch:
 	pacman -S --noconfirm bspwm
 	pacman -S --noconfirm sxhkd
 
+archLarge:
+	pacman -S --noconfirm texlive-core
+	pacman -S --noconfirm texlive-latexextra
+
 clones:
 	git clone git@github.com:lanceberge/.kde4.git ~/.kde4
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
