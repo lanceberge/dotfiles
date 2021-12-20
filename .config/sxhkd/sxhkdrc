@@ -8,7 +8,24 @@ super + @space
 super + Return
     alacritty
 
-# firefox
+super + ctrl + 1
+    firefox
+
+super + ctrl + 2
+    emacs
+
+super + ctrl + 3
+    alacritty
+
+super + ctrl + 4
+    systemsettings5
+
+super + ctrl + 5
+    dolphin
+
+super + ctrl + 6
+    microsoft-edge-dev
+
 super + alt + f
     firefox
 
