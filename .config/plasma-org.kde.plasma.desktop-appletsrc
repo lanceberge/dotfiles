@@ -29,6 +29,14 @@ ToolBoxButtonX=552
 Image=file:///home/lance/dotfiles/.config/misc/futurama.jpg
 SlidePaths=/usr/share/wallpapers
 
+[Containments][19][ConfigDialog]
+DialogHeight=1024
+DialogWidth=913
+
+[Containments][19][Wallpaper][org.kde.image][General]
+Image=/home/lance/dotfiles/.config/misc/futurama.jpg
+SlidePaths=/usr/share/wallpapers
+
 [Containments][2]
 activityId=
 formfactor=2
