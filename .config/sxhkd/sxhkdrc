@@ -1,8 +1,10 @@
 #
 # wm independent hotkeys
 #
-
 # terminal emulator
+super + @space
+    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
+
 super + Return
     alacritty
 
@@ -10,13 +12,8 @@ super + Return
 super + alt + f
     firefox
 
-# program launcher
-super + @space
-	# dmenu_run
-    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
-
 # make sxhkd reload its configuration files:
-super + Escape
+super + r
 	pkill -USR1 -x sxhkd
 
 #
