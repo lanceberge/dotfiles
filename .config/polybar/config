@@ -1,0 +1,7 @@
+[bar/mybar]
+modules-right = date
+modules-lef = bspwm
+
+[module/date]
+type = internal/date
+date = %Y-%m-%d%
