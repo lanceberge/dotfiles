@@ -19,7 +19,7 @@ arch:
 	pacman -S --noconfirm zsh         # shell
 	pacman -S --noconfirm bspwm       # window manager
 	pacman -S --noconfirm sxhkd       # manage keyboard shortcuts
-	pacman -S --noconfirm ttf-dejavau # font
+	pacman -S --noconfirm ttf-dejavu # font
 
 archLarge:
 	pacman -S --noconfirm texlive-core # latex
