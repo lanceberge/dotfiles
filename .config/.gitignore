@@ -16,7 +16,6 @@ kactivitymanagerdrc
 kateschemarc
 kcminputrc
 kconf_updaterc
-kde.org/
 kdeconnect/
 kded5rc
 kglobalshortcutsrc
@@ -33,7 +32,6 @@ kxkbrc
 libaccounts-glib/
 okularpartrc
 plasma-localerc
-plasma-org.kde.plasma.desktop-appletsrc
 plasmashellrc
 powerdevilrc
 powermanagementprofilesrc
