@@ -3,3 +3,18 @@
     email = bergeron.lance6@gmail.com
 [core]
     editor = vim
+
+[alias]
+        co = checkout
+        s = status
+        am = commit -am
+        l = log
+        d = diff
+        dc = diff --cached
+        r = reset
+        p = push
+        f = pull
+        c = commit
+        cm = commit -m
+        a = add
+        aa = add -A

@@ -9,10 +9,10 @@ super + Return
     alacritty
 
 super + ctrl + 1
-    firefox
+    emacs
 
 super + ctrl + 2
-    emacs
+    firefox
 
 super + ctrl + 3
     alacritty
