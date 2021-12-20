@@ -1,9 +1,9 @@
 symlinks:
-	ln -sf ~/dotfiles/.zshrc ~/.zshrc
-	ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
-	ln -sf ~/dotfiles/.bashrc ~/.bashrc
-	ln -sf ~/dotfiles/.bash_profile ~/.bash_profile
-	ln -sf ~/dotfiles/.zshenv ~/.zshenv
+	ln -sf ~/dotfiles/.zshrc              ~/.zshrc
+	ln -sf ~/dotfiles/.gitconfig          ~/.gitconfig
+	ln -sf ~/dotfiles/.bashrc             ~/.bashrc
+	ln -sf ~/dotfiles/.bash_profile       ~/.bash_profile
+	ln -sf ~/dotfiles/.zshenv             ~/.zshenv
 	ln -sf ~/dotfiles/.config/nvim/.vimrc ~/.vimrc
 
 vim:
@@ -13,17 +13,16 @@ vim:
 # nvim +PlugInstall +qall
 
 arch:
-	pacman -S --noconfirm xwallpaper
-	pacman -S --noconfirm zsh
-	pacman -S --noconfirm emacs
-	pacman -S --noconfirm bspwm
-	pacman -S --noconfirm alacritty
-	pacman -S --noconfirm zsh
-	pacman -S --noconfirm bspwm
-	pacman -S --noconfirm sxhkd
+	pacman -S --noconfirm xwallpaper  # wallpapers
+	pacman -S --noconfirm emacs       # OS
+	pacman -S --noconfirm alacritty   # terminal emulator
+	pacman -S --noconfirm zsh         # shell
+	pacman -S --noconfirm bspwm       # window manager
+	pacman -S --noconfirm sxhkd       # manage keyboard shortcuts
+	pacman -S --noconfirm ttf-dejavau # font
 
 archLarge:
-	pacman -S --noconfirm texlive-core
+	pacman -S --noconfirm texlive-core # latex
 	pacman -S --noconfirm texlive-latexextra
 
 clones:
@@ -33,4 +32,5 @@ clones:
 all:
 	make symlinks
 	make arch
+	make archLarge
 	make clones
