@@ -12,7 +12,8 @@ super + alt + f
 
 # program launcher
 super + @space
-	dmenu_run
+	# dmenu_run
+    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
 
 # make sxhkd reload its configuration files:
 super + Escape
