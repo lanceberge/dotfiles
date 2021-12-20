@@ -83,7 +83,7 @@ immutability=1
 plugin=org.kde.plasma.icontasks
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=preferred://browser,applications:emacs.desktop,applications:Alacritty.desktop,applications:systemsettings.desktop,preferred://filemanager,applications:microsoft-edge-dev.desktop
+launchers=applications:emacs.desktop,preferred://browser,applications:Alacritty.desktop,applications:systemsettings.desktop,preferred://filemanager,applications:microsoft-edge-dev.desktop
 
 [Containments][2][Applets][6]
 immutability=1
