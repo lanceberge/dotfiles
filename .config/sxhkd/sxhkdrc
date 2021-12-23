@@ -6,7 +6,7 @@ super + @space
     qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
 
 super + shift + @space
-    dmenu
+    dmenu_run
 
 super + Return
     alacritty
