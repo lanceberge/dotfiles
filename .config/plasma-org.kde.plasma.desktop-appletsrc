@@ -21,6 +21,9 @@ wallpaperplugin=org.kde.image
 DialogHeight=540
 DialogWidth=720
 
+[Containments][1][Configuration]
+PreloadWeight=42
+
 [Containments][1][General]
 ToolBoxButtonState=topcenter
 ToolBoxButtonX=552
@@ -50,16 +53,22 @@ wallpaperplugin=org.kde.image
 immutability=1
 plugin=org.kde.plasma.digitalclock
 
+[Containments][2][Applets][17][Configuration]
+PreloadWeight=42
+
 [Containments][2][Applets][18]
 immutability=1
 plugin=org.kde.plasma.showdesktop
+
+[Containments][2][Applets][18][Configuration]
+PreloadWeight=42
 
 [Containments][2][Applets][3]
 immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
-PreloadWeight=100
+PreloadWeight=92
 
 [Containments][2][Applets][3][Configuration][ConfigDialog]
 DialogHeight=1022
@@ -78,9 +87,15 @@ global=Alt+F1
 immutability=1
 plugin=org.kde.plasma.pager
 
+[Containments][2][Applets][4][Configuration]
+PreloadWeight=42
+
 [Containments][2][Applets][5]
 immutability=1
 plugin=org.kde.plasma.icontasks
+
+[Containments][2][Applets][5][Configuration]
+PreloadWeight=42
 
 [Containments][2][Applets][5][Configuration][General]
 launchers=applications:emacs.desktop,preferred://browser,applications:Alacritty.desktop,applications:systemsettings.desktop,preferred://filemanager,applications:microsoft-edge-dev.desktop
@@ -89,17 +104,23 @@ launchers=applications:emacs.desktop,preferred://browser,applications:Alacritty.
 immutability=1
 plugin=org.kde.plasma.marginsseparator
 
+[Containments][2][Applets][6][Configuration]
+PreloadWeight=42
+
 [Containments][2][Applets][7]
 immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=55
+PreloadWeight=47
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]
 DialogHeight=84
 DialogWidth=1920
+
+[Containments][2][Configuration]
+PreloadWeight=42
 
 [Containments][2][General]
 AppletOrder=3;4;5;6;7;17;18
@@ -117,41 +138,74 @@ wallpaperplugin=org.kde.image
 immutability=1
 plugin=org.kde.kdeconnect
 
+[Containments][8][Applets][10][Configuration]
+PreloadWeight=42
+
 [Containments][8][Applets][11]
 immutability=1
 plugin=org.kde.plasma.manage-inputmethod
+
+[Containments][8][Applets][11][Configuration]
+PreloadWeight=42
 
 [Containments][8][Applets][12]
 immutability=1
 plugin=org.kde.plasma.printmanager
 
+[Containments][8][Applets][12][Configuration]
+PreloadWeight=42
+
 [Containments][8][Applets][13]
 immutability=1
 plugin=org.kde.plasma.volume
+
+[Containments][8][Applets][13][Configuration]
+PreloadWeight=42
 
 [Containments][8][Applets][14]
 immutability=1
 plugin=org.kde.plasma.devicenotifier
 
+[Containments][8][Applets][14][Configuration]
+PreloadWeight=42
+
 [Containments][8][Applets][15]
 immutability=1
 plugin=org.kde.plasma.notifications
+
+[Containments][8][Applets][15][Configuration]
+PreloadWeight=42
 
 [Containments][8][Applets][16]
 immutability=1
 plugin=org.kde.plasma.keyboardlayout
 
+[Containments][8][Applets][16][Configuration]
+PreloadWeight=42
+
 [Containments][8][Applets][19]
 immutability=1
 plugin=org.kde.plasma.battery
+
+[Containments][8][Applets][19][Configuration]
+PreloadWeight=42
 
 [Containments][8][Applets][20]
 immutability=1
 plugin=org.kde.plasma.networkmanagement
 
+[Containments][8][Applets][20][Configuration]
+PreloadWeight=42
+
 [Containments][8][Applets][9]
 immutability=1
 plugin=org.kde.plasma.clipboard
+
+[Containments][8][Applets][9][Configuration]
+PreloadWeight=42
+
+[Containments][8][Configuration]
+PreloadWeight=42
 
 [Containments][8][General]
 extraItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.kdeconnect,org.kde.plasma.manage-inputmethod,org.kde.plasma.printmanager,org.kde.plasma.networkmanagement,org.kde.plasma.volume,org.kde.plasma.devicenotifier,org.kde.plasma.notifications,org.kde.plasma.keyboardlayout,org.kde.plasma.mediacontroller
