@@ -11,22 +11,22 @@ super + shift + @space
 super + Return
     alacritty
 
-super + ctrl + 1
+super + shift + 1
     emacs
 
-super + ctrl + 2
+super + shift + 2
     firefox
 
-super + ctrl + 3
+super + shift + 3
     alacritty
 
-super + ctrl + 4
+super + shift + 4
     systemsettings5
 
-super + ctrl + 5
+super + shift + 5
     dolphin
 
-super + ctrl + 6
+super + shift + 6
     microsoft-edge-dev
 
 super + alt + f
