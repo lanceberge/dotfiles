@@ -54,7 +54,7 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][17][Configuration]
-PreloadWeight=42
+PreloadWeight=47
 
 [Containments][2][Applets][18]
 immutability=1
@@ -62,6 +62,16 @@ plugin=org.kde.plasma.showdesktop
 
 [Containments][2][Applets][18][Configuration]
 PreloadWeight=42
+
+[Containments][2][Applets][21]
+immutability=1
+plugin=org.kde.plasma.battery
+
+[Containments][2][Applets][21][Configuration]
+PreloadWeight=55
+
+[Containments][2][Applets][21][Configuration][General]
+showPercentage=true
 
 [Containments][2][Applets][3]
 immutability=1
@@ -112,7 +122,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=47
+PreloadWeight=57
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]

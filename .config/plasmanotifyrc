@@ -1,3 +1,7 @@
 [Notifications]
 CriticalInDndMode=false
 LowPriorityPopups=false
+
+[Services][plasma_workspace]
+ShowInHistory=false
+ShowPopups=false
