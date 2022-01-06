@@ -25,6 +25,7 @@ arch:
 archLarge:
 	pacman -S --noconfirm texlive-core # latex
 	pacman -S --noconfirm texlive-latexextra
+	pacman -S --noconfirm python-pip
 
 clones:
 	# may have to rm -rf ~/.kde4 first

@@ -6,32 +6,6 @@ wheel:Vertical;NoModifier=org.kde.switchdesktop
 [ActionPlugins][1]
 RightButton;NoModifier=org.kde.contextmenu
 
-[Containments][1]
-ItemGeometries-1920x1080=
-ItemGeometriesHorizontal=
-activityId=1bc3df7b-cb2e-4548-868a-25f1a5f59afd
-formfactor=0
-immutability=1
-lastScreen=0
-location=0
-plugin=org.kde.plasma.folder
-wallpaperplugin=org.kde.image
-
-[Containments][1][ConfigDialog]
-DialogHeight=540
-DialogWidth=720
-
-[Containments][1][Configuration]
-PreloadWeight=42
-
-[Containments][1][General]
-ToolBoxButtonState=topcenter
-ToolBoxButtonX=552
-
-[Containments][1][Wallpaper][org.kde.image][General]
-Image=file:///home/lance/dotfiles/.config/misc/futurama.jpg
-SlidePaths=/usr/share/wallpapers
-
 [Containments][19][ConfigDialog]
 DialogHeight=1024
 DialogWidth=913
@@ -133,18 +107,25 @@ DialogWidth=1920
 PreloadWeight=42
 
 [Containments][2][General]
-AppletOrder=3;4;5;6;7;17;18
+AppletOrder=3;4;5;6;7;17;18;21
+
+[Containments][22]
+ItemGeometries-800x600=
+ItemGeometriesHorizontal=
+activityId=7e955def-4db3-490c-9c5d-d1ace85f174f
+formfactor=0
+immutability=1
+lastScreen=0
+location=0
+plugin=org.kde.plasma.folder
+wallpaperplugin=org.kde.image
 
 [Containments][22][ConfigDialog]
-DialogHeight=1024
-DialogWidth=1908
-
-[Containments][22][General]
-ToolBoxButtonState=topcenter
-ToolBoxButtonX=552
+DialogHeight=1023
+DialogWidth=913
 
 [Containments][22][Wallpaper][org.kde.image][General]
-Image=file:///home/lance/dotfiles/.config/misc/futurama.jpg
+Image=/home/lance/dotfiles/.config/misc/futurama.jpg
 SlidePaths=/usr/share/wallpapers
 
 [Containments][8]
