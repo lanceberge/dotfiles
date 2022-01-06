@@ -19,15 +19,18 @@ arch:
 	pacman -S --noconfirm zsh         # shell
 	pacman -S --noconfirm bspwm       # window manager
 	pacman -S --noconfirm sxhkd       # manage keyboard shortcuts
-	pacman -S --noconfirm ttf-dejavu # font
+	pacman -S --noconfirm ttf-dejavu  # font
+	pacman -S --noconfirm ispell
 
 archLarge:
 	pacman -S --noconfirm texlive-core # latex
 	pacman -S --noconfirm texlive-latexextra
 
 clones:
+	# may have to rm -rf ~/.kde4 first
 	git clone git@github.com:lanceberge/.kde4.git ~/.kde4
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
+	git clone git@github.com:lanceberge/org.git ~/org
 
 all:
 	make symlinks

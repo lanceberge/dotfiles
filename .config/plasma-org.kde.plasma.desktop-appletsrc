@@ -135,6 +135,18 @@ PreloadWeight=42
 [Containments][2][General]
 AppletOrder=3;4;5;6;7;17;18
 
+[Containments][22][ConfigDialog]
+DialogHeight=1024
+DialogWidth=1908
+
+[Containments][22][General]
+ToolBoxButtonState=topcenter
+ToolBoxButtonX=552
+
+[Containments][22][Wallpaper][org.kde.image][General]
+Image=file:///home/lance/dotfiles/.config/misc/futurama.jpg
+SlidePaths=/usr/share/wallpapers
+
 [Containments][8]
 activityId=
 formfactor=2
