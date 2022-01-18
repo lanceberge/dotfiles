@@ -6,11 +6,12 @@ set -o vi
 export XDG_CONFIG_HOME=~/dotfiles/.config
 
 export PATH=$PATH:~/.local/bin
+export BROWSER=firefox
 
 shopt -s autocd # change directory without typing cd
 shopt -s histappend # append to history file
 
-for file in ~/dotfiles/.{aliases,prompt,local_aliases}; do
+for file in ~/dotfiles/.{aliases,prompt,local}; do
     [ -r "$file" ] && [ -f "$file" ] &&
         source "$file";
 done;
