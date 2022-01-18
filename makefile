@@ -28,10 +28,13 @@ archLarge:
 	pacman -S --noconfirm python-pip
 
 clones:
-	# may have to rm -rf ~/.kde4 first
+	rm -rf ~/.kde4
+	rm -rf ~/.config
 	git clone git@github.com:lanceberge/.kde4.git ~/.kde4
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
 	git clone git@github.com:lanceberge/org.git ~/org
+	git clone git@github.com:lanceberge/.config.git ~/.config
+	git clone git@github.com:lanceberge/school.git ~/school
 
 all:
 	make symlinks

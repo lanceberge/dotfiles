@@ -125,7 +125,7 @@ DialogHeight=1023
 DialogWidth=913
 
 [Containments][22][Wallpaper][org.kde.image][General]
-Image=/home/lance/dotfiles/.config/misc/futurama.jpg
+Image=file:///home/lance/dotfiles/.config/misc/futurama.jpg
 SlidePaths=/usr/share/wallpapers
 
 [Containments][8]

@@ -5,6 +5,8 @@ fi
 set -o vi
 export XDG_CONFIG_HOME=~/dotfiles/.config
 
+export PATH=$PATH:~/.local/bin
+
 shopt -s autocd # change directory without typing cd
 shopt -s histappend # append to history file
 
