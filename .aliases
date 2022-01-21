@@ -38,7 +38,7 @@ alias sz='source ~/.zshrc'
 alias nvd='cd ~/dotfiles/.config/nvim'
 
 # Listing Files
-alias l='ls -AF ${colorflag}'
+alias l='ls -F'
 alias ll='ls -lF ${colorflag}'
 alias lsa='ls -aF ${colorflag}'
 alias la='ls -lAF ${colorflag}'
@@ -48,3 +48,6 @@ alias ls='command ls ${colorflag}'
 # ssh
 alias node="ssh cmda02@pascal.math.vt.edu"
 alias node02="ssh -J cmda02@pascal.math.vt.edu cmda02@node02"
+
+# Directories
+alias s22='cd ~/school/spring2022'

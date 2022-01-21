@@ -8,5 +8,5 @@
 .config/nvim/autoload/plug.vim
 .config/nvim/autoload/plug.vim.old
 .config/nvim/plugin/quickfix_toggle.vim
-.local_aliases
+.local
 etc
