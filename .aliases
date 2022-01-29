@@ -3,6 +3,7 @@
 #--------------------Aliases--------------------
 alias v='vim'
 alias s='sudo'
+alias jn="nohup jupyter-notebook --no-browser &"
 
 # Pacman
 alias sp='sudo pacman'
