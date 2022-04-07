@@ -5,6 +5,7 @@ symlinks:
 	ln -sf ~/dotfiles/.bash_profile       ~/.bash_profile
 	ln -sf ~/dotfiles/.zshenv             ~/.zshenv
 	ln -sf ~/dotfiles/.config/nvim/.vimrc ~/.vimrc
+	ln -sf  /usr/bin/python3               /usr/bin/python
 
 vim:
 # curl -fLo ~/dotfiles/.config/nvim/autoload/plug.vim --create-dirs \

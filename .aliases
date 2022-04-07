@@ -3,7 +3,7 @@
 #--------------------Aliases--------------------
 alias v='vim'
 alias s='sudo'
-alias jn="nohup jupyter-notebook --no-browser &"
+alias jn="nohup jupyter-notebook --no-browser >/dev/null 2>&1 &"
 
 # Pacman
 alias sp='sudo pacman'
@@ -52,3 +52,6 @@ alias node02="ssh -J cmda02@pascal.math.vt.edu cmda02@node02"
 
 # Directories
 alias s22='cd ~/school/spring2022'
+
+# Python
+alias python='python3'
