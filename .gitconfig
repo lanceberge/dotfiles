@@ -5,16 +5,23 @@
     editor = vim
 
 [alias]
-        co = checkout
-        s  = status
-        am = commit -am
-        l  = log
-        d  = diff
-        dc = diff --cached
-        r  = reset
-        p  = push
-        f  = pull
-        c  = commit
-        cm = commit -m
-        a  = add
-        aa = add -A
+        co  = checkout
+        s   = status
+        l   = log
+
+        c   = commit
+        cm  = commit -m
+        cam = commit -am
+
+        d   = diff
+        dc  = diff --cached
+
+        r   = reset
+        rh  = reset --hard
+
+
+        p   = push
+        f   = pull
+
+        a   = add
+        aa  = add -A

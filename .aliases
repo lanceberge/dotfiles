@@ -3,28 +3,13 @@
 #--------------------Aliases--------------------
 alias v='vim'
 alias s='sudo'
-alias jn="nohup jupyter-notebook --no-browser >/dev/null 2>&1 &"
+alias jn="nohup jupyter-notebook --no-browser >/dev/null 2>&1 &" # open a jupyter server in the background
 
 # Pacman
 alias sp='sudo pacman'
 alias sps='sudo pacman -S'
 alias spr='sudo pacman -Rs'
 alias syu='sudo pacman -Syu'
-
-# Git
-alias g='git'
-alias gs='git status'
-alias gd='git diff'
-alias gc='git commit'
-alias gcm='git commit -m'
-alias ga='git add'
-alias gaa='git add -A'
-alias gcam='git commit -a -m'
-alias gca='git commit -a'
-alias gr='git reset'
-alias gl='git log'
-alias gp='git push'
-alias gP='git pull'
 
 # Navigation
 alias df='cd ~/dotfiles'
@@ -33,10 +18,9 @@ alias ..='cd ..'
 alias 2..='cd ../..'
 alias 3..='cd ../../..'
 
-# RC Files
+# Source Files
 alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
-alias nvd='cd ~/dotfiles/.config/nvim'
 
 # Listing Files
 alias l='ls -F'
