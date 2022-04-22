@@ -1,6 +1,7 @@
 install=pacman -S
 flags=""
 
+
 symlinks:
 	ln -sf ~/dotfiles/.zshrc              ~/.zshrc
 	ln -sf ~/dotfiles/.gitconfig          ~/.gitconfig
@@ -11,10 +12,20 @@ symlinks:
 	ln -sf  /usr/bin/python3               /usr/bin/python
 
 
+## arch specific
 arch_packages:
 	${install} ${flags} alacritty   # terminal emulator
 
 
+arch:
+	make arch_packages
+	rm -rf ~/.kde4
+	rm -rf ~/.config
+	git clone git@github.com:lanceberge/.kde4.git   ~/.kde4
+	git clone git@github.com:lanceberge/.config.git ~/.config
+
+
+## packages
 base_packages:
 	${install} ${flags} xwallpaper  # wallpapers
 	${install} ${flags} emacs       # OS
@@ -37,15 +48,10 @@ all_packages:
 	${install} ${flags} texlive-latexextra
 
 
-# clone repos
 clones:
-	# rm -rf ~/.kde4
-	# rm -rf ~/.config
-	# git clone git@github.com:lanceberge/.kde4.git ~/.kde4
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
-	git clone git@github.com:lanceberge/org.git ~/org
-	# git clone git@github.com:lanceberge/.config.git ~/.config
-	git clone git@github.com:lanceberge/school.git ~/school
+	git clone git@github.com:lanceberge/org.git      ~/org
+	git clone git@github.com:lanceberge/school.git   ~/school
 
 
 all:
