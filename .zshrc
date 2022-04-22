@@ -1,5 +1,4 @@
-# Aliases
-# source ~/dotfiles/.aliases
+# source files
 for file in ~/dotfiles/.{aliases,local_aliases}; do
     [ -r "$file" ] && [ -f "$file" ] &&
         source "$file";
@@ -7,15 +6,14 @@ done;
 unset file;
 
 # Settings
-setopt autocd
+setopt autocd # change dir without typing cd
 
 # Exports
-export EDITOR="nvim"
+export EDITOR="vim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
-# export PATH=$PATH:~/.local/bin/:/usr/local/MATLAB/R2020b/bin:.
 
 # History
 HISTSIZE=1000
