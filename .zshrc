@@ -15,6 +15,10 @@ export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
 
+# Path
+# export PATH=$PATH:/Users/lance/Library/Python/3.8/lib/python/site-packages:~/code/misc_scripts/food
+export PATH=$PATH:/Users/lance/code/misc-scripts/food/
+
 # History
 HISTSIZE=1000
 SAVEHIST=1000
@@ -59,12 +63,9 @@ prompt='%B%F{cyan}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
 
 # Start x at login
-if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-      exec startx ~/dotfiles/.xinitrc
-fi
-
-# Load zsh-syntax-highlighting; should be last.
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+#       exec startx ~/dotfiles/.xinitrc
+# fi
 
 # List files every time you change directory
 function chpwd {

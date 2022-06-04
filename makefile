@@ -9,6 +9,7 @@ symlinks:
 	ln -sf ~/dotfiles/.bash_profile       ~/.bash_profile
 	ln -sf ~/dotfiles/.zshenv             ~/.zshenv
 	ln -sf ~/dotfiles/.config/nvim/.vimrc ~/.vimrc
+	ln -sf ~/dotfiles/.osx                ~/.osx
 
 
 ## arch specific
@@ -35,7 +36,17 @@ mac:
 	# install brew
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew install --cask emacs
-	
+
+	brew tap homebrew/cask-fonts
+	brew install font-dejavu
+
+	## From App Store
+	# - Snap
+	#
+
+	# From web
+	# - scroll reverser
+
 
 python_packages:
 	${install} ${flags} python3
