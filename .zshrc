@@ -1,5 +1,5 @@
 # source files
-for file in ~/dotfiles/.{aliases,local_aliases}; do
+for file in ~/dotfiles/.{aliases,local_aliases,local}; do
     [ -r "$file" ] && [ -f "$file" ] &&
         source "$file";
 done;
