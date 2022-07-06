@@ -63,7 +63,6 @@ all_packages:
 clones:
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
 	git clone git@github.com:lanceberge/org.git      ~/org
-	git clone git@github.com:lanceberge/school.git   ~/school
 
 
 all:
