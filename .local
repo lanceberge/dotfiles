@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+## Local Settings
+if hostname | grep -q 'amazon'; then
+    export PATH=$PATH:$HOME/.toolbox/bin
+
+    alias ssh-cd="ssh dev-dsk-belancev-2b-946c0bd6.us-west-2.amazon.com"
+
+    # COCO beta AWS account
+    alias ada-coco-beta="ada credentials update --account=coco-network-design-workflow-beta --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE"
+
+    # COCO Prod NA AWS account
+    alias ada-coco-prod-na="ada credentials update --account=coco-network-design-workflow-na-prod --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE"
+
+    alias mwk="mwinit -o && kinit"
+
+# elif hostname | grep -q 'MacBook'; then
+fi

@@ -25,8 +25,8 @@ SAVEHIST=1000
 HISTFILE=~/dotfiles/etc/.zsh_history
 
 # Vi mode
-bindkey -v
-bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
+# bindkey -v
+# bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
 export KEYTIMEOUT=20
 
 # Edit line in vim with C-f
