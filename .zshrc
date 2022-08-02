@@ -30,8 +30,8 @@ HISTFILE=~/dotfiles/etc/.zsh_history
 export KEYTIMEOUT=20
 
 # Edit line in vim with C-f
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^f' edit-command-line
+# autoload edit-command-line; zle -N edit-command-line
+# bindkey '^f' edit-command-line
 
 # Tab completion
 autoload -U compinit
