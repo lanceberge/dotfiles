@@ -12,7 +12,28 @@ if hostname | grep -q 'amazon'; then
     # COCO Prod NA AWS account
     alias ada-coco-prod-na="ada credentials update --account=coco-network-design-workflow-na-prod --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE"
 
-    alias mwk="mwinit -o && kinit"
+ 
+    
+    alias aws-coco-na='aws --region us-east-1 --profile coco-na-prod'
+    alias aws-coco-beta='aws --region us-west-2 --profile coco-beta'
 
-# elif hostname | grep -q 'MacBook'; then
+    alias bb=brazil-build
+    alias bba="brazil-build apollo-pkg"
+    alias bre="brazil-runtime-exec"
+    alias brc="brazil-recursive-cmd"
+    alias bws="brazil ws"
+    alias bwsuse="bws use --gitMode -p"
+    alias bwscreate="bws create -n"
+    alias bbr="brc brazil-build"
+    alias bball="brc --allPackages"
+    alias bbb="brc --allPackages brazil-build"
+    export DYLD_LIBRARY_PATH=/opt/xpressmp/lib
+    
+    alias cra cr -n --all
+
+     # export XPRESS=/opt/xpressmp/bin
+     # . /Applications/FICO\ Xpress/xpressmp/bin/xpvars.sh   alias mwk="mwinit -o && kinit"
+
+    # elif hostname | grep -q 'MacBook'; then
+
 fi

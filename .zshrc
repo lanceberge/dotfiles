@@ -25,13 +25,13 @@ SAVEHIST=1000
 HISTFILE=~/dotfiles/etc/.zsh_history
 
 # Vi mode
-# bindkey -v
-# bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
+bindkey -v
+bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
 export KEYTIMEOUT=20
 
 # Edit line in vim with C-f
-# autoload edit-command-line; zle -N edit-command-line
-# bindkey '^f' edit-command-line
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^f' edit-command-line
 
 # Tab completion
 autoload -U compinit
@@ -69,7 +69,7 @@ PS2='> '
 
 # List files every time you change directory
 function chpwd {
-    ls -AF
+    ls -F
 }
 
 # >>> conda initialize >>>
