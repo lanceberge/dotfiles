@@ -12,8 +12,8 @@ if hostname | grep -q 'amazon'; then
     # COCO Prod NA AWS account
     alias ada-coco-prod-na="ada credentials update --account=coco-network-design-workflow-na-prod --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE"
 
- 
-    
+
+
     alias aws-coco-na='aws --region us-east-1 --profile coco-na-prod'
     alias aws-coco-beta='aws --region us-west-2 --profile coco-beta'
 
@@ -28,12 +28,19 @@ if hostname | grep -q 'amazon'; then
     alias bball="brc --allPackages"
     alias bbb="brc --allPackages brazil-build"
     export DYLD_LIBRARY_PATH=/opt/xpressmp/lib
-    
+
     alias cra cr -n --all
 
      # export XPRESS=/opt/xpressmp/bin
      # . /Applications/FICO\ Xpress/xpressmp/bin/xpvars.sh   alias mwk="mwinit -o && kinit"
 
-    # elif hostname | grep -q 'MacBook'; then
+elif hostname | grep -q 'MacBook'; then
+    export PATH=$PATH:/Users/lance/code/misc-scripts/food/:/Users/lance/code/Get-Stock-Data
 
 fi
+
+## Arch
+# Start x at login
+# if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+#       exec startx ~/dotfiles/.xinitrc
+# fi

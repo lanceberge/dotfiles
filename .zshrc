@@ -8,16 +8,15 @@ unset file;
 # Settings
 setopt autocd # change dir without typing cd
 
+# List files every time you change directory
+function chpwd {
+    ls -F
+}
+
 # Exports
 export EDITOR="vim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
-
-# Path
-# export PATH=$PATH:/Users/lance/Library/Python/3.8/lib/python/site-packages:~/code/misc_scripts/food
-export PATH=$PATH:/Users/lance/code/misc-scripts/food/
 
 # History
 HISTSIZE=1000
@@ -61,28 +60,3 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats " %F{green}on %F{yellow}%b%F{red}[%u%c]"
 prompt='%B%F{cyan}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
-
-# Start x at login
-# if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-#       exec startx ~/dotfiles/.xinitrc
-# fi
-
-# List files every time you change directory
-function chpwd {
-    ls -F
-}
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/lance/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-    # eval "$__conda_setup"
-# else
-    # if [ -f "/home/lance/anaconda3/etc/profile.d/conda.sh" ]; then
-        # . "/home/lance/anaconda3/etc/profile.d/conda.sh"
-    # else
-        # export PATH="/home/lance/anaconda3/bin:$PATH"
-    # fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<

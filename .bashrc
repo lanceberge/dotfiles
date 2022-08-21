@@ -6,7 +6,6 @@ set -o vi # vim style keys
 
 export PATH=$PATH:~/.local/bin
 export XDG_CONFIG_HOME=~/dotfiles/.config
-export BROWSER=firefox
 export EDITOR=vim
 
 shopt -s autocd # change directory without typing cd

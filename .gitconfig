@@ -1,6 +1,7 @@
 [user]
     name = lanceberge
     email = bergeron.lance6@gmail.com
+
 [core]
     editor = vim
 
@@ -25,3 +26,6 @@
 
         a   = add
         aa  = add -A
+
+[pull]
+        rebase = true
