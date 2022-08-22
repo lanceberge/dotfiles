@@ -16,7 +16,7 @@ if hostname | grep -q 'amazon'; then
     alias ada-prod="ada credentials update --account=coco-network-design-workflow-na-prod --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE --once"
 
     # Brazil
-    alias bb=brazil-build
+    alias bb="brazil-build"
     alias bba="brazil-build apollo-pkg"
     alias bre="brazil-runtime-exec"
     alias brc="brazil-recursive-cmd"
