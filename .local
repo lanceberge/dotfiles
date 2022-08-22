@@ -5,7 +5,11 @@ if hostname | grep -q 'amazon'; then
     export PATH=$PATH:$HOME/.toolbox/bin
 
     alias ssh-cd="ssh dev-dsk-belancev-2b-946c0bd6.us-west-2.amazon.com"
-    alias cra cr -n --all
+    alias crna="cr -n --all"
+    alias cra="cr --all"
+    
+    alias mwk="mwinit -o && kinit"
+    alias mwo="mwinit -o"
 
     # COCO beta AWS account
     alias ada-beta="ada credentials update --account=coco-network-design-workflow-beta --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE --once"
@@ -16,7 +20,8 @@ if hostname | grep -q 'amazon'; then
     alias bba="brazil-build apollo-pkg"
     alias bre="brazil-runtime-exec"
     alias brc="brazil-recursive-cmd"
-    alias bws="brazil ws"
+    alias bw="brazil ws"
+    alias bwcs="brazil ws clean && brazil ws sync"
     alias bwsuse="bws use --gitMode -p"
     alias bwscreate="bws create -n"
     alias bbr="brc brazil-build"
@@ -26,7 +31,7 @@ if hostname | grep -q 'amazon'; then
 
 
      # export XPRESS=/opt/xpressmp/bin
-     # . /Applications/FICO\ Xpress/xpressmp/bin/xpvars.sh   alias mwk="mwinit -o && kinit"
+     # . /Applications/FICO\ Xpress/xpressmp/bin/xpvars.sh  
 
 elif hostname | grep -q 'MacBook'; then
     export PATH=$PATH:/Users/lance/code/misc-scripts/food/:/Users/lance/code/Get-Stock-Data
