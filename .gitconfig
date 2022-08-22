@@ -26,6 +26,3 @@
 
         a   = add
         aa  = add -A
-
-[pull]
-        rebase = true
