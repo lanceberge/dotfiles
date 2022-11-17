@@ -18,6 +18,9 @@ export EDITOR="vim"
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
 
+# Path
+export PATH=$PATH:$HOME/code/scripts
+
 # History
 HISTSIZE=1000
 SAVEHIST=1000
