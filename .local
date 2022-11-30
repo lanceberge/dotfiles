@@ -36,8 +36,9 @@ if hostname | grep -q 'amazon'; then
      . /Applications/FICO\ Xpress/xpressmp/bin/xpvars.sh  
 
 elif hostname | grep -q 'MacBook'; then
-    export PATH=$PATH:$HOME/code/scripts/food/:$HOME/code/Get-Stock-Data:$HOME/code/scripts/guitar
 fi
+
+export PATH=$PATH:$HOME/code/scripts/food/:$HOME/code/Get-Stock-Data:$HOME/code/scripts/guitar
 
 ## Arch
 # Start x at login

@@ -44,9 +44,6 @@ mac:
 	# - Snap
 	#
 
-	# From web
-	# - scroll reverser
-
 
 python_packages:
 	${install} ${flags} python3
@@ -63,6 +60,7 @@ all_packages:
 clones:
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
 	git clone git@github.com:lanceberge/org.git      ~/org
+	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
 
 
 all:
