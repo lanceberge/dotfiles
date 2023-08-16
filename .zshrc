@@ -19,7 +19,14 @@ export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/dotfiles/.config
 
 # Path
-export PATH=$PATH:$HOME/code/scripts
+if [ -d ~/code/scripts ]; then
+    for file in ~/code/scripts/*/; do
+        if [ -d "$file" ]; then
+            export PATH="$PATH":"$file"
+        fi
+    done
+    unset file
+fi
 
 # History
 HISTSIZE=1000

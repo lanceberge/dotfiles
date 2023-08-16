@@ -38,8 +38,6 @@ if hostname | grep -q 'amazon'; then
 elif hostname | grep -q 'MacBook'; then
 fi
 
-export PATH=$PATH:$HOME/code/scripts/food/:$HOME/code/Get-Stock-Data:$HOME/code/scripts/guitar
-
 ## Arch
 # Start x at login
 # if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
