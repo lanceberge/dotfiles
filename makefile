@@ -36,9 +36,9 @@ mac:
 	# install brew
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew install --cask emacs
-
 	brew tap homebrew/cask-fonts
 	brew install font-dejavu
+	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 	## From App Store
 	# - Snap
