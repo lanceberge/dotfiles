@@ -35,3 +35,18 @@ alias s22='cd ~/school/spring2022'
 
 # Python
 alias python='python3'
+
+# Docker
+
+alias dps='docker ps'
+alias dlps='docker ps -a'
+alias drun='docker run'
+alias drit='docker run -it'
+alias drrm='docker run --rm'
+alias dexcit='docker exec -it'
+alias dimg='docker images'
+alias dsp='docker system prune'
+alias dkill='docker kill'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias dins='docker inspect'

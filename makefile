@@ -10,6 +10,7 @@ symlinks:
 	ln -sf ~/dotfiles/.zshenv             ~/.zshenv
 	ln -sf ~/dotfiles/.config/nvim/.vimrc ~/.vimrc
 	ln -sf ~/dotfiles/.osx                ~/.osx
+	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
 
 
 ## arch specific

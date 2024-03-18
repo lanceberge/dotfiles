@@ -1,10 +1,12 @@
+setxkbmap -layout us -option ctrl:swapcaps
+
 if [[ -f /etc/bashrc && ! $BASH_SOURCED ]]; then
    . /etc/bashrc
 fi
 
 set -o vi # vim style keys
 
-export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin:~/bin
 export XDG_CONFIG_HOME=~/dotfiles/.config
 export EDITOR=vim
 
@@ -19,4 +21,6 @@ done;
 unset file;
 
 export HISTFILE=~/dotfiles/etc/.bash_history
+export HISTSIZE=30000
+export HISTFILESIZE=30000
 bind -x $'"\C-l":clear;'

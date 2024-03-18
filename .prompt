@@ -51,14 +51,13 @@ red=$(tput setaf 124);
 orange=$(tput setaf 208);
 green=$(tput setaf 106);
 blue=$(tput setaf 108);
-yellow=$(tput setaf 214);
 bold=$(tput bold);
-# reset=$(tput sgr0);
-reset=$(tput setaf 223);
+reset=$(tput sgr0);
+#reset=$(tput setaf 223);
 
 PS1="\[${reset}\]";
 PS1+="\[${green}\]\w"; # cwd
-PS1+="\$(prompt_git \"\[${blue}\] on \[${orange}\]\" \"\[${red}\]\")"; # Git repository details
+# PS1+="\$(prompt_git \"\[${blue}\] on \[${orange}\]\" \"\[${red}\]\")"; # Git repository details
 PS1+="\[${white}\]\[${reset}\] \$ ";
 export PS1;
 
