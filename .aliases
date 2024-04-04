@@ -5,18 +5,13 @@ alias v='vim'
 alias s='sudo'
 alias jn="nohup jupyter-notebook --no-browser >/dev/null 2>&1 &" # open a jupyter server in the background
 
-# Pacman
-alias sp='sudo pacman'
-alias sps='sudo pacman -S'
-alias spr='sudo pacman -Rs'
-alias syu='sudo pacman -Syu'
-
 # Navigation
 alias df='cd ~/dotfiles'
 alias dfc='cd ~/dotfiles/.config'
 alias ..='cd ..'
 alias 2..='cd ../..'
 alias 3..='cd ../../..'
+alias hg='history |grep'
 
 # Source Files
 alias sb='source ~/.bashrc'
@@ -37,7 +32,6 @@ alias s22='cd ~/school/spring2022'
 alias python='python3'
 
 # Docker
-
 alias dps='docker ps'
 alias dlps='docker ps -a'
 alias drun='docker run'
@@ -50,3 +44,6 @@ alias dkill='docker kill'
 alias drm='docker rm'
 alias drmi='docker rmi'
 alias dins='docker inspect'
+
+# Kubernetes
+alias kc='kubectl'
