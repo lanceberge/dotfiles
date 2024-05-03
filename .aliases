@@ -47,3 +47,6 @@ alias dins='docker inspect'
 
 # Kubernetes
 alias kc='kubectl'
+
+#Maven
+alias mcs='mvn clean install -DskipTests'

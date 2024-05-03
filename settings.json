@@ -1,4 +1,5 @@
 {
-    "workbench.colorTheme": "GrunBoxTheme"
-
+    "workbench.colorTheme": "GrunBoxTheme",
+    "vim.handleKeys": { "<C-f>": false }
 }
+
