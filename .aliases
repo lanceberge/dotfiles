@@ -25,9 +25,6 @@ alias la='ls -lAF ${colorflag}'
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 alias ls='command ls ${colorflag}'
 
-# Directories
-alias s22='cd ~/school/spring2022'
-
 # Python
 alias python='python3'
 
