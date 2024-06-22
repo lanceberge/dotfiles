@@ -54,6 +54,7 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M viins '^?' backward-delete-char
+bindkey '^R' history-incremental-search-backward
 
 # Prompt
 export TERM=xterm-256color

@@ -35,3 +35,4 @@
         gpgsign = true
 [pull]
         rebase = false
+
