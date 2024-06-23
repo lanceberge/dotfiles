@@ -29,9 +29,11 @@ if [ -d ~/code/scripts ]; then
 fi
 
 # History
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/dotfiles/etc/.zsh_history
+unsetopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
 
 # Vi mode
 bindkey -v
