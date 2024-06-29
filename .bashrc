@@ -29,6 +29,10 @@ PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups:erasedups
 bind -x $'"\C-l":clear;'
 
+function cd {
+    builtin cd "$@" && ls -F
+}
+
 function vimf() {
     if [ "$#" -eq 1 ]; then
         $EDITOR $(find -name "$1")
