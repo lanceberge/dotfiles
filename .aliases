@@ -18,12 +18,11 @@ alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
 
 # Listing Files
-alias l='ls -F'
+alias ls='ls -F' ${colorflag}
 alias ll='ls -lF ${colorflag}'
 alias lsa='ls -aF ${colorflag}'
 alias la='ls -lAF ${colorflag}'
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
-alias ls='command ls ${colorflag}'
 
 # Python
 alias python='python3'
@@ -47,3 +46,5 @@ alias kc='kubectl'
 
 #Maven
 alias mcs='mvn clean install -DskipTests'
+alias hs='helmfile sync -e gcdev-ds-shared'
+alias hd='helmfile destroy -e gcdev-ds-shared'
