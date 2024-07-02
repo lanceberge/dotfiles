@@ -5,11 +5,6 @@ fi
 # Settings
 setopt autocd # change dir without typing cd
 
-# List files every time you change directory
-function chpwd {
-    ls -F
-}
-
 # Exports
 export EDITOR="vim"
 export LANG=en_US.UTF-8
