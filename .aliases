@@ -12,6 +12,7 @@ alias ..='cd ..'
 alias 2..='cd ../..'
 alias 3..='cd ../../..'
 alias hg='history |grep'
+alias pg='ps aux |grep'
 
 # Source Files
 alias sb='source ~/.bashrc'
