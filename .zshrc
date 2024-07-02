@@ -1,9 +1,6 @@
-# source files
-for file in ~/dotfiles/.{aliases,local_aliases,local}; do
-    [ -r "$file" ] && [ -f "$file" ] &&
-        source "$file";
-done;
-unset file;
+if [ -f ~/dotfiles/.sharedrc ]; then
+    source ~/dotfiles/.sharedrc
+fi
 
 # Settings
 setopt autocd # change dir without typing cd
@@ -31,9 +28,6 @@ fi
 # History
 unsetopt EXTENDED_HISTORY
 setopt SHARE_HISTORY
-HISTSIZE=100000
-SAVEHIST=100000
-HISTFILE=~/.zsh_history
 
 # Vi mode
 bindkey -v
