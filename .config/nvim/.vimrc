@@ -1,7 +1,11 @@
 """"""""""""""""""""""""""""""Settings"""""""""""""""""""""""""""""" 
 " General {{{
 set noerrorbells
-set clipboard=unnamedplus
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
 set timeoutlen=500 " 500ms to do mapped commands
 set ttimeout
 set ttimeoutlen=100
