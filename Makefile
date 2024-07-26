@@ -36,13 +36,10 @@ arch:
 
 
 mac:
-	# install brew
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew install --cask emacs
 	brew tap homebrew/cask-fonts
 	brew install font-dejavu
-	brew install cmake
-	brew install libtool
 	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 	## From App Store
@@ -54,6 +51,10 @@ python_packages:
 	${install} ${flags} python3
 	${install} ${flags} python-pip
 	pip install numpy matplotlib pandas
+
+
+go:
+	go install golang.org/x/tools/gopls@latest
 
 
 node:
