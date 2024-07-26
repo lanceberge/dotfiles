@@ -1,5 +1,6 @@
 #!/bin/bash
 export XDG_CONFIG_HOME=~/dotfiles/.config
+export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # source aliases, prompt, ...
@@ -10,11 +11,19 @@ done;
 unset file;
 
 # add to path
-for dir in ~/{go/bin,.local/bin}; do
+for dir in ~/{.local/bin,go/bin}; do
     if [ -d "$dir" ]; then
         export PATH="$dir:$PATH";
     fi
 done;
+
+if [ -d ~/code/scripts ]; then
+    for dir in ~/code/scripts/*/; do
+        if [ -d "$dir" ]; then
+            export PATH="$dir":"$PATH"
+        fi
+    done
+fi
 unset dir;
 
 

@@ -5,21 +5,6 @@ fi
 # Settings
 setopt autocd # change dir without typing cd
 
-# Exports
-export EDITOR="vim"
-export LANG=en_US.UTF-8
-export XDG_CONFIG_HOME=~/dotfiles/.config
-
-# Path
-if [ -d ~/code/scripts ]; then
-    for file in ~/code/scripts/*/; do
-        if [ -d "$file" ]; then
-            export PATH="$PATH":"$file"
-        fi
-    done
-    unset file
-fi
-
 # History
 unsetopt EXTENDED_HISTORY
 setopt SHARE_HISTORY
