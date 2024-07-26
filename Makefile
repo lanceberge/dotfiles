@@ -65,6 +65,9 @@ go:
 	ifeq($(is_ubuntu), true)
 	    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
 
+	else ifeq($(is_mac), true)
+	    ${install} go
+
 	go install golang.org/x/tools/gopls@latest
 
 
