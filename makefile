@@ -40,6 +40,9 @@ mac:
 	brew tap homebrew/cask-fonts
 	brew install font-dejavu
 	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
+	brew install postgresql@16
+	brew install --cask rectangle
+	brew install cmake
 
 	## From App Store
 	# - Snap
