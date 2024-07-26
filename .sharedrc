@@ -1,5 +1,4 @@
 #!/bin/bash
-export PATH=~/.local/bin:$PATH
 export XDG_CONFIG_HOME=~/dotfiles/.config
 export EDITOR=vim
 
@@ -11,8 +10,7 @@ done;
 unset file;
 
 # add to path
-for dir in ~/go/bin; do
-    echo $dir
+for dir in ~/{go/bin,.local/bin}; do
     if [ -d "$dir" ]; then
         export PATH="$dir:$PATH";
     fi
