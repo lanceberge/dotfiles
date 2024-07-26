@@ -52,10 +52,9 @@ system_packages:
 	    ${install} cmake
 
 
-python_packages:
+python:
 	${install} python3
 	${install} python-pip
-	pip install numpy matplotlib pandas
 
 
 go:
