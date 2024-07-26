@@ -1,5 +1,4 @@
 #!/bin/bash
-export PATH=~/.local/bin:$PATH
 export XDG_CONFIG_HOME=~/dotfiles/.config
 export EDITOR=vim
 
@@ -9,6 +8,14 @@ for file in ~/dotfiles/.{aliases,prompt,local}; do
         source "$file";
 done;
 unset file;
+
+# add to path
+for dir in ~/{go/bin,.local/bin}; do
+    if [ -d "$dir" ]; then
+        export PATH="$dir:$PATH";
+    fi
+done;
+unset dir;
 
 
 export HISTFILE=~/.bash_history

@@ -50,9 +50,6 @@ system_packages:
 	    brew tap homebrew/cask-fonts
 	    ${install} font-dejavu
 	    ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
-	    ${install} postgresql@16
-	    ${install} --cask rectangle
-	    ${install} cmake
 
 
 python_packages:
