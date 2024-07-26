@@ -62,8 +62,3 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats " %F{green}on %F{yellow}%b%F{red}[%u%c]"
 prompt='%B%F{cyan}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
-# Ensure the terminal window closes on exit
-TRAPEXIT() {
-    echo "Session ended."
-    exit
-}
