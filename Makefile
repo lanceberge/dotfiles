@@ -13,6 +13,8 @@ symlinks:
 	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
 
 
+#TODO variable for package manager
+
 ## arch specific
 arch_packages:
 	pacman -S --noconfirm xwallpaper  # wallpapers
@@ -39,6 +41,8 @@ mac:
 	brew install --cask emacs
 	brew tap homebrew/cask-fonts
 	brew install font-dejavu
+	brew install cmake
+	brew install libtool
 	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 	## From App Store
@@ -50,6 +54,10 @@ python_packages:
 	${install} ${flags} python3
 	${install} ${flags} python-pip
 	pip install numpy matplotlib pandas
+
+
+node:
+	npm install -g typescript typescript-language-server prettier
 
 
 all_packages:

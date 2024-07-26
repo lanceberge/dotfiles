@@ -10,6 +10,15 @@ for file in ~/dotfiles/.{aliases,prompt,local}; do
 done;
 unset file;
 
+# add to path
+for dir in ~/go/bin; do
+    echo $dir
+    if [ -d "$dir" ]; then
+        export PATH="$dir:$PATH";
+    fi
+done;
+unset dir;
+
 
 export HISTFILE=~/.bash_history
 export HISTSIZE=30000
