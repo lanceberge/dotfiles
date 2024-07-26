@@ -1,8 +1,26 @@
-install=pacman -S
-flags=""
+install=brew install
 
 
-symlinks:
+# Detect the package manager and set the install command
+ifeq ($(shell command -v apt 2>/dev/null),/usr/bin/apt)
+	install=sudo apt install -y
+	is_ubuntu=true
+else ifeq ($(shell command -v brew 2>/dev/null),brew)
+	install=brew install
+	is_mac=true
+else ifeq ($(shell command -v pacman 2>/dev/null),pacman)
+	install=sudo pacman -S --noconfirm
+	is_linux=true
+endif
+
+
+clones:
+	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
+	git clone git@github.com:lanceberge/org.git      ~/org
+	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
+
+
+symlinks: clones
 	ln -sf ~/dotfiles/.zshrc              ~/.zshrc
 	ln -sf ~/dotfiles/.gitconfig          ~/.gitconfig
 	ln -sf ~/dotfiles/.bashrc             ~/.bashrc
@@ -13,67 +31,39 @@ symlinks:
 	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
 
 
-#TODO variable for package manager
+system_packages:
+	${install} emacs
+	${install} vim
 
-## arch specific
-arch_packages:
-	pacman -S --noconfirm xwallpaper  # wallpapers
-	pacman -S --noconfirm emacs       # OS
-	pacman -S --noconfirm zsh         # shell
-	pacman -S --noconfirm bspwm       # window manager
-	pacman -S --noconfirm sxhkd       # manage keyboard shortcuts
-	pacman -S --noconfirm ttf-dejavu  # font
-	pacman -S --noconfirm ispell
-	pacman -S --noconfirm alacritty   # terminal emulator
+	ifeq($(is_linux), true)
+	    ${install} xwallpaper  # wallpapers
+	    ${install} zsh         # shell
+	    ${install} bspwm       # window manager
+	    ${install} sxhkd       # manage keyboard shortcuts
+	    ${install} ttf-dejavu  # font
+	    ${install} ispell
+	    ${install} alacritty   # terminal emulator
 
-
-arch:
-	make arch_packages
-	rm -rf ~/.kde4
-	rm -rf ~/.config
-	git clone git@github.com:lanceberge/.kde4.git   ~/.kde4
-	git clone git@github.com:lanceberge/.config.git ~/.config
-
-
-mac:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew install --cask emacs
-	brew tap homebrew/cask-fonts
-	brew install font-dejavu
-	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
-
-	## From App Store
-	# - Snap
-	#
+	else ifeq($(is_mac), true)
+	    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	    ${install} --cask emacs
+	    brew tap homebrew/cask-fonts
+	    ${install} font-dejavu
+	    ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 
 python_packages:
-	${install} ${flags} python3
-	${install} ${flags} python-pip
+	${install} python3
+	${install} python-pip
 	pip install numpy matplotlib pandas
 
 
 go:
+	ifeq($(is_ubuntu), true)
+	    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
+
 	go install golang.org/x/tools/gopls@latest
 
 
 node:
 	npm install -g typescript typescript-language-server prettier
-
-
-all_packages:
-	make python_packages
-	${install} ${flags} texlive-core # latex
-	${install} ${flags} texlive-latexextra
-
-
-clones:
-	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
-	git clone git@github.com:lanceberge/org.git      ~/org
-	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
-
-
-all:
-	make symlinks
-	make all_packages
-	make clones
