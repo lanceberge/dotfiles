@@ -1,11 +1,8 @@
-install=brew install
-
-
 # Detect the package manager and set the install command
-ifeq ($(shell command -v apt 2>/dev/null),/usr/bin/apt)
+ifeq ($(shell uname),Ubuntu)
 	install=sudo apt install -y
 	is_ubuntu=true
-else ifeq ($(shell command -v brew 2>/dev/null),brew)
+else ifeq ($(shell uname),Darwin)
 	install=brew install
 	is_mac=true
 else ifeq ($(shell command -v pacman 2>/dev/null),pacman)
