@@ -70,3 +70,8 @@ go:
 
 node:
 	npm install -g typescript typescript-language-server prettier
+
+
+lang: node go python
+
+all: symlinks system_packages lang 
