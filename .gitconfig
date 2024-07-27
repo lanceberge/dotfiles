@@ -4,29 +4,30 @@
 [core]
     editor = vim
 [alias]
-        co  = checkout
-        s   = status
-        l   = log
+    b   = branch
+    co  = checkout
+    s   = status
+    l   = log
 
-        c   = commit
-        cm  = commit -m
-        cam = commit -am
+    c   = commit
+    cm  = commit -m
+    cam = commit -am
 
-        d   = diff
-        dc  = diff --cached
+    d   = diff
+    dc  = diff --cached
 
-        r   = reset
-        rh  = reset --hard
+    r   = reset
+    rs  = reset --soft
+    rh  = reset --hard
 
+    p   = push
+    f   = pull
 
-        p   = push
-        f   = pull
+    a   = add
+    aa  = add -A
 
-        a   = add
-        aa  = add -A
-
-        lag = log --oneline --all --decorate=short --graph
+    lag = log --oneline --all --decorate=short --graph
 [init]
-        defaultBranch = main
+    defaultBranch = main
 [pull]
-        rebase = false
+    rebase = false
