@@ -55,6 +55,7 @@ system_packages:
 python:
 	${install} python3
 	${install} python-pip
+	pip install python-lsp-server
 
 
 go:
