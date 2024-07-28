@@ -17,13 +17,14 @@ clones:
 	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
 
 
-symlinks: clones
+symlinks:
 	ln -sf ~/dotfiles/.zshrc              ~/.zshrc
 	ln -sf ~/dotfiles/.gitconfig          ~/.gitconfig
 	ln -sf ~/dotfiles/.bashrc             ~/.bashrc
 	ln -sf ~/dotfiles/.bash_profile       ~/.bash_profile
 	ln -sf ~/dotfiles/.zshenv             ~/.zshenv
 	ln -sf ~/dotfiles/.config/nvim/.vimrc ~/.vimrc
+	ln -sf ~/dotfiles/.config             ~/.config
 	ln -sf ~/dotfiles/.osx                ~/.osx
 	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
 
@@ -42,6 +43,8 @@ system_packages:
 	    ${install} alacritty   # terminal emulator
 
 	else ifeq($(is_mac), true)
+		echo /opt/homebrew/fish | sudo tee -a /etc/shells
+		chsh -s /opt/homebrew/fish
 	    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	    ${install} --cask emacs
 	    brew tap homebrew/cask-fonts
@@ -74,4 +77,4 @@ node:
 
 lang: node go python
 
-all: symlinks system_packages lang 
+all: clones symlinks system_packages lang 
