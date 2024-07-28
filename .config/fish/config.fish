@@ -1,10 +1,3 @@
-function fish_prompt
-    set -g __fish_git_prompt_showupstream auto
-    set -g __fish_git_prompt_showdirtystate true
-    set -g __fish_git_prompt_showcolorhints true
-    printf '%s %s$ ' (prompt_pwd) (fish_git_prompt)
-end
-
 function fish_user_key_bindings
     fish_vi_key_bindings
 
@@ -23,3 +16,12 @@ function __ls_after_cd__on_variable_pwd --on-variable PWD
         ls -GF
     end
 end
+
+function fish_prompt
+    set -g __fish_git_prompt_showupstream auto
+    set -g __fish_git_prompt_showdirtystate true
+    set -g __fish_git_prompt_showcolorhints true
+    printf '%s %s$ ' (prompt_pwd) (fish_git_prompt)
+end
+
+bind -M insert jk "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
