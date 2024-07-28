@@ -31,10 +31,10 @@ symlinks: clones
 system_packages:
 	${install} emacs
 	${install} vim
+	${install} fish # shell
 
 	ifeq($(is_linux), true)
 	    ${install} xwallpaper  # wallpapers
-	    ${install} zsh         # shell
 	    ${install} bspwm       # window manager
 	    ${install} sxhkd       # manage keyboard shortcuts
 	    ${install} ttf-dejavu  # font
