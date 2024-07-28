@@ -19,11 +19,11 @@ alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
 
 # Listing Files
-alias ls='ls -F' ${colorflag}
-alias ll='ls -lF ${colorflag}'
-alias lsa='ls -aF ${colorflag}'
-alias la='ls -lAF ${colorflag}'
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+alias ls='ls -F'
+alias ll='ls -lF'
+alias lsa='ls -aF'
+alias la='ls -lAF'
+alias lsd="ls -lF| grep --color=never '^d'"
 
 # Python
 alias python='python3'
