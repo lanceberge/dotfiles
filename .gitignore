@@ -1,6 +1,7 @@
 .vimrc
 .config/*
 !.config/nvim
+!.config/fish
 .config/nvim/plugin/expr-folding.vim
 .config/nvim/undo
 .config/nvim/sessions
