@@ -1,6 +1,6 @@
 # Detect the package manager and set the install command
 ifeq ($(shell uname),Linux)
-	install=sudo apt install -y
+	install=apt install -y
 	is_ubuntu=true
 else ifeq ($(shell uname),Darwin)
 	install=brew install
@@ -32,9 +32,14 @@ symlinks:
 system_packages:
 	${install} emacs
 	${install} vim
-	${install} fish # shell
+	${install} zsh # shell
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh my zsh
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 	ifeq($(is_linux), true)
+		echo $(which zsh) | sudo tee -a /etc/shells
+		chsh -s $(which zsh)
 	    # ${install} xwallpaper  # wallpapers
 	    # ${install} bspwm       # window manager
 	    # ${install} sxhkd       # manage keyboard shortcuts
@@ -43,8 +48,6 @@ system_packages:
 	    # ${install} alacritty   # terminal emulator
 
 	else ifeq($(is_mac), true)
-		echo /opt/homebrew/fish | sudo tee -a /etc/shells
-		chsh -s /opt/homebrew/fish
 	    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	    ${install} --cask emacs
 	    brew tap homebrew/cask-fonts

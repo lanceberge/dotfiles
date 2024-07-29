@@ -18,8 +18,11 @@
     d   = diff
     dc  = diff --cached
     r   = reset
-    rs  = reset --soft
+    rr  = reset --soft
     rh  = reset --hard
+
+    rs  = restore --staged
+    R   = restore
 
     p   = push
     f   = pull

@@ -1,7 +1,6 @@
 if [ -f ~/dotfiles/.sharedrc ]; then
     source ~/dotfiles/.sharedrc
 fi
-
 # Settings
 setopt autocd # change dir without typing cd
 
@@ -47,3 +46,19 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats " %F{green}on %F{yellow}%b%F{red}[%u%c]"
 prompt='%B%F{cyan}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
+
+export ZSH="$HOME/.oh-my-zsh"
+
+plugins=(
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+source $ZSH/oh-my-zsh.sh
+
+bindkey '^J' autosuggest-accept
+bindkey '^F' autosuggest-execute
+
+if [ -z "$TMUX" ]; then
+  # Start a new TMUX session named 'default' or attach to it if it already exists
+  tmux attach-session -t default || tmux new-session -s default
+fi
