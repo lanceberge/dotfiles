@@ -1,5 +1,5 @@
 # Detect the package manager and set the install command
-ifeq ($(shell uname),Ubuntu)
+ifeq ($(shell uname),Linux)
 	install=sudo apt install -y
 	is_ubuntu=true
 else ifeq ($(shell uname),Darwin)
@@ -35,12 +35,12 @@ system_packages:
 	${install} fish # shell
 
 	ifeq($(is_linux), true)
-	    ${install} xwallpaper  # wallpapers
-	    ${install} bspwm       # window manager
-	    ${install} sxhkd       # manage keyboard shortcuts
-	    ${install} ttf-dejavu  # font
-	    ${install} ispell
-	    ${install} alacritty   # terminal emulator
+	    # ${install} xwallpaper  # wallpapers
+	    # ${install} bspwm       # window manager
+	    # ${install} sxhkd       # manage keyboard shortcuts
+	    # ${install} ttf-dejavu  # font
+	    # ${install} ispell
+	    # ${install} alacritty   # terminal emulator
 
 	else ifeq($(is_mac), true)
 		echo /opt/homebrew/fish | sudo tee -a /etc/shells
