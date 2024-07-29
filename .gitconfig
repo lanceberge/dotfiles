@@ -1,7 +1,6 @@
 [user]
-    name = "Lance Bergeron"
-    email = lance.bergeron@ccri.com
-    signingkey = /home/labergeron/.ssh/id_rsa.pub
+    name = lanceberge
+    email = bergeron.lance6@gmail.com
 [core]
     editor = vim
 [alias]
@@ -36,9 +35,5 @@
     lag = log --oneline --all --decorate=short --graph
 [init]
     defaultBranch = main
-[gpg]
-    format = ssh
-[commit]
-    gpgsign = true
 [pull]
     rebase = false
