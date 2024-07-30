@@ -52,6 +52,7 @@ export ZSH="$HOME/.oh-my-zsh"
 plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
+    vi-mode
 )
 source $ZSH/oh-my-zsh.sh
 

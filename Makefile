@@ -30,15 +30,15 @@ symlinks:
 
 
 system_packages:
-	${install} emacs
-	${install} vim
 	${install} tmux
-	${install} zsh # shell
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh my zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 	ifeq($(is_linux), true)
+		${install} zsh # shell
+		${install} vim
+		${install} emacs
 		echo $(which zsh) | sudo tee -a /etc/shells
 		chsh -s $(which zsh)
 	    # ${install} xwallpaper  # wallpapers
