@@ -47,5 +47,5 @@ alias kc='kubectl'
 
 #Maven
 alias mcs='mvn clean install -DskipTests'
-alias hs='helmfile sync -e gcdev-ds-shared'
-alias hd='helmfile destroy -e gcdev-ds-shared'
+
+alias hse='helmfile sync -e'
