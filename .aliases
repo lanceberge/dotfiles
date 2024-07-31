@@ -47,5 +47,7 @@ alias kc='kubectl'
 
 #Maven
 alias mcs='mvn clean install -DskipTests'
+alias mci='mvn clean install'
+
 
 alias hse='helmfile sync -e'
