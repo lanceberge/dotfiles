@@ -43,8 +43,8 @@ setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:*' formats " %F{108}on %F{208}%b%F{124}[%u%c]"
 # prompt='%F{106} %~${vcs_info_msg_0_}%F{white} # '
-zstyle ':vcs_info:*' formats " %F{green}on %F{yellow}%b%F{red}[%u%c]"
-prompt='%B%F{cyan}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
+zstyle ':vcs_info:*' formats " %F{brightwhite}on %F{106}%b%F{124}[%u%c]"
+prompt='%F{#5eacd3}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
 
 export ZSH="$HOME/.oh-my-zsh"
