@@ -51,3 +51,4 @@ alias mci='mvn clean install'
 
 
 alias hse='helmfile sync -e'
+alias hde='helmfile destroy -e'
