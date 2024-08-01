@@ -57,7 +57,7 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
-bindkey '^J' autosuggest-accept
+# bindkey '^J' autosuggest-accept
 bindkey '^F' autosuggest-execute
 
 if [ -z "$TMUX" ]; then
