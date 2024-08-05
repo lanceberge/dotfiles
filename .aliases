@@ -44,7 +44,7 @@ alias dins='docker inspect'
 
 # Kubernetes
 alias kc='kubectl'
-alias kqa='kc delete all --all -n $(whoami)
+alias kqa='kc delete all --all -n $(whoami)'
 
 #Maven
 alias mcs='mvn clean install -DskipTests'
