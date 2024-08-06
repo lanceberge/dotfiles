@@ -4,14 +4,15 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # source aliases, prompt, ...
-for file in ~/dotfiles/.{aliases,prompt,local}; do
-    [ -r "$file" ] && [ -f "$file" ] &&
+for file in ~/dotfiles/.{aliases,local}; do
+    if [ -r "$file" ] && [ -f "$file" ]; then
         source "$file";
+    fi
 done;
 unset file;
 
 # add to path
-for dir in ~/{.local/bin,go/bin}; do
+for dir in ~/{.local/bin,go/bin,dotfiles/bin}; do
     if [ -d "$dir" ]; then
         export PATH="$dir:$PATH";
     fi
