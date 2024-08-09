@@ -75,10 +75,14 @@ go:
 	go install golang.org/x/tools/gopls@latest
 
 
+rust:
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+
 node:
 	npm install -g typescript typescript-language-server prettier
 
 
-lang: node go python
+lang: node go python rust
 
 all: clones symlinks system_packages lang 
