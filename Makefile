@@ -34,29 +34,32 @@ system_packages:
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh my zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	curl -fLo ~/dotfiles/.config/nvim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-	ifeq($(is_linux), true)
-		${install} zsh # shell
-		${install} vim
-		${install} emacs
-		echo $(which zsh) | sudo tee -a /etc/shells
-		chsh -s $(which zsh)
-	    # ${install} xwallpaper  # wallpapers
-	    # ${install} bspwm       # window manager
-	    # ${install} sxhkd       # manage keyboard shortcuts
-	    # ${install} ttf-dejavu  # font
-	    # ${install} ispell
-	    # ${install} alacritty   # terminal emulator
+
+ifeq($(is_linux), true)
+	${install} zsh # shell
+	${install} vim
+	${install} emacs
+	echo $(which zsh) | sudo tee -a /etc/shells
+	chsh -s $(which zsh)
+	# ${install} xwallpaper  # wallpapers
+	# ${install} bspwm       # window manager
+	# ${install} sxhkd       # manage keyboard shortcuts
+	# ${install} ttf-dejavu  # font
+	# ${install} ispell
+	# ${install} alacritty   # terminal emulator
 
 	else ifeq($(is_mac), true)
-	    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	    ${install} --cask emacs
-	    brew tap homebrew/cask-fonts
-	    ${install} font-dejavu
-	    ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
-	    ${install} postgresql@16
-	    ${install} --cask rectangle
-	    ${install} cmake
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	${install} --cask emacs
+	brew tap homebrew/cask-fonts
+	${install} font-dejavu
+	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
+	${install} postgresql@16
+	${install} --cask rectangle
+	${install} cmake
 
 
 python:
@@ -67,11 +70,10 @@ python:
 
 go:
 	ifeq($(is_ubuntu), true)
-	    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
+	rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
 
 	else ifeq($(is_mac), true)
-	    ${install} go
-
+	${install} go
 	go install golang.org/x/tools/gopls@latest
 
 
