@@ -19,7 +19,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround' " s as a motion for surrounding characters
 Plug 'wellle/targets.vim' " adds new text obects, also all text objects work outside of the object like ci' does
 " Language specific
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 call plug#end()
 " }}}
 " FZF {{{
@@ -60,18 +59,8 @@ nnoremap <leader>fH :History<cr>
 nnoremap <leader>fw :Windows<cr>
 nnoremap <leader>fh :Helptags<cr>
 nnoremap <leader>fs :Snippets<cr>
-nmap <leader>fMn <plug>(fzf-maps-n)
-nmap <leader>fMi <plug>(fzf-maps-i)
-nmap <leader>fMx <plug>(fzf-maps-x)
-nmap <leader>fMo <plug>(fzf-maps-o)
-imap <A-x><A-f> <plug>(fzf-complete-path)
-imap <A-x><A-l> <plug>(fzf-complete-buffer-line)
-imap <A-x><A-L> <plug>(fzf-complete-line)
 " }}}
 " Sneak {{{
-" <A-;> and <A-,> for next in f and sneak searches, as ; is mapped to :
-map <A-;> <Plug>Sneak_;
-map <A-,> <Plug>Sneak_,
 " }}}
 " Snippets {{{
 " [!] to mark the next point to jump to in custom snippets, then <A-j> to edit it
