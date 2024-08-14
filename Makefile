@@ -51,9 +51,10 @@ ifeq($(is_linux), true)
 	# ${install} ispell
 	# ${install} alacritty   # terminal emulator
 
-	else ifeq($(is_mac), true)
+else ifeq($(is_mac), true)
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	${install} --cask emacs
+	brew tap d12frosted/emacs-plus
+	${install} emacs-plus --with-native-comp
 	brew tap homebrew/cask-fonts
 	${install} font-dejavu
 	ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
@@ -88,4 +89,4 @@ node:
 
 lang: node go python rust
 
-all: clones symlinks system_packages lang 
+all: clones symlinks system_packages lang
