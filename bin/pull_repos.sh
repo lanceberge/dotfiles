@@ -6,3 +6,6 @@ for dir in ~/{dotfiles,.emacs.d,org,org-roam}; do
         git -C "$dir" pull
     fi
 done
+
+git fetch origin main
+git merge origin main
