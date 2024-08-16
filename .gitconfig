@@ -36,4 +36,4 @@
 [init]
     defaultBranch = main
 [pull]
-    rebase = false
+    ff = only
