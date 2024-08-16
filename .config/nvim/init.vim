@@ -7,12 +7,11 @@ nnoremap <leader>pU :w<bar>PlugUpgrade<cr>
 nnoremap <leader>ps :w<bar>PlugStatus<cr>
 
 call plug#begin('~/dotfiles/.config/nvim/plugged')
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf.vim' " fuzzy finding
+" Plug 'junegunn/fzf.vim' " fuzzy finding
 Plug 'junegunn/vim-plug'
 Plug 'justinmk/vim-sneak' " s for two character searches, like how f is for one character searches
 Plug 'morhetz/gruvbox' " theme
-Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' " snippets
+" Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' " snippets
 Plug 'tpope/vim-commentary' " comment with gc{motion}
 Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
