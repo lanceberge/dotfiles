@@ -1,4 +1,4 @@
-""""""""""""""""""""""""""""""Plugins"""""""""""""""""""""""""""""" 
+"""""""""""""""""""""""""""""Plugins""""""""""""""""""""""""""""""
 " Vim Plug {{{
 nnoremap <leader>pi :w<bar>PlugInstall<cr>
 nnoremap <leader>pc :w<bar>PlugClean<cr>
@@ -17,6 +17,7 @@ Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround' " s as a motion for surrounding characters
 Plug 'wellle/targets.vim' " adds new text obects, also all text objects work outside of the object like ci' does
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Language specific
 call plug#end()
 " }}}
@@ -33,6 +34,22 @@ function! IsInsideGitRepo()
     return 1
   fi
 endfunction
+
+function! s:IsFirenvimActive(event) abort
+  if !exists('*nvim_get_chan_info')
+    return 0
+  endif
+  let l:ui = nvim_get_chan_info(a:event.chan)
+  return has_key(l:ui, 'client') && has_key(l:ui.client, "name") &&
+      \ l:ui.client.name is# "Firenvim"
+endfunction
+
+function! OnUIEnter(event) abort
+  if s:IsFirenvimActive(a:event)
+    au BufWritePost *.txt ++once call timer_start(100, {_ -> feedkeys("GA")})
+  endif
+endfunction
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 " }}}
 " GFilesOrFiles {{{
 function! GFilesOrFiles()
@@ -80,7 +97,7 @@ nnoremap <silent> <leader>gl :Git log<cr>
 nnoremap <silent> <leader>ga :Gdiffsplit<cr>
 " }}}
 
-""""""""""""""""""""""""""""""Settings"""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""Settings""""""""""""""""""""""""""""""
 " General {{{
 set noerrorbells
 set clipboard=unnamedplus
@@ -164,7 +181,7 @@ set completeopt=menuone,longest
 set omnifunc=syntaxcomplete#Complete
 " keep a menu item highlighted
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>c-n>" : ""<CR>' 
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>c-n>" : ""<CR>'
 " keep menu item always highlighted by simulating <Up> on pu visible
 inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
   \ '<C-p><C-r>=pumvisible() ? "\<lt>c-p>" : ""<CR>'
@@ -187,7 +204,7 @@ augroup formatoptions
 augroup END
 " }}}
 
-""""""""""""""""""""""""""""""Mappings"""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""Mappings""""""""""""""""""""""""""""""
 " General Leader Maps {{{
 map <space> <leader>
 nnoremap <silent> <leader>ve :e ~/dotfiles/.config/nvim/init.vim<cr>
@@ -247,7 +264,7 @@ nnoremap <silent> <leader>td :tabclose<cr>
 " Sessions {{{
 " quit and make session
 nnoremap <leader>q :wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/Session.vim<bar>qa!<cr>
-nnoremap <leader>vq :exec "wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/" . 
+nnoremap <leader>vq :exec "wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/" .
             \expand('%:t') . ".vim<bar>qa!"<cr>
 " load session
 nnoremap <leader>vl :so $XDG_CONFIG_HOME/nvim/sessions/<c-d>
