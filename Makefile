@@ -54,6 +54,10 @@ system_packages:
 		# ${install} alacritty   # terminal emulator
 
 	else ifeq($(is_mac), true)
+	 	## AWS CLI
+		curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+		sudo installer -pkg AWSCLIV2.pkg -target /
+
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		brew tap d12frosted/emacs-plus
 		${install} emacs-plus --with-native-comp
