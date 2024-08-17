@@ -1,15 +1,3 @@
 .vimrc
-.config/*
-!.config/nvim
-!.config/fish
-.config/nvim/plugin/expr-folding.vim
-.config/nvim/undo
-.config/nvim/sessions
-.config/doom
-.config/nvim/.netrwhist
-.config/nvim/plugged
-.config/nvim/autoload/plug.vim
-.config/nvim/autoload/plug.vim.old
-.config/nvim/plugin/quickfix_toggle.vim
 etc
 .local
