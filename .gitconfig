@@ -44,4 +44,4 @@
 [commit]
     gpgsign = true
 [pull]
-    rebase = false
+    ff = only

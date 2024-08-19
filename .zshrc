@@ -41,11 +41,12 @@ precmd() {
 }
 setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
-# zstyle ':vcs_info:*' formats " %F{108}on %F{208}%b%F{124}[%u%c]"
-# prompt='%F{106} %~${vcs_info_msg_0_}%F{white} # '
-zstyle ':vcs_info:*' formats " %F{#fe8019}on %F{106}%b%F{#9d0006}[%u%c]"
-prompt='%F{#87afaf}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
+# zstyle ':vcs_info:*' formats " %F{#fe8019}on %F{106}%b%F{#9d0006}[%u%c]"
+# prompt='%F{#87afaf}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
+zstyle ':vcs_info:*' formats " %F{208}on %F{106}%b%F{160}[%u%c]"
+prompt='%F{109}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
+
 
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -60,7 +61,7 @@ source $ZSH/oh-my-zsh.sh
 # bindkey '^J' autosuggest-accept
 bindkey '^F' autosuggest-execute
 
-if [ -z "$TMUX" ]; then
-  # Start a new TMUX session named 'default' or attach to it if it already exists
-  tmux attach-session -t default || tmux new-session -s default
-fi
+# if [ -z "$TMUX" ]; then
+#   # Start a new TMUX session named 'default' or attach to it if it already exists
+#   tmux attach-session -t default || tmux new-session -s default
+# fi
