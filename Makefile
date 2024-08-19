@@ -91,7 +91,7 @@ rust:
 
 node:
 	npm install -g typescript typescript-language-server prettier
-	npm install -g svelte-language-server
+	npm install -g svelte-language-server prettier-plugin-svelte
 
 
 lang: node go python rust
