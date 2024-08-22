@@ -35,6 +35,7 @@
 
     sp  = stash push
     sP  = stash pop
+    spu = stash push --include-untracked
 
     lag = log --oneline --all --decorate=short --graph
 [init]
