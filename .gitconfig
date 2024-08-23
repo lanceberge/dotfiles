@@ -3,6 +3,7 @@
     email = bergeron.lance6@gmail.com
 [core]
     editor = vim
+	ignorecase = false
 [alias]
     b   = branch
     co  = checkout
