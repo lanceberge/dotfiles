@@ -27,7 +27,6 @@ if [ -d ~/code/scripts ]; then
 fi
 unset dir;
 
-
 export HISTFILE=~/.bash_history
 export HISTSIZE=30000
 export HISTFILESIZE=30000
