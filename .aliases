@@ -57,3 +57,10 @@ alias mci='mvn clean install'
 alias hse='helmfile sync -e'
 alias hde='helmfile destroy -e'
 
+function paste() {
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        xclip -o | sed -e "s/$/\n/"
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        pbpaste | sed -e "s/$/\n/"
+    fi
+}
