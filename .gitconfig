@@ -13,7 +13,7 @@
     c   = commit
     cm  = commit -m
     cam = commit -am
-    ca  = commit --amend -m
+    ca  = commit --amend
 
     d   = diff
     dc  = diff --cached

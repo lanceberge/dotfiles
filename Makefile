@@ -94,6 +94,11 @@ node:
 	npm install -g svelte-language-server prettier-plugin-svelte
 
 
+docker:
+	mkdir -p ~/.oh-my-zsh/completions
+	docker completion zsh > ~/.oh-my-zsh/completions/_docker
+
+
 lang: node go python rust
 
 all: clones symlinks system_packages lang

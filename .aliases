@@ -32,14 +32,16 @@ alias python='python3'
 
 # Docker
 alias dps='docker ps'
+alias dil='docker image list'
 alias dlps='docker ps -a'
 alias drun='docker run'
 alias drit='docker run -it'
 alias drrm='docker run --rm'
-alias dexcit='docker exec -it'
+alias dex='docker exec -it'
 alias dimg='docker images'
 alias dsp='docker system prune'
 alias dkill='docker kill'
+alias dstop='docker stop'
 alias drm='docker rm'
 alias drmi='docker rmi'
 alias dins='docker inspect'
@@ -54,3 +56,4 @@ alias mci='mvn clean install'
 
 alias hse='helmfile sync -e'
 alias hde='helmfile destroy -e'
+
