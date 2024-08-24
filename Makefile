@@ -1,4 +1,7 @@
 # Detect the package manager and set the install command
+is_ubuntu=false
+is_mac=false
+is_linux=false
 ifeq ($(shell uname),Linux)
 	install=apt install -y
 	is_ubuntu=true
@@ -40,33 +43,26 @@ system_packages:
 	curl -fLo ~/dotfiles/.config/nvim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-	ifeq($(is_linux), true)
-		${install} zsh # shell
-		${install} vim
-		${install} emacs
-		echo $(which zsh) | sudo tee -a /etc/shells
-		chsh -s $(which zsh)
-		# ${install} xwallpaper  # wallpapers
-		# ${install} bspwm       # window manager
-		# ${install} sxhkd       # manage keyboard shortcuts
-		# ${install} ttf-dejavu  # font
-		# ${install} ispell
-		# ${install} alacritty   # terminal emulator
+	@if [ "$is_linux" = true ]; then \
+		${install} zsh; \
+		${install} vim; \
+		${install} emacs; \
+		echo $(which zsh) | sudo tee -a /etc/shells; \
+		chsh -s $(which zsh); \
 
-	else ifeq($(is_mac), true)
-	 	## AWS CLI
-		curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-		sudo installer -pkg AWSCLIV2.pkg -target /
+	elif [ "$is_mac" = true]; then \
+		curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"; \
+		sudo installer -pkg AWSCLIV2.pkg -target /; \
 
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-		brew tap d12frosted/emacs-plus
-		${install} emacs-plus --with-native-comp
-		brew tap homebrew/cask-fonts
-		${install} font-dejavu
-		ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json
-		${install} postgresql@16
-		${install} --cask rectangle
-		${install} cmake
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+		brew tap d12frosted/emacs-plus; \
+		${install} emacs-plus --with-native-comp; \
+		brew tap homebrew/cask-fonts; \
+		${install} font-dejavu; \
+		ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json; \
+		${install} postgresql@16; \
+		${install} --cask rectangle; \
+		${install} cmake; \
 	endif
 
 
@@ -77,12 +73,12 @@ python:
 
 
 go:
-	ifeq($(is_ubuntu), true)
-	rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
-
-	else ifeq($(is_mac), true)
-	${install} go
-	go install golang.org/x/tools/gopls@latest
+	@if [ "$is_ubuntu" = true ]; then \
+		rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz; \
+	elif [ "$is_mac" = true]; then \
+		${install} go; \
+		go install golang.org/x/tools/gopls@latest; \
+	fi
 
 
 rust:
