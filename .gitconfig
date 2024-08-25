@@ -21,6 +21,8 @@
     rr  = reset --soft
     rh  = reset --hard
 
+    rmc = rm --cached
+
     rs  = restore --staged
     R   = restore
 

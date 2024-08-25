@@ -4,7 +4,7 @@
 alias v='vim'
 alias vim='nvim'
 alias s='sudo'
-alias jn="nohup jupyter-notebook --no-browser >/dev/null 2>&1 &" # open a jupyter server in the background
+alias jn=" jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''"
 
 # Navigation
 alias df='cd ~/dotfiles'
