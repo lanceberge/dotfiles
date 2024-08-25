@@ -1,4 +1,5 @@
 .vimrc
 etc
 .local
-.config
+.config/*
+!.config/nvim/
