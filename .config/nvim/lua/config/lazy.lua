@@ -14,6 +14,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+<<<<<<< Updated upstream
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -33,3 +34,17 @@ return {
       dependencies = { 'nvim-lua/plenary.nvim' }
     }
 }
+=======
+require("lazy").setup({
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme gruvbox]])
+    end,
+  },
+
+  { import = "plugins" },
+  checker = { enabled = true },
+})
+>>>>>>> Stashed changes

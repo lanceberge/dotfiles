@@ -1,0 +1,12 @@
+<<<<<<< Updated upstream
+plugin/expr-folding.vim
+undo
+sessions
+.netrwhist
+plugged
+autoload/plug.vim
+autoload/plug.vim.old
+plugin/quickfix_toggle.vim
+=======
+lazy-lock.json
+>>>>>>> Stashed changes
