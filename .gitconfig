@@ -4,6 +4,7 @@
     signingkey = /home/labergeron/.ssh/id_rsa.pub
 [core]
     editor = vim
+	ignorecase = false
 [alias]
     b   = branch
     co  = checkout
@@ -13,7 +14,7 @@
     c   = commit
     cm  = commit -m
     cam = commit -am
-    ca  = commit --amend -m
+    ca  = commit --amend
 
     d   = diff
     dc  = diff --cached
@@ -23,6 +24,7 @@
 
     sp  = stash push
     sP  = stash pop
+    rmc = rm --cached
 
     rs  = restore --staged
     R   = restore

@@ -1,4 +1,3 @@
-zsh
 # source aliases, prompt, ...
 for file in ~/dotfiles/.{aliases,prompt,local,sharedrc}; do
     [ -r "$file" ] && [ -f "$file" ] &&
