@@ -11,3 +11,4 @@ set -o vi # vim style keys
 bind -x $'"\C-l":clear;'
 
 setxkbmap -layout us -option ctrl:swapcaps
+
