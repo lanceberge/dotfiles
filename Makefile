@@ -20,6 +20,7 @@ clones:
 	git clone git@github.com:lanceberge/org-roam.git ~/org-roam
 	git clone git@github.com:lanceberge/Notes.git    ~/org-roam/public
 	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
+	git clone git@github.com:lanceberge/secrets.git  ~/code/secrets
 
 
 symlinks:
@@ -33,6 +34,7 @@ symlinks:
 	ln -sf ~/dotfiles/.osx                ~/.osx
 	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
 	ln -sf ~/dotfiles/.ideavimrc          ~/.ideavimrc
+	ln -sf ~/secrets/.authinfo            ~/.authinfo
 
 
 system_packages:
