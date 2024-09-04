@@ -27,9 +27,6 @@ alias lsa='ls -aF'
 alias la='ls -lAF'
 alias lsd="ls -lF| grep --color=never '^d'"
 
-# Python
-alias python='python3'
-
 # Docker
 alias dps='docker ps'
 alias dil='docker image list'
