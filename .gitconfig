@@ -48,3 +48,5 @@
     gpgsign = true
 [pull]
     ff = only
+[github]
+	user = lanceberge
