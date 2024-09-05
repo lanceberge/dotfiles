@@ -2,3 +2,4 @@
 etc
 .local
 .config
+bin/apply_diffs
