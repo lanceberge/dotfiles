@@ -72,6 +72,7 @@ python:
 	${install} python3
 	${install} python-pip
 	pip install python-lsp-server
+	pip install debugpy
 
 
 go:
@@ -97,6 +98,6 @@ docker:
 	docker completion zsh > ~/.oh-my-zsh/completions/_docker
 
 
-lang: node go python rust
+dev: node go python rust docker
 
-all: clones symlinks system_packages lang
+all: clones symlinks system_packages dev
