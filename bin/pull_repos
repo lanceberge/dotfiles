@@ -3,12 +3,13 @@
 for dir in ~/{.emacs.d,org,org-roam,org-roam/public,secrets,code/Advent-of-Code-2023/,code/elysium}; do
     if [ -d "$dir" ]; then
         echo "Pulling $dir"
+        echo "------------------------------" 
         git -C "$dir" stash push
         git -C "$dir" pull
     fi
 done
 
-echo 
 echo "Pulling $dir"
+echo "------------------------------" 
 git -C ~/dotfiles fetch origin main
 git -C ~/dotfiles merge origin/main
