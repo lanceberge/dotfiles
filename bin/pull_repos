@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for dir in ~/{.emacs.d,org,org-roam,org-roam/public,dotfiles,secrets}; do
+for dir in ~/{.emacs.d,org,org-roam,org-roam/public,dotfiles,secrets,code/Advent-of-Code-2023/,code/elysium}; do
     if [ -d "$dir" ]; then
         echo "Pulling $dir"
         git -C "$dir" stash push

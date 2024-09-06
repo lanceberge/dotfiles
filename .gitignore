@@ -3,3 +3,5 @@ etc
 .local
 .config
 bin/create_diffs
+bin/apply_diffs
+
