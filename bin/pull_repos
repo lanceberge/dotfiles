@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for dir in ~/{.emacs.d,org,org-roam,org-roam/public,dotfiles,secrets,code/Advent-of-Code-2023/,code/elysium}; do
+for dir in ~/{.emacs.d,org,org-roam,org-roam/public,secrets,code/Advent-of-Code-2023/,code/elysium}; do
     if [ -d "$dir" ]; then
         echo "Pulling $dir"
         git -C "$dir" stash push
@@ -8,5 +8,7 @@ for dir in ~/{.emacs.d,org,org-roam,org-roam/public,dotfiles,secrets,code/Advent
     fi
 done
 
-git -C ~/dotfiles fetch origin
+echo 
+echo "Pulling $dir"
+git -C ~/dotfiles fetch origin main
 git -C ~/dotfiles merge origin/main
