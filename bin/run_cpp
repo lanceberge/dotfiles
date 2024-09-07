@@ -3,5 +3,5 @@
 filename="$1"
 basename="${filename%.*}"
 
-g++ "$filename" -o "$basename" -std=c++20
+g++-14 "$filename" -o "$basename" -std=c++20
 ./"$basename"

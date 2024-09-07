@@ -65,6 +65,7 @@ system_packages:
 		${install} postgresql@16; \
 		${install} --cask rectangle; \
 		${install} cmake; \
+		${install} lldb; \
 	endif
 
 
