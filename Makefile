@@ -64,8 +64,6 @@ system_packages:
 		ln -sf ~/dotfiles/settings.json ~/Library/Application\ Support/Code/User/settings.json; \
 		${install} postgresql@16; \
 		${install} --cask rectangle; \
-		${install} cmake; \
-		${install} lldb; \
 	endif
 
 
@@ -98,6 +96,13 @@ docker:
 	docker completion zsh > ~/.oh-my-zsh/completions/_docker
 
 
-lang: node go python rust
+c:
+	${install} cmake
+	${install} lldb
+	${install} llvm
+
+
+lang: node go python rust c
+
 
 all: clones symlinks system_packages lang
