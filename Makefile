@@ -23,6 +23,7 @@ clones:
 	git clone git@github.com:lanceberge/secrets.git  ~/code/secrets
 
 
+# TODO use GNU stow
 symlinks:
 	ln -sf ~/dotfiles/.zshrc              ~/.zshrc
 	ln -sf ~/dotfiles/.gitconfig          ~/.gitconfig
@@ -46,6 +47,7 @@ system_packages:
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 	@if [ "$is_linux" = true ]; then \
+		curl -L https://nixos.org/nix/install | sh -s -- --daemon; \
 		${install} zsh; \
 		${install} vim; \
 		${install} emacs; \
@@ -53,6 +55,7 @@ system_packages:
 		chsh -s $(which zsh); \
 
 	elif [ "$is_mac" = true]; then \
+		curl -L https://nixos.org/nix/install | sh; \
 		curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"; \
 		sudo installer -pkg AWSCLIV2.pkg -target /; \
 
@@ -100,6 +103,10 @@ c:
 	${install} cmake
 	${install} lldb
 	${install} llvm
+
+
+clojure:
+	${install} clojure/tools/clojure
 
 
 lang: node go python rust c
