@@ -11,13 +11,6 @@ for file in ~/dotfiles/.{aliases,local}; do
 done;
 unset file;
 
-# add to path
-for dir in {~/.local/bin,~/go/bin,~/dotfiles/bin,~/.cargo/bin,/opt/homebrew/opt/llvm/bin}; do
-    if [ -d "$dir" ]; then
-        export PATH="$dir:$PATH";
-    fi
-done;
-
 if [ -d ~/code/scripts ]; then
     for dir in ~/code/scripts/*/; do
         if [ -d "$dir" ]; then
@@ -25,11 +18,21 @@ if [ -d ~/code/scripts ]; then
         fi
     done
 fi
+
+# add to path
+for dir in {~/.local/bin,~/go/bin,~/dotfiles/bin,~/.cargo/bin,/opt/homebrew/opt/llvm/bin,/opt/homebrew/opt/openjdk/bin}; do
+    if [ -d "$dir" ]; then
+        export PATH="$dir:$PATH";
+    fi
+done;
+
 unset dir;
 
 export HISTFILE=~/.bash_history
 export HISTSIZE=30000
 export HISTFILESIZE=30000
+
+export GH_TOKEN=$(cat ~/secrets/gh_token)
 
 # a new shell gets history from all previous shells
 PROMPT_COMMAND='history -a'
@@ -59,17 +62,3 @@ function cdf() {
     fi
 }
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/labergeron/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/labergeron/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/labergeron/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/labergeron/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
