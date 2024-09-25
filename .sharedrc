@@ -20,7 +20,8 @@ if [ -d ~/code/scripts ]; then
 fi
 
 # add to path
-for dir in {~/.local/bin,~/go/bin,~/dotfiles/bin,~/.cargo/bin,/opt/homebrew/opt/llvm/bin,/opt/homebrew/opt/openjdk/bin}; do
+for dir in {~/.local/bin,~/go/bin,~/dotfiles/bin,~/.cargo/bin,/opt/homebrew/opt/llvm/bin, \
+                /opt/homebrew/opt/openjdk/bin,~/bin/bin}; do
     if [ -d "$dir" ]; then
         export PATH="$dir:$PATH";
     fi
