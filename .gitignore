@@ -4,4 +4,3 @@ etc
 .config
 bin/create_diffs
 bin/apply_diffs
-
