@@ -6,10 +6,10 @@ export EDITOR=vim
 # source aliases, prompt, ...
 for file in ~/dotfiles/.{aliases,local}; do
     if [ -r "$file" ] && [ -f "$file" ]; then
-        source "$file";
+        source "$file"
     fi
-done;
-unset file;
+done
+unset file
 
 if [ -d ~/code/scripts ]; then
     for dir in ~/code/scripts/*/; do
@@ -22,11 +22,11 @@ fi
 # add to path
 for dir in {~/.local/bin,~/go/bin,~/dotfiles/bin,~/.cargo/bin,/opt/homebrew/opt/llvm/bin,/opt/homebrew/opt/openjdk/bin}; do
     if [ -d "$dir" ]; then
-        export PATH="$dir:$PATH";
+        export PATH="$dir:$PATH"
     fi
-done;
+done
 
-unset dir;
+unset dir
 
 export HISTFILE=~/.bash_history
 export HISTSIZE=30000
@@ -62,7 +62,6 @@ function cdf() {
     fi
 }
 
-
 function aws-profile() {
     if [ $# -eq 0 ]; then
         echo "Current AWS_PROFILE: $AWS_PROFILE"
@@ -71,5 +70,6 @@ function aws-profile() {
     else
         export AWS_PROFILE="$1"
         echo "Switched to AWS profile: $AWS_PROFILE"
+        aws configure list
     fi
 }
