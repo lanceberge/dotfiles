@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Current AWS_PROFILE: $AWS_PROFILE"
+    echo "Possible Profiles:"
+    aws configure list-profiles
+else
+    export AWS_PROFILE=$1
+    echo "Switched to AWS profile: $AWS_PROFILE"
+    aws configure list
+fi
