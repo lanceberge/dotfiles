@@ -1,0 +1,11 @@
+Create a github repo and configure the remote
+
+#!/bin/bash
+if [ $# -eq 0 ]; then
+    echo "Usage create_repo <name> [args]"
+    exit 1
+fi
+
+gh repo create "$1" "$2"
+git remote add origin git@github.com:lanceberge/"$1".git
+git push -u origin main

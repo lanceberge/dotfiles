@@ -83,3 +83,6 @@ vterm_prompt_end() {
 }
 setopt PROMPT_SUBST
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+
+# Set up autocompletions
+complete -C aws_completer aws
