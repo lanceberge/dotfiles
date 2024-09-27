@@ -4,7 +4,7 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # source aliases, prompt, ...
-for file in ~/dotfiles/.{aliases,local}; do
+for file in ~/dotfiles/.{aliases,local,aws_functions}; do
     if [ -r "$file" ] && [ -f "$file" ]; then
         source "$file"
     fi
@@ -63,7 +63,7 @@ function cdf() {
     fi
 }
 
-__conda_setup="$('/home/labergeron/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/labergeron/miniconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -74,15 +74,3 @@ else
     fi
 fi
 unset __conda_setup
-
-function aws-profile() {
-    if [ $# -eq 0 ]; then
-        echo "Current AWS_PROFILE: $AWS_PROFILE"
-        echo "Possible Profiles:"
-        aws configure list-profiles
-    else
-        export AWS_PROFILE="$1"
-        echo "Switched to AWS profile: $AWS_PROFILE"
-        aws configure list
-    fi
-}

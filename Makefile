@@ -86,6 +86,8 @@ go:
 		go install golang.org/x/tools/gopls@latest; \
 	fi
 
+	go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
 
 rust:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -114,7 +116,12 @@ clojure:
 dev: docker
 
 
-lang: node go python rust c
+bash:
+	# Bash formatter
+	npm install -g bash-language-server
+
+
+lang: node go python rust c bash
 
 
 all: clones symlinks system_packages dev lang

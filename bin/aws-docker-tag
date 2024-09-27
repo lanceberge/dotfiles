@@ -1,9 +1,0 @@
-#!/bin/bash
-if [ $# -ne 1 ]; then
-    echo "Usage: aws-docker-tag <container_name>"
-    exit 1
-fi
-
-AWS_ID=$(aws sts get-caller-identity --query Account --output text)
-
-docker tag $1:latest "$AWS_ID.dkr.ecr.us-west-2.amazonaws.com/$1:latest"
