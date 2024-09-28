@@ -2,18 +2,20 @@
 
 function get-aws-id() {
     aws sts get-caller-identity --query Account --output text
-
 }
 
 function aws-docker-tag() {
     if [ $# -ne 1 ]; then
-        echo "Usage: aws-docker-tag <container_name>"
+        echo "Usage: aws-docker-tag <container_name> [repository_name]"
         exit 1
     fi
 
     AWS_ID=$(get-aws-id)
     docker tag $1:latest "$AWS_ID.dkr.ecr.us-west-2.amazonaws.com/$1:latest"
-    docker push "$AWS_ID.dkr.ecr.us-west-2.amazonaws.com/$1:latest"
+
+    if [ $# -e 2]; then
+        docker push "$AWS_ID.dkr.ecr.us-west-2.amazonaws.com/$2:latest"
+    fi
 }
 
 function aws-profile() {
