@@ -183,7 +183,6 @@ cnoremap jk <esc>
 cnoremap <A-j> <down>
 cnoremap <A-k> <up>
 cnoremap <A-m> %
-cnoremap ; <cr>
 " }}}
 " }}}
 " Netrw {{{
