@@ -1,7 +1,0 @@
-[Desktop Entry]
-Exec=/home/lance/.config/plasma-workspace/env/plasma-bspwm.sh
-Icon=dialog-scripts
-Name=plasma-bspwm.sh
-Path=
-Type=Application
-X-KDE-AutostartScript=true

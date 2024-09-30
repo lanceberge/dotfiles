@@ -17,49 +17,10 @@ Plug 'tpope/vim-fugitive' " git support
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround' " s as a motion for surrounding characters
 Plug 'wellle/targets.vim' " adds new text obects, also all text objects work outside of the object like ci' does
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Language specific
 call plug#end()
 " }}}
 " FZF {{{
-let g:fzf_preview_window = '' " no preview window
-" set layout to bottom of screen and roughly 20% of it's height
-let g:fzf_layout = { 'down': '~20%' }
-" IsInsideGitRepo {{{
-function! IsInsideGitRepo()
-  let result=systemlist('git rev-parse --is-inside-work-tree')
-  if v:shell_error
-    return 0
-  else
-    return 1
-  fi
-endfunction
-
-function! s:IsFirenvimActive(event) abort
-  if !exists('*nvim_get_chan_info')
-    return 0
-  endif
-  let l:ui = nvim_get_chan_info(a:event.chan)
-  return has_key(l:ui, 'client') && has_key(l:ui.client, "name") &&
-      \ l:ui.client.name is# "Firenvim"
-endfunction
-
-function! OnUIEnter(event) abort
-  if s:IsFirenvimActive(a:event)
-    au BufWritePost *.txt ++once call timer_start(100, {_ -> feedkeys("GA")})
-  endif
-endfunction
-autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-" }}}
-" GFilesOrFiles {{{
-function! GFilesOrFiles()
-    if IsInsideGitRepo()
-        GFiles
-    else
-        Files
-    endif
-endfunction
-" }}}
 nnoremap <leader>. :call GFilesOrFiles()<cr>
 nnoremap <leader>ff :Files<cr>
 nnoremap <leader>fgL :Commits<cr>
@@ -76,15 +37,7 @@ nnoremap <leader>fw :Windows<cr>
 nnoremap <leader>fh :Helptags<cr>
 nnoremap <leader>fs :Snippets<cr>
 " }}}
-" Sneak {{{
-" }}}
 " Snippets {{{
-" [!] to mark the next point to jump to in custom snippets, then <A-j> to edit it
-" nnoremap <silent> <A-j> :call search('[!]')<cr>ca[
-" inoremap <silent> <A-j> <esc>:call search('[!]')<cr>ca[
-" <A-J> to clear all [!]
-" nnoremap <silent> <A-J> ma:%s/\[!\]//g<cr>`a
-" inoremap <silent> <A-J> <esc>ma:%s/\[!\]//g<cr>`a
 let g:UltiSnipsExpandTrigger="<A-j>"
 let g:UltiSnipsJumpForwardTrigger="<A-j>"
 let g:UltiSnipsJumpBackwardTrigger="<A-k>"
@@ -94,7 +47,6 @@ let g:UltiSnipsJumpBackwardTrigger="<A-k>"
 nnoremap <silent> <leader>gs :Git<cr>:wincmd o<cr>
 nnoremap <silent> <leader>gd :vert botright Git diff<cr>
 nnoremap <silent> <leader>gl :Git log<cr>
-nnoremap <silent> <leader>ga :Gdiffsplit<cr>
 " }}}
 
 """"""""""""""""""""""""""""""Settings""""""""""""""""""""""""""""""
@@ -116,28 +68,13 @@ set nowritebackup
 set updatetime=100
 set lazyredraw " render changes once macro has finished
 set autochdir " auto change to the directory of a file when switching files
-set browsedir=buffer " netrw uses current files directory
 set gdefault " default /g for substitutions
 filetype plugin indent on " determine the type of a file based on contents
-set shortmess=as
 set virtualedit=block
-if has('vim')
-    set termwinsize=20x200
-    set ttyfast
-    set viminfo+=n~/.vim/viminfo
-endif
 " }}}
 " Undos {{{
-set undolevels=500 " number of possible undos; default is 1000
 set undodir=$XDG_CONFIG_HOME/nvim/undo " undos save between opening and closing vim
 set undofile
-" }}}
-" Statusline {{{
-set laststatus=2 " show status bar
-set statusline=\%f " relative file path
-set statusline+=%15{FugitiveStatusline()} " git branch
-set statusline+=%= " left/right separator
-set statusline+=%-15c " cursor column
 " }}}
 " UI {{{
 set noruler
@@ -149,7 +86,6 @@ set sidescrolloff=5 " 5 line buffer when scrolling to the side
 set nowrap
 " }}}
 " Tabs, Indentation, etc. {{{
-set pastetoggle=<F2> " toggle paste mode
 set tabstop=4
 set softtabstop=4
 set expandtab
@@ -162,29 +98,10 @@ set shiftwidth=4
 " center search results
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-" 'very magic' searches by default - better support for regular expressions
-noremap ? ?\v
-noremap / /\v
 set incsearch  " show matches without needing <cr>
-set path=.,, " :find searches relative to cwd
-set wildmenu " <tab> for match menu in :e and :find
 set ignorecase
 set smartcase " match case if capitals are in a search, otherwise don't
 set nohlsearch " don't highlight searches
-" A-l to clear highlight search (taken from tpope's sensible)
-" nnoremap <silent> <A-l> :nohlsearch<c-r>=has('diff')?'<bar>diffupdate':''<cr><cr><c-l>
-" }}}
-" Autocomplete {{{
-set completeopt=menuone,longest
-set omnifunc=syntaxcomplete#Complete
-" keep a menu item highlighted
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>c-n>" : ""<CR>'
-" keep menu item always highlighted by simulating <Up> on pu visible
-inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
-  \ '<C-p><C-r>=pumvisible() ? "\<lt>c-p>" : ""<CR>'
 " }}}
 " Colorscheme {{{
 syntax enable
@@ -193,15 +110,6 @@ colorscheme gruvbox
 " }}}
 " Folding {{{
 set foldignore= " folding ignores nothing
-" }}}
-" Formatoptions {{{
-augroup formatoptions
-    autocmd!
-    " don't continue comments on newlines, autocommand needed because this is
-    " set by the vim rtp after the vimrc is sourced
-    autocmd Filetype * setlocal formatoptions=jql
-    autocmd Filetype * let g:gruvbox_invert_selection=0
-augroup END
 " }}}
 
 """"""""""""""""""""""""""""""Mappings""""""""""""""""""""""""""""""
@@ -214,10 +122,8 @@ nnoremap <leader>; :!
 nnoremap <silent> <leader>= magg=G`a
 " }}}
 " Not Mode Specific {{{
-noremap H ^
+noremap H _
 noremap L $
-noremap <silent> <leader><c-h> H
-noremap <silent> <leader><c-l> L
 noremap ; :
 noremap : ;
 " }}}
@@ -225,16 +131,10 @@ noremap : ;
 " repeat last macro
 nmap gm @@
 nnoremap Y y$
-" append a semicolon to the end of a line
-nnoremap <silent> y; :call setline('.', getline('.') . ';')<cr>
-" copy the path of a file in cwd by specifying the filename
-nnoremap yp :let @+ = fnamemodify('', ':p')<c-f>0ci'
 " split a line at the cursor and move it below the current line
 nnoremap gs i<cr><esc>
 " split a line at the cursor and move it above the current line
 nmap gS i<cr><esc>[e
-" comment until the end of the line using tpope's commentary
-nmap gC i<cr><esc>gcckJ
 " }}}
 " Windows, Buffers, Tabs, Sessions {{{
 " Windows {{{
@@ -248,27 +148,15 @@ nnoremap <leader>wq :x<cr>
 " delete window
 nnoremap <silent> <leader>wd :q!<cr>
 nnoremap <silent> <A-o> :wincmd o<cr>
-nnoremap <silent> <A-=> :wincmd =<cr>
-nnoremap <silent> <A-]> :wincmd +<cr>
-nnoremap <silent> <A-[> :wincmd -<cr>
-" }}}
 " Buffers {{{
 nnoremap <silent> <leader>bd :bd!<cr>
 nnoremap <silent> <leader>bs :w<cr>
-nnoremap <silent> <leader>bq :update<bar>bd!<cr>
-" }}}
-" Tabs {{{
-nnoremap <silent> <leader>tn :tabnew<cr>
-nnoremap <silent> <leader>td :tabclose<cr>
 " }}}
 " Sessions {{{
 " quit and make session
 nnoremap <leader>q :wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/Session.vim<bar>qa!<cr>
-nnoremap <leader>vq :exec "wa!<bar>mksession! $XDG_CONFIG_HOME/nvim/sessions/" .
-            \expand('%:t') . ".vim<bar>qa!"<cr>
 " load session
 nnoremap <leader>vl :so $XDG_CONFIG_HOME/nvim/sessions/<c-d>
-nnoremap <leader>vL :so $XDG_CONFIG_HOME/nvim/sessions/Session.vim<cr>
 " }}}
 " }}}
 " Brackets {{{
@@ -278,24 +166,8 @@ nnoremap <silent> [<space> O<esc>j
 nnoremap <silent> ]<space> o<esc>
 nnoremap <silent> [b :bprevious<cr>
 nnoremap <silent> ]b :bnext<cr>
-nnoremap <silent> [B :bfirst<cr>
-nnoremap <silent> ]B :blast<cr>
-nnoremap <silent> [t :tabprevious<cr>
-nnoremap <silent> ]t :tabnext<cr>
-nnoremap <silent> [T :tabfirst<cr>
-nnoremap <silent> ]T :tablast<cr>
 nnoremap [oh :set nohlsearch<cr>
 nnoremap ]oh :set hlsearch<cr>
-nnoremap [ow :set nowrap<cr>
-nnoremap ]ow :set wrap<cr>
-nnoremap [oi :set ignorecase<cr>
-nnoremap ]oi :set noignorecase<cr>
-nnoremap [Q :cfirst<cr>
-nnoremap ]Q :clast<cr>
-nnoremap [osr :set nosplitright<cr>
-nnoremap ]osr :set splitright<cr>
-nnoremap [osb :set nosplitbelow<cr>
-nnoremap ]osb :set splitbelow<cr>
 " }}}
 " Insert, Visual, Command Mode {{{
 " Insert Mode {{{
@@ -311,29 +183,9 @@ cnoremap jk <esc>
 cnoremap <A-j> <down>
 cnoremap <A-k> <up>
 cnoremap <A-m> %
-cnoremap ; <cr>
-cnoreabbrev v vert
 " }}}
-" }}}
-" Tags {{{
-nnoremap <silent> <leader>gt :silent exec "!ctags -R"<cr>
 " }}}
 " Netrw {{{
 " toggle netrw
 nnoremap <silent> <leader>on :10Lexplore<cr>
-" }}}
-" Terminal {{{
-if has ('nvim')
-    " open terminal
-    nnoremap <silent> <leader>ot :terminal<cr>i
-    nnoremap <silent> <leader>ovt :vsplit term://zsh<cr>i
-    " go to normal mode
-    tnoremap <esc> <c-\><c-n>
-
-    " no line numbers for terminal
-    augroup terminal
-        autocmd!
-        autocmd TermOpen * setlocal norelativenumber|setlocal nonumber
-    augroup END
-endif
 " }}}

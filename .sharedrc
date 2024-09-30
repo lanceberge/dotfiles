@@ -4,7 +4,8 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # source aliases, prompt, ...
-for file in ~/dotfiles/.{aliases,local,aws_functions}; do
+for file in ~/dotfiles/.{aliases,local} \
+    ~/dotfiles/aws_functions; do
     if [ -r "$file" ] && [ -f "$file" ]; then
         source "$file"
     fi
