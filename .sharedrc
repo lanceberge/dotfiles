@@ -1,7 +1,7 @@
 #!/bin/bash
 export XDG_CONFIG_HOME=~/dotfiles/.config
 export LANG=en_US.UTF-8
-export EDITOR=vim
+export EDITOR=nvim
 
 # source aliases, prompt, ...
 for file in ~/dotfiles/.{aliases,local} \
