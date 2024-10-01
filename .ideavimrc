@@ -1,1 +1,5 @@
 set easymotion
+sethandler <C-X> a:vim
+sethandler <C-Y> a:vim
+sethandler <C-[> a:vim
+set ideajoin
