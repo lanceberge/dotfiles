@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export AWS_DEFAULT_REGION=us-east-2
 ## TODO publicize
 
 function aws-get-id() {
