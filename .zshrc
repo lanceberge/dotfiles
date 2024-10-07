@@ -83,5 +83,11 @@ vterm_prompt_end() {
 setopt PROMPT_SUBST
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
+# Completely clear the buffer. With this, everything that is not on screen
+# is erased.
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
+fi
+
 # Set up autocompletions
 complete -C aws_completer aws
