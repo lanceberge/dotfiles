@@ -41,7 +41,7 @@ PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups:erasedups
 
 function cd {
-    builtin cd "$@" && ls -F
+    builtin cd "$@" && ls -F --color=tty
 }
 
 function vimf() {
