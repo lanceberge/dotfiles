@@ -91,3 +91,5 @@ fi
 
 # Set up autocompletions
 complete -C aws_completer aws
+export PATH="~/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="~/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
