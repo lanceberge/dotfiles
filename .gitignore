@@ -4,3 +4,4 @@ etc
 .config
 bin/create_diffs
 bin/apply_diffs
+bin/spinup_minikube
