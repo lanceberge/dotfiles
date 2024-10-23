@@ -3,8 +3,8 @@
     email = lance.bergeron@ccri.com
     signingkey = /home/labergeron/.ssh/id_rsa.pub
 [core]
-    editor = vim
-	ignorecase = false
+    editor = nvim
+    ignorecase = false
 [alias]
     b   = branch
     co  = checkout
@@ -49,4 +49,4 @@
 [pull]
     ff = only
 [github]
-	user = lanceberge
+    user = lanceberge
