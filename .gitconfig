@@ -2,8 +2,8 @@
     name = lanceberge
     email = bergeron.lance6@gmail.com
 [core]
-    editor = vim
-	ignorecase = false
+    editor = nvim
+    ignorecase = false
 [alias]
     b   = branch
     co  = checkout
@@ -42,4 +42,4 @@
 [pull]
     ff = only
 [github]
-	user = lanceberge
+    user = lanceberge
