@@ -60,11 +60,6 @@ source $ZSH/oh-my-zsh.sh
 bindkey '^K' autosuggest-accept
 bindkey '^F' autosuggest-execute
 
-# if [ -z "$TMUX" ]; then
-#   # Start a new TMUX session named 'default' or attach to it if it already exists
-#   tmux attach-session -t default || tmux new-session -s default
-# fi
-
 vterm_printf() {
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ]); then
         # Tell tmux to pass the escape sequences through
@@ -95,3 +90,8 @@ complete -C aws_completer aws
 # PHP
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+if [ -z "$TMUX" ]; then
+    # Start a new TMUX session named 'default' or attach to it if it already exists
+    tmux attach-session -t default || tmux new-session -s default
+fi
