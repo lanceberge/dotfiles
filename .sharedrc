@@ -34,8 +34,6 @@ export HISTFILE=~/.bash_history
 export HISTSIZE=30000
 export HISTFILESIZE=30000
 
-export GH_TOKEN=$(cat ~/secrets/gh_token)
-
 # a new shell gets history from all previous shells
 PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups:erasedups
