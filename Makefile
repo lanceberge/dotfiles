@@ -116,6 +116,18 @@ bash:
 	# Bash formatter
 	npm install -g bash-language-server
 
+php:
+	@if [ "$is_mac" = true ]; then \
+		/bin/bash -c "$(curl -fsSL https://php.new/install/mac)"
+
+	elif [ "$is_linux" = true ]; then \
+		/bin/bash -c "$(curl -fsSL https://php.new/install/linux)"
+
+	source ~/dotfiles/.zshrc
+	composer global require laravel/installer
+
+	npm  install -g intelephense
+
 
 lang: node go python rust c bash
 

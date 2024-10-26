@@ -91,7 +91,7 @@ complete -C aws_completer aws
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
-if [ -z "$TMUX" ]; then
-    # Start a new TMUX session named 'default' or attach to it if it already exists
-    tmux attach-session -t default || tmux new-session -s default
-fi
+# if [ -z "$TMUX" ]; then
+#     # Start a new TMUX session named 'default' or attach to it if it already exists
+#     tmux attach-session -t default || tmux new-session -s default
+# fi
