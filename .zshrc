@@ -41,8 +41,6 @@ precmd() {
 }
 setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
-# zstyle ':vcs_info:*' formats " %F{#fe8019}on %F{106}%b%F{#9d0006}[%u%c]"
-# prompt='%F{#87afaf}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 zstyle ':vcs_info:*' formats " %F{208}on %F{106}%b%F{160}[%u%c]"
 prompt='%F{109}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
 PS2='> '
@@ -59,11 +57,6 @@ source $ZSH/oh-my-zsh.sh
 
 bindkey '^K' autosuggest-accept
 bindkey '^F' autosuggest-execute
-
-# if [ -z "$TMUX" ]; then
-#   # Start a new TMUX session named 'default' or attach to it if it already exists
-#   tmux attach-session -t default || tmux new-session -s default
-# fi
 
 vterm_printf() {
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ]); then
@@ -95,3 +88,8 @@ complete -C aws_completer aws
 # PHP
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+# if [ -z "$TMUX" ]; then
+#     # Start a new TMUX session named 'default' or attach to it if it already exists
+#     tmux attach-session -t default || tmux new-session -s default
+# fi
