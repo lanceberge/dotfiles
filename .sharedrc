@@ -3,6 +3,12 @@ export XDG_CONFIG_HOME=~/dotfiles/.config
 export LANG=en_US.UTF-8
 export EDITOR=nvim
 
+export HISTFILE=~/.bash_history
+export HISTSIZE=30000
+export HISTFILESIZE=30000
+
+export GH_TOKEN=$(cat ~/secrets/gh_token)
+
 # source aliases, prompt, ...
 for file in ~/dotfiles/.{aliases,local} \
     ~/dotfiles/aws_functions; do
@@ -27,12 +33,7 @@ for dir in ~/.local/bin ~/go/bin ~/dotfiles/bin ~/.cargo/bin \
         export PATH="$dir:$PATH"
     fi
 done
-
 unset dir
-
-export HISTFILE=~/.bash_history
-export HISTSIZE=30000
-export HISTFILESIZE=30000
 
 # a new shell gets history from all previous shells
 PROMPT_COMMAND='history -a'
@@ -59,5 +60,16 @@ function cdf() {
         cd $(find "$1" -name "$2")
     else
         echo "Usage: cdf [directory] <filename>"
+    fi
+}
+
+function e() {
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <filename>"
+        exit 1
+    fi
+
+    if command -v emacsclient >/dev/null 2>&1; then
+        emacsclient -n "$1"
     fi
 }
