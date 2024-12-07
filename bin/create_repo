@@ -4,6 +4,8 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
+unset GH_TOKEN && gh auth login --with-token <~/secrets/gh_token
+
 if [ $# -eq 1 ]; then
     ARGS="--private"
 else
