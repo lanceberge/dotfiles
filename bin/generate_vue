@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+if [ $# -eq 0 ]; then
+    echo "Usage create_repo <name>"
+    exit 1
+fi
+
+PROJECT_NAME="$1"
+
+unset GH_TOKEN && gh auth login --with-token <~/secrets/gh_token
+
+if [ $# -eq 1 ]; then
+    ARGS="--private"
+else
+    ARGS=$2
+fi
+
+gh repo create "$PROJECT_NAME" --template lanceberge/vue-template "$ARGS"
+git clone "git@github.com:lanceberge/$PROJECT_NAME.git"
+
+# Add the template upstream
+cd $PROJECT_NAME
+git remote add template git@github.com:lanceberge/vue-template.git
