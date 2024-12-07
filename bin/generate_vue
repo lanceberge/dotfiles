@@ -22,3 +22,10 @@ git clone "git@github.com:lanceberge/$PROJECT_NAME.git"
 # Add the template upstream
 cd $PROJECT_NAME
 git remote add template git@github.com:lanceberge/vue-template.git
+
+npm install
+composer install
+cp .env.example .env
+touch database/database.sqlite
+php artisan migrate
+php artisan key:generate
