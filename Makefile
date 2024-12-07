@@ -116,6 +116,9 @@ bash:
 	# Bash formatter
 	npm install -g bash-language-server
 
+vue:
+	npm install -g @vue/language-server
+
 php:
 	@if [ "$is_mac" = true ]; then \
 		/bin/bash -c "$(curl -fsSL https://php.new/install/mac)"
