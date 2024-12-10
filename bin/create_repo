@@ -1,9 +1,17 @@
 #!/bin/bash
 if [ $# -eq 0 ]; then
-    echo "Usage create_repo <name> [args]"
+    echo "Usage create_repo <name>"
     exit 1
 fi
 
-gh repo create "$1" "$2"
+unset GH_TOKEN && gh auth login --with-token <~/secrets/gh_token
+
+if [ $# -eq 1 ]; then
+    ARGS="--private"
+else
+    ARGS=$2
+fi
+
+gh repo create $1 $ARGS
 git remote add origin git@github.com:lanceberge/"$1".git
 git push -u origin main

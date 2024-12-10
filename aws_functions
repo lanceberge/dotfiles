@@ -1,7 +1,6 @@
 #!/bin/bash
 
-export AWS_DEFAULT_REGION=us-east-2
-## TODO publicize
+export AWS_DEFAULT_REGION=us-east-1
 
 function aws-get-id() {
     aws sts get-caller-identity --query Account --output text
@@ -33,4 +32,14 @@ function aws-profile() {
         echo "Switched to AWS profile: $AWS_PROFILE"
         aws configure list
     fi
+}
+
+function aws-create-ecr-repo() {
+    if [ $# -eq 0 ]; then
+        "Usage: aws-ecr-create-repo <repo_name>"
+    else
+        aws-docker-authenticate
+        aws ecr create-repository --repository-name "$1"
+    fi
+
 }

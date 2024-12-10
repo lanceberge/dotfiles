@@ -50,3 +50,5 @@
     ff = only
 [github]
     user = lanceberge
+[push]
+	autoSetupRemote = true
