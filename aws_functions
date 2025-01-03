@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export AWS_DEFAULT_REGION=us-east-1
-
 function aws-get-id() {
     aws sts get-caller-identity --query Account --output text
 }
