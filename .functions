@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function +awk() {
+	if [ $# -ne 1 ]; then
+		echo "Usage: +awk <n>"
+		return 1
+	fi
+
+	awk '{print $1}'
+}

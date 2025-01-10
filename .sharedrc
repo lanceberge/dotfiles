@@ -10,7 +10,7 @@ export HISTFILESIZE=30000
 export GH_TOKEN=$(cat ~/secrets/gh_token)
 
 # source aliases, prompt, ...
-for file in ~/dotfiles/.{aliases,local} \
+for file in ~/dotfiles/.{aliases,local,function} \
     ~/dotfiles/aws_functions; do
     if [ -r "$file" ] && [ -f "$file" ]; then
         source "$file"
