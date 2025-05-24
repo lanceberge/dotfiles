@@ -97,3 +97,6 @@ export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 # fi
 
 export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)
+source <(fzf --zsh)
+
+bindkey -s ^a "tmux-sessionizer\n"
