@@ -42,7 +42,6 @@ require('lazy').setup {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
-      -- TODO
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[P]roject [F]iles' })
       vim.keymap.set('n', '<leader>,', builtin.buffers, { desc = '[,] Find existing buffers' })
