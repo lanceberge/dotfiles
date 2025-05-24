@@ -8,6 +8,8 @@ setopt autocd # change dir without typing cd
 unsetopt EXTENDED_HISTORY
 setopt SHARE_HISTORY
 
+DISABLE_AUTOUPDATE=false
+
 # Vi mode
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
@@ -87,9 +89,11 @@ complete -C aws_completer aws
 
 # PHP
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+# export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # if [ -z "$TMUX" ]; then
 #     # Start a new TMUX session named 'default' or attach to it if it already exists
 #     tmux attach-session -t default || tmux new-session -s default
 # fi
+
+export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)

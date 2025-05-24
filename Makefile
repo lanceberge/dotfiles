@@ -128,8 +128,13 @@ php:
 
 	source ~/dotfiles/.zshrc
 	composer global require laravel/installer
+	composer global require friendsofphp/php-cs-fixer -v
 
-	npm  install -g intelephense
+	npm install -g intelephense
+
+	curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
+	chmod a+x phpactor.phar
+	mv phpactor.phar ~/dotfiles/bin/phpactor
 
 
 lang: node go python rust c bash
