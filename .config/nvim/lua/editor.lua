@@ -87,4 +87,23 @@ return {
     end,
   },
   { 'NMAC427/guess-indent.nvim' },
+  {
+    'ggandor/leap.nvim',
+    event = 'BufRead', -- TODO do this for more plugins
+    config = function()
+      local leap = require 'leap'
+      leap.add_default_mappings()
+
+      leap.opts = {
+        max_phase_one_targets = nil,
+        highlight_unlabeled = true,
+        case_sensitive = false,
+        safe_labels = { 's', 'f', 'n', 'u', 't', '/' },
+      }
+
+      vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function()
+        require('leap').leap { target_windows = { vim.fn.win_getid() } }
+      end, { desc = 'Leap to any position in current window' })
+    end,
+  },
 }
