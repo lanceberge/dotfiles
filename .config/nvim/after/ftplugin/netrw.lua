@@ -1,4 +1,5 @@
 -- mf - mark file
+-- mu - unmark all
 local g = vim.g
 
 local options_append = {

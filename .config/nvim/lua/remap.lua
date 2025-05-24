@@ -19,4 +19,5 @@ return {
 
   vim.keymap.set('n', '<leader>bn', ':bn<CR>'),
   vim.keymap.set('n', '<leader>bp', ':bp<CR>'),
+  vim.keymap.set('i', 'jk', '<esc>'),
 }
