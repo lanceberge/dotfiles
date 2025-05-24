@@ -1,7 +1,6 @@
 .vimrc
 etc
 .local
-.config
 bin/apply_diffs
 bin/create_diffs
 bin/phpactor

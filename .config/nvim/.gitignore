@@ -1,8 +1,7 @@
-plugin/expr-folding.vim
-undo
-sessions
-.netrwhist
-plugged
-autoload/plug.vim
-autoload/plug.vim.old
-plugin/quickfix_toggle.vim
+tags
+test.sh
+.luarc.json
+nvim
+
+spell/
+lazy-lock.json
