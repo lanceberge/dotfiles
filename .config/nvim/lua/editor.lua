@@ -101,9 +101,13 @@ return {
         safe_labels = { 's', 'f', 'n', 'u', 't', '/' },
       }
 
-      vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function()
-        require('leap').leap { target_windows = { vim.fn.win_getid() } }
-      end, { desc = 'Leap to any position in current window' })
+      vim.keymap.set('n', 'gs', function()
+        require('leap').leap {
+          target_windows = vim.tbl_filter(function(win)
+            return vim.api.nvim_win_is_valid(win)
+          end, vim.api.nvim_tabpage_list_wins(0)),
+        }
+      end, { desc = 'Leap across all windows in current tab' })
     end,
   },
 }

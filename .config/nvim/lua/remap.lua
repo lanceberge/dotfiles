@@ -15,6 +15,8 @@ return {
   vim.keymap.set('n', 'L', '$'),
 
   vim.keymap.set('n', '<leader>bd', ':bd<CR>'),
+  vim.keymap.set('n', '<leader>w', '<C-w>'),
+  vim.keymap.set('n', '<leader>wd', '<C-w>q'),
   vim.keymap.set('n', '<leader>wq', ':wq<CR>'),
 
   vim.keymap.set('n', '<leader>bn', ':bn<CR>'),
