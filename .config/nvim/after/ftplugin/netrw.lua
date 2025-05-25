@@ -25,16 +25,4 @@ local nmap = function(lhs, rhs)
 end
 
 nmap('.', 'gh')
-nmap('H', 'u')
 nmap('q', ':bd<CR>')
-
-nmap('<leader>m', 'mu') -- unmark all
-
-nmap('ff', ':!touch ') -- create file
-nmap('fd', ':!mkdir -p ') -- create folder
-nmap('fm', ':!mv ') -- move/rename
-nmap('fc', ':!cp -r ') -- copy
-nmap('D', ':!rm -r ') -- delete
-nmap('+', 'd')
-
-nmap('n', '%')
