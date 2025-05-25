@@ -26,3 +26,4 @@ end
 
 nmap('.', 'gh')
 nmap('q', ':bd<CR>')
+nmap('<leader>wq', ':q<CR>')

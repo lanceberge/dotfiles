@@ -110,4 +110,11 @@ return {
       end, { desc = 'Leap across all windows in current tab' })
     end,
   },
+  {
+    'echasnovski/mini.move',
+    version = '*',
+    config = function()
+      require('mini.move').setup()
+    end,
+  },
 }
