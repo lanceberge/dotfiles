@@ -9,9 +9,9 @@ return {
     config = function()
       local neogit = require 'neogit'
       neogit.setup {
-        kind = 'vsplit', -- Open Neogit in a vertical split
+        kind = 'vsplit',
         commit_popup = {
-          kind = 'split', -- Horizontal split for commit editor
+          kind = 'split',
         },
         use_magit_keybindings = true,
         disable_signs = false,
@@ -19,7 +19,6 @@ return {
         disable_context_highlighting = false,
       }
 
-      -- Keybinding to open Neogit
       vim.keymap.set('n', '<leader>gs', function()
         neogit.open { kind = 'vsplit' }
       end, { noremap = true, silent = true, desc = 'Open Neogit in vertical split' })
@@ -43,13 +42,30 @@ return {
     config = function()
       require('git-conflict').setup {
         default_mappings = {
-          ours = 'l',
-          theirs = 'o',
-          both = 'a',
-          next = 'n',
-          prev = 'p',
+          ours = 'ml',
+          theirs = 'mo',
+          none = 'mx',
+          both = 'ma',
+          next = ']c',
+          prev = '[c',
         },
       }
+    end,
+  },
+  {
+    'fredeeb/tardis.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('tardis-nvim').setup {
+        keymap = {
+          ['next'] = 'p',
+          ['prev'] = 'n',
+          ['quit'] = 'q',
+        },
+        initial_revisions = 10,
+        max_revisions = 256,
+      }
+      vim.keymap.set('n', '<leader>gt', ':Tardis git<cr>')
     end,
   },
 }

@@ -1,7 +1,3 @@
-local nmap = function(lhs, rhs)
-  vim.keymap.set('n', lhs, rhs, { remap = true, buffer = vim.api.nvim_get_current_buf() })
-end
-
 return {
   vim.keymap.set('n', '-', vim.cmd.Ex),
   vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>'),
