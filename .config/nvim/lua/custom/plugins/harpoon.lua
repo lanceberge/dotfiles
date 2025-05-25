@@ -17,5 +17,12 @@ return {
         harpoon:list():select(idx)
       end)
     end
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'harpoon',
+      callback = function()
+        local buf = vim.api.nvim_get_current_buf()
+        vim.keymap.set('n', '<C-c>', ':wq<CR>', { buffer = buf })
+      end,
+    })
   end,
 }

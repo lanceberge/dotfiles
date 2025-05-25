@@ -22,6 +22,14 @@ return {
       vim.keymap.set('n', '<leader>gs', function()
         neogit.open { kind = 'vsplit' }
       end, { noremap = true, silent = true, desc = 'Open Neogit in vertical split' })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'NeogitStatus',
+        callback = function()
+          local buf = vim.api.nvim_get_current_buf()
+          vim.keymap.set('n', '<C-c>', ':q<CR>', { buffer = buf })
+        end,
+      })
     end,
   },
   {
