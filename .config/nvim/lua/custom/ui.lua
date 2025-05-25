@@ -10,15 +10,8 @@ return {
           transparency = true,
         },
         highlight_groups = {
-          -- ['@keyword.lua'] = { bg = 'NONE' }, -- For keywords like 'local'
-          -- ['@keyword.return.lua'] = { bg = 'NONE' }, -- For 'return'
-          -- ['@function.builtin.lua'] = { bg = 'NONE' }, -- For 'require'
-          -- ['@field.lua'] = { bg = 'NONE' }, -- For table keys like 'event', 'build'
-          -- ['@property.lua'] = { bg = 'NONE' }, -- For table keys (captured here)
-          -- ['@lsp.type.property.lua'] = { bg = 'NONE' }, -- LSP-specific property capture
-          -- ['@variable.lua'] = { bg = 'NONE' }, -- For variables
-          ['@variable'] = { bg = 'NONE' }, -- Fallback for linked group
-          ['@property'] = { bg = 'NONE' }, -- Fallback for linked group
+          -- ['@variable'] = { bg = 'NONE' }, -- Fallback for linked group
+          -- ['@property'] = { bg = 'NONE' }, -- Fallback for linked group
         },
       }
       vim.cmd 'colorscheme rose-pine'

@@ -1,4 +1,36 @@
-require 'opt'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+vim.g.have_nerd_font = false
+
+vim.o.number = true
+vim.o.relativenumber = true
+
+vim.o.mouse = 'a'
+
+vim.o.showmode = false
+
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
+
+vim.o.breakindent = true
+vim.o.undofile = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.signcolumn = 'yes'
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.o.inccommand = 'split'
+vim.o.cursorline = false
+vim.o.scrolloff = 5
+vim.o.confirm = true
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -13,12 +45,8 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
-require('lazy').setup {
-  require 'editor',
-  require 'search',
-  require 'kickstart.plugins.autopairs',
-  require 'remap',
-  require 'lsp',
-  require 'git',
-  require 'ui',
-}
+require('lazy').setup({ import = 'custom/' }, {
+  change_detection = {
+    notify = false,
+  },
+})
