@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$( (find ~/code -maxdepth 1 -type d; echo ~/dotfiles; echo ~/dotfiles/.config/nvim/) | fzf)
+    selected=$( (find ~/code -maxdepth 2 -type d; echo ~/dotfiles; echo ~/dotfiles/.config/nvim/) | fzf)
 fi
 
 if [[ -z $selected ]]; then
