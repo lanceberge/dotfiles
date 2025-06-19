@@ -1,6 +1,6 @@
 *
+!ghostty/
+!ghostty/**
 !pycodestyle
 !nvim/
 !nvim/**
-!nvim2/
-!nvim2/**
