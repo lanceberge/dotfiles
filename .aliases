@@ -2,7 +2,6 @@
 
 #--------------------Aliases--------------------
 alias v='nvim'
-alias vim='nvim'
 alias s='sudo'
 alias jn="jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''"
 alias jl="jupyter lab"
