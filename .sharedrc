@@ -7,7 +7,9 @@ export HISTFILE=~/.bash_history
 export HISTSIZE=30000
 export HISTFILESIZE=30000
 
-export GH_TOKEN=$(cat ~/secrets/gh_token)
+if [ -f $HOME/secrets/gh_token ]; then
+    export GH_TOKEN=$(cat ~/secrets/gh_token)
+fi
 
 # source aliases, prompt, ...
 for file in ~/dotfiles/.{aliases,local,function} \

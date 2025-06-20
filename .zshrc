@@ -3,6 +3,7 @@ if [ -f ~/dotfiles/.sharedrc ]; then
 fi
 # Settings
 setopt autocd # change dir without typing cd
+export XDG_CONFIG_HOME=$HOME/dotfiles/.config
 
 # History
 unsetopt EXTENDED_HISTORY
@@ -55,7 +56,10 @@ plugins=(
     vi-mode
     git
 )
-source $ZSH/oh-my-zsh.sh
+
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+    source $ZSH/oh-my-zsh.sh
+fi
 
 bindkey '^K' autosuggest-accept
 bindkey '^F' autosuggest-execute
@@ -96,7 +100,9 @@ export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 #     tmux attach-session -t default || tmux new-session -s default
 # fi
 
-export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)
+if [ -f $HOME/secrets/claude_key ]; then
+    export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)
+fi 
 source <(fzf --zsh)
 
 bindkey -s ^a "tmux-sessionizer\n"
