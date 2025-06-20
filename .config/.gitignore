@@ -4,3 +4,5 @@
 !pycodestyle
 !nvim/
 !nvim/**
+!i3/
+!i3/**
