@@ -38,10 +38,14 @@
 
     lag = log --oneline --all --decorate=short --graph
 [init]
-    defaultBranch = main
+	defaultBranch = master
 [pull]
     ff = only
+	rebase = true
 [github]
     user = lanceberge
 [push]
 	autoSetupRemote = true
+	rebaseAmend = noPrompt
+[rebase]
+	autoStash = true
