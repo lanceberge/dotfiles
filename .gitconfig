@@ -41,7 +41,10 @@
     defaultBranch = main
 [pull]
     ff = only
+	rebase = true
 [github]
     user = lanceberge
 [push]
 	autoSetupRemote = true
+[rebase]
+	autoStash = true
