@@ -49,3 +49,5 @@
 	rebaseAmend = noPrompt
 [rebase]
 	autoStash = true
+[checkout]
+	defaultRemote = origin

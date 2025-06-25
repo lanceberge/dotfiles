@@ -93,6 +93,7 @@ complete -C aws_completer aws
 
 # PHP
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
+export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 # export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # if [ -z "$TMUX" ]; then
@@ -102,7 +103,7 @@ export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 
 if [ -f $HOME/secrets/claude_key ]; then
     export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)
-fi 
+fi
 source <(fzf --zsh)
 
 bindkey -s ^a "tmux-sessionizer\n"
