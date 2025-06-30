@@ -14,9 +14,9 @@ assign [class="Emacs"] "2"
 assign [class="Brave-browser"] "3"
 
 # Launch each app on its target workspace
-exec --no-startup-id i3-msg "workspace 1; exec ghostty"
 exec --no-startup-id i3-msg "workspace 2; exec emacs"
 exec --no-startup-id i3-msg "workspace 3; exec brave"
+exec --no-startup-id i3-msg "workspace 1; exec ghostty"
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -139,6 +139,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bar {
-        status_command i3status
-}
+# bar {
+#         status_command i3status
+# }
+# exec_always --no-startup-id polybar top
