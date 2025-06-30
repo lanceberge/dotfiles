@@ -95,15 +95,17 @@ complete -C aws_completer aws
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 # export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-
-# if [ -z "$TMUX" ]; then
-#     # Start a new TMUX session named 'default' or attach to it if it already exists
-#     tmux attach-session -t default || tmux new-session -s default
-# fi
+export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 
 if [ -f $HOME/secrets/claude_key ]; then
     export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)
 fi
+
+if [ -z "$TMUX" ]; then
+    # Start a new TMUX session named 'default' or attach to it if it already exists
+    tmux
+fi
+
 source <(fzf --zsh)
 
 bindkey -s ^a "tmux-sessionizer\n"

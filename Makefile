@@ -17,8 +17,8 @@ endif
 clones:
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
 	git clone git@github.com:lanceberge/org.git      ~/org
-	git clone git@github.com:lanceberge/org-roam.git ~/org-roam
-	git clone git@github.com:lanceberge/Notes.git    ~/org-roam/public
+	git clone git@github.com:lanceberge/roam-private.git ~/org-roam
+	git clone git@github.com:lanceberge/org-roam.git    ~/org-roam/public
 	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
 	git clone git@github.com:lanceberge/secrets.git  ~/code/secrets
 
