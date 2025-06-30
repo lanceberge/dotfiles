@@ -36,8 +36,4 @@ tooltip label {
   padding: 2px;
 }
 
-window {
-  opacity: 0.7; /* Sets the entire window to 70% opacity */
-}
-
 @import "./theme.css";
