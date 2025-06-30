@@ -1,10 +1,5 @@
-*
-!ghostty/
-!ghostty/**
-!pycodestyle
-!nvim/
-!nvim/**
-!i3/
-!i3/**
-!polybar/
-!polybar/**
+go/*
+composer/*
+nixos
+pulse/*
+BraveSoftware/*
