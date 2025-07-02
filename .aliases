@@ -64,3 +64,4 @@ function paste() {
         pbpaste | sed -e "s/$/\n/"
     fi
 }
+alias nrs='sudo nixos-rebuild switch --flake ~/.config/nixos'

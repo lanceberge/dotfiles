@@ -1,9 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for dir in ~/{.emacs.d,org,org-roam,org-roam/public,dotfiles,secrets,code/Advent-of-Code-2023/,code/elysium}; do
-    if [ -d "$dir" ]; then
-        echo "Pulling $dir"
-        echo "------------------------------" 
-        git -C "$dir" pull
+    if [ ! -d "$dir" ]; then
+        echo "Skipping $dir: Directory does not exist"
+        continue
     fi
+
+    if ! git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Skipping $dir: Not a git repository"
+        continue
+    fi
+
+    if [ "$(git -C "$dir" rev-parse --abbrev-ref HEAD)" != "master" ]; then
+        echo "Skipping $dir: Not on master branch"
+        continue
+    fi
+
+    if ! git -C "$dir" diff --quiet || ! git -C "$dir" diff --cached --quiet; then
+        echo "Skipping $dir: Local changes detected"
+        continue
+    fi
+
+    echo "Pulling $dir"
+    git -C "$dir" pull --rebase
+    echo
 done
