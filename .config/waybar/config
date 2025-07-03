@@ -1,4 +1,5 @@
 {
+    "output": ["eDP-1", "HDMI-A-2"],
     "layer": "top",
     "position": "top",
     "spacing": 0,
@@ -42,7 +43,7 @@
         "on-click": "alacritty -e btop"
     },
     "clock": {
-        "format": "{:%A %H:%M}",
+        "format": "{:%A %I:%M %p}",
         "format-alt": "{:%d %B W%V %Y}",
         "tooltip": false
     },

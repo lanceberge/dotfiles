@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+TARGET_MONITOR="HDMI-A-2"
+
+MONITORS=$(hyprctl monitors -j | jq -r '.[] | .name')
+
+if ! echo "$MONITORS" | grep -q "$TARGET_MONITOR"; then
+    echo "Error: Target monitor $TARGET_MONITOR not found."
+    exit 1
+fi
+
+WORKSPACES=$(hyprctl workspaces -j | jq -r '.[] | .id')
+for ws in $WORKSPACES; do
+    hyprctl dispatch moveworkspacetomonitor "$ws $TARGET_MONITOR"
+    echo "Moved workspace $ws to $TARGET_MONITOR"
+done
