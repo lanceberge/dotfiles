@@ -109,3 +109,10 @@ fi
 source <(fzf --zsh)
 
 bindkey -s ^a "tmux-sessionizer\n"
+
+# bun completions
+[ -s "/Users/lance/.oh-my-zsh/completions/_bun" ] && source "/Users/lance/.oh-my-zsh/completions/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
