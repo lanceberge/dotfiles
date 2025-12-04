@@ -21,6 +21,8 @@
     rr  = reset --soft
     rh  = reset --hard
 
+    rc = rebase --continue
+
     rmc = rm --cached
 
     rs  = restore --staged
@@ -38,16 +40,17 @@
 
     lag = log --oneline --all --decorate=short --graph
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [pull]
     ff = only
-	rebase = true
+    rebase = true
 [github]
     user = lanceberge
 [push]
-	autoSetupRemote = true
-	rebaseAmend = noPrompt
+    autoSetupRemote = true
+    rebaseAmend = noPrompt
 [rebase]
-	autoStash = true
+    autoStash = true
 [checkout]
-	defaultRemote = origin
+    defaultRemote = origin
+    autoStash = true
