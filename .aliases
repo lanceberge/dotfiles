@@ -7,7 +7,7 @@ alias jn="jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.passwor
 alias jl="jupyter lab"
 
 # Navigation
-alias df='cd ~/dotfiles'
+alias cddf='cd ~/dotfiles'
 alias dfc='cd ~/dotfiles/.config'
 alias ..='cd ..'
 alias 2..='cd ../..'
@@ -47,7 +47,7 @@ alias dins='docker inspect'
 alias dll='docker logs $(docker ps -l -q)' # last docker logs
 
 # Kubernetes
-alias kc='kubectl'
+alias k='kubectl'
 alias kqa='kc delete all --all -n $(whoami)'
 
 #Maven

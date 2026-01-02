@@ -12,7 +12,7 @@ if [ -f $HOME/secrets/gh_token ]; then
 fi
 
 # source aliases, prompt, ...
-for file in ~/dotfiles/.{aliases,local,function} \
+for file in ~/dotfiles/.{aliases,local,functions} \
     ~/dotfiles/aws_functions; do
     if [ -r "$file" ] && [ -f "$file" ]; then
         source "$file"

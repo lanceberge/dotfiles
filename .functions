@@ -8,3 +8,7 @@ function +awk() {
 
 	awk '{print $1}'
 }
+
+function root() {
+    git rev-parse --show-toplevel
+}

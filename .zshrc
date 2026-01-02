@@ -12,13 +12,15 @@ setopt SHARE_HISTORY
 DISABLE_AUTOUPDATE=false
 
 # Vi mode
-bindkey -v
-bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
+# bindkey -v
+# bindkey -M viins 'jk' vi-cmd-mode # remap <esc>
 export KEYTIMEOUT=20
+
+bindkey -e
 
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^v' edit-command-line
+bindkey '^[v' edit-command-line
 
 # Tab completion
 autoload -U compinit
@@ -53,7 +55,7 @@ export ZSH="$HOME/.oh-my-zsh"
 plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
-    vi-mode
+    # vi-mode
     git
 )
 
@@ -61,9 +63,11 @@ if [ -f $ZSH/oh-my-zsh.sh ]; then
     source $ZSH/oh-my-zsh.sh
 fi
 
-bindkey '^K' autosuggest-accept
-bindkey '^F' autosuggest-execute
+# bindkey '^K' autosuggest-accept
+# bindkey '^F' autosuggest-execute
+bindkey '^[^M' autosuggest-execute
 
+# emacs stuff
 vterm_printf() {
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ]); then
         # Tell tmux to pass the escape sequences through
@@ -79,11 +83,10 @@ vterm_printf() {
 vterm_prompt_end() {
     vterm_printf "51;A$(whoami)@$(hostname):$(pwd)"
 }
+
 setopt PROMPT_SUBST
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
-# Completely clear the buffer. With this, everything that is not on screen
-# is erased.
 if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
     alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
 fi
@@ -94,7 +97,6 @@ complete -C aws_completer aws
 # PHP
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
 export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
-# export PHP_INI_SCAN_DIR="/Users/lance/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 
 if [ -f $HOME/secrets/claude_key ]; then
@@ -108,7 +110,7 @@ fi
 
 source <(fzf --zsh)
 
-bindkey -s ^a "tmux-sessionizer\n"
+# bindkey -s ^a "tmux-sessionizer\n"
 
 # bun completions
 [ -s "/Users/lance/.oh-my-zsh/completions/_bun" ] && source "/Users/lance/.oh-my-zsh/completions/_bun"
@@ -116,3 +118,5 @@ bindkey -s ^a "tmux-sessionizer\n"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
