@@ -66,6 +66,7 @@ fi
 # bindkey '^K' autosuggest-accept
 # bindkey '^F' autosuggest-execute
 bindkey '^[^M' autosuggest-execute
+bindkey '^W' kill-region
 
 # emacs stuff
 vterm_printf() {
@@ -100,7 +101,7 @@ export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 
 if [ -f $HOME/secrets/claude_key ]; then
-    export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key)
+    export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key | base64 -d)
 fi
 
 if [ -z "$TMUX" ]; then
