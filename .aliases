@@ -16,7 +16,7 @@ alias hg='history |grep'
 alias pg='ps aux |grep'
 alias cdr='cd $(git rev-parse --show-toplevel)' # cd to the git root
 
-alias gha="unset GH_TOKEN && gh auth login --with-token < ~/secrets/gh_token"
+alias gha='unset GH_TOKEN && cat ~/secrets/gh_token | base64 -d | gh auth login --with-token'
 
 # Source Files
 alias sb='source ~/.bashrc'

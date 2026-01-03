@@ -1,5 +1,6 @@
-go/*
-composer/*
+go
+composer
 nixos
-pulse/*
-BraveSoftware/*
+pulse
+BraveSoftware
+gh

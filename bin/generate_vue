@@ -13,7 +13,7 @@ fi
 
 PROJECT_NAME="$1"
 
-unset GH_TOKEN && gh auth login --with-token <~/secrets/gh_token
+unset GH_TOKEN && gh auth login --with-token <$(~/secrets/gh_token | base64 -d)
 
 if [ $# -eq 1 ]; then
     ARGS="--private"
