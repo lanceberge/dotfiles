@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    echo "worktree_delete: not in a git repo"
+    exit 1
+}
+
+REPO_NAME=$(basename "$REPO_ROOT")
+WORKTREE_BASE="$HOME/worktrees/$REPO_NAME"
+
+if [ ! -d "$WORKTREE_BASE" ]; then
+    echo "No worktrees found in $WORKTREE_BASE"
+    exit 1
+fi
+
+SELECTED=$(find "$WORKTREE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf --prompt="Delete worktree: ")
+
+[[ -z $SELECTED ]] && exit 0
+
+SELECTED=$(echo "$SELECTED" | tr '/' '_')
+
+WORKTREE_PATH="$WORKTREE_BASE/$SELECTED"
+
+# read -p "Delete worktree '$SELECTED' and branch '$BRANCH_NAME'? (y/N) " -n 1 -r
+# echo
+# if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+#     echo "Cancelled"
+#     exit 0
+# fi
+
+echo "Removing worktree at $WORKTREE_PATH..."
+git worktree remove "$WORKTREE_PATH" --force
+
+echo "Deleting directory: $WORKTREE_PATH"
+rm -rf "$WORKTREE_PATH"
+
+TMUX_WINDOW="worktree/${SELECTED}"
+if command -v tmux >/dev/null 2>&1 && [ -n "${TMUX:-}" ]; then
+    if tmux list-windows -F '#W' | grep -qx "$TMUX_WINDOW"; then
+        echo "Killing tmux window: $TMUX_WINDOW"
+        tmux kill-window -t "$TMUX_WINDOW"
+    fi
+fi

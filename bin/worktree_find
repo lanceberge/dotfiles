@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Either creates a new worktree or finds an existing one then opens it in ~/worktrees/${REPO_NAME}/${BRANCH_NAME}
+# and a new tmux pane named worktrees/${BRANCH_NAME}
+set -euo pipefail
+
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    tmux display-message "worktree_new: not in a git repo"
+    exit 1
+}
+
+CURRENT_BRANCH=$(git branch --show-current)
+
+REMOTE_BRANCHES=($(
+    git branch -r |
+        sed 's/^[[:space:]]*//' |
+        grep -v -- '->' |
+        sed 's|^origin/||' |
+        grep -v "^$CURRENT_BRANCH$"
+))
+
+BRANCHES=("new branch" "${REMOTE_BRANCHES[@]}")
+SELECTED_BRANCH=$(printf "%s\n" "${BRANCHES[@]}" | fzf)
+[[ -z "$SELECTED_BRANCH" ]] && exit 0
+
+REPO_NAME=$(basename "$REPO_ROOT")
+WORKTREE_BASE="$HOME/worktrees/$REPO_NAME"
+mkdir -p "$WORKTREE_BASE"
+
+if [[ "$SELECTED_BRANCH" == "new branch" ]]; then
+    read -rp "New branch name: " BRANCH_NAME
+    [[ -z "$BRANCH_NAME" ]] && exit 1
+    WORKTREE_PATH="$WORKTREE_BASE/$BRANCH_NAME"
+    WINDOW_NAME="worktree/$(echo "$BRANCH_NAME" | tr '/' '_')"
+    if [ ! -d "$WORKTREE_PATH" ]; then
+        git worktree add -b "$BRANCH_NAME" "$WORKTREE_PATH"
+    fi
+else
+    BRANCH_NAME="$SELECTED_BRANCH"
+    WORKTREE_PATH="$WORKTREE_BASE/$BRANCH_NAME"
+    WINDOW_NAME="worktree/$(echo "$BRANCH_NAME" | tr '/' '_')"
+    if [ ! -d "$WORKTREE_PATH" ]; then
+        git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
+    fi
+fi
+
+if [ -d "$WORKTREE_PATH" ]; then
+    if tmux list-windows -F "#{window_name}" | grep -q "^${WINDOW_NAME}$"; then
+        tmux select-window -t "$WINDOW_NAME"
+        exit 0
+    fi
+fi
+
+if tmux list-windows -F "#{window_name}" | grep -qx "$WINDOW_NAME"; then
+    tmux select-window -t "$WINDOW_NAME"
+else
+    tmux neww -n "$WINDOW_NAME" bash -c "cd '$WORKTREE_PATH'; exec \$SHELL"
+fi
