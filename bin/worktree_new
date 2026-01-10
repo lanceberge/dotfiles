@@ -29,15 +29,21 @@ mkdir -p "$WORKTREE_BASE"
 if [[ "$SELECTED_BRANCH" == "new branch" ]]; then
     read -rp "New branch name: " BRANCH_NAME
     [[ -z "$BRANCH_NAME" ]] && exit 1
-    WORKTREE_PATH="$WORKTREE_BASE/$BRANCH_NAME"
-    WINDOW_NAME="worktree/$(echo "$BRANCH_NAME" | tr '/' '_')"
+
+    TR_BRANCH_NAME="$(echo "$BRANCH_NAME" | tr '/' '_')"
+    WORKTREE_PATH="$WORKTREE_BASE/$TR_BRANCH_NAME"
+    WINDOW_NAME="worktree/$TR_BRANCH_NAME"
+
     if [ ! -d "$WORKTREE_PATH" ]; then
         git worktree add -b "$BRANCH_NAME" "$WORKTREE_PATH"
     fi
 else
     BRANCH_NAME="$SELECTED_BRANCH"
-    WORKTREE_PATH="$WORKTREE_BASE/$BRANCH_NAME"
-    WINDOW_NAME="worktree/$(echo "$BRANCH_NAME" | tr '/' '_')"
+
+    TR_BRANCH_NAME="$(echo "$BRANCH_NAME" | tr '/' '_')"
+    WORKTREE_PATH="$WORKTREE_BASE/$TR_BRANCH_NAME"
+    WINDOW_NAME="worktree/$TR_BRANCH_NAME"
+
     if [ ! -d "$WORKTREE_PATH" ]; then
         git worktree add "$WORKTREE_PATH" "$BRANCH_NAME"
     fi

@@ -17,22 +17,13 @@ fi
 SELECTED=$(find "$WORKTREE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf --prompt="Delete worktree: ")
 
 [[ -z $SELECTED ]] && exit 0
-
 SELECTED=$(echo "$SELECTED" | tr '/' '_')
 
 WORKTREE_PATH="$WORKTREE_BASE/$SELECTED"
 
-# read -p "Delete worktree '$SELECTED' and branch '$BRANCH_NAME'? (y/N) " -n 1 -r
-# echo
-# if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-#     echo "Cancelled"
-#     exit 0
-# fi
-
 echo "Removing worktree at $WORKTREE_PATH..."
 
 echo "Deleting directory: $WORKTREE_PATH"
-rm -rf "$WORKTREE_PATH"
 
 git worktree remove "$WORKTREE_PATH" --force
 
