@@ -30,10 +30,11 @@ WORKTREE_PATH="$WORKTREE_BASE/$SELECTED"
 # fi
 
 echo "Removing worktree at $WORKTREE_PATH..."
-git worktree remove "$WORKTREE_PATH" --force
 
 echo "Deleting directory: $WORKTREE_PATH"
 rm -rf "$WORKTREE_PATH"
+
+git worktree remove "$WORKTREE_PATH" --force
 
 TMUX_WINDOW="worktree/${SELECTED}"
 if command -v tmux >/dev/null 2>&1 && [ -n "${TMUX:-}" ]; then
