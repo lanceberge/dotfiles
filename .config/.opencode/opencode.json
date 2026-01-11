@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "dmr": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Docker Model Runner",
+      "options": {
+        "baseURL": "http://localhost:12434/engines/v1",
+        "apiKey": "docker"
+      },
+      "models": {
+        "ai/gpt-oss:20B-UD-Q8_K_XL": {
+          "name": "GPT-OSS:20B"
+        },
+        "ai/llama3.2:1B-Q4_0": {
+          "name": "Llama 3.2 1B"
+        },
+        "ai/devstral-small:24B": {
+          "name": "Devstral Small 24B"
+        }
+      }
+    }
+  }
+}
