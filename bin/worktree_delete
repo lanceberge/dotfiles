@@ -14,23 +14,42 @@ if [ ! -d "$WORKTREE_BASE" ]; then
     exit 1
 fi
 
-SELECTED=$(find "$WORKTREE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf --prompt="Delete worktree: ")
+if [ $# -eq 0 ]; then
+    SELECTED=$(find "$WORKTREE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf --prompt="Delete worktree: ")
+    [[ -z $SELECTED ]] && exit 0
+else
+    SELECTED="$1"
+    SELECTED=$(echo "$SELECTED" | tr '/' '_')
 
-[[ -z $SELECTED ]] && exit 0
+    # Check if the worktree exists
+    WORKTREE_PATH="$WORKTREE_BASE/$SELECTED"
+    if [ ! -d "$WORKTREE_PATH" ]; then
+        echo "Error: Worktree '$1' not found at $WORKTREE_PATH"
+        echo "Available worktrees:"
+        find "$WORKTREE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;
+        exit 1
+    fi
+fi
+
 SELECTED=$(echo "$SELECTED" | tr '/' '_')
-
 WORKTREE_PATH="$WORKTREE_BASE/$SELECTED"
 
 echo "Removing worktree at $WORKTREE_PATH..."
-
 echo "Deleting directory: $WORKTREE_PATH"
 
-git worktree remove "$WORKTREE_PATH" --force
+if ! git worktree remove "$WORKTREE_PATH" --force; then
+    echo "Git failed to delete worktree cleanly."
+    echo "Force removing directory: $WORKTREE_PATH"
+    rm -rf "$WORKTREE_PATH"
+fi
 
 TMUX_WINDOW="worktree/${SELECTED}"
+
 if command -v tmux >/dev/null 2>&1 && [ -n "${TMUX:-}" ]; then
     if tmux list-windows -F '#W' | grep -qx "$TMUX_WINDOW"; then
         echo "Killing tmux window: $TMUX_WINDOW"
         tmux kill-window -t "$TMUX_WINDOW"
     fi
 fi
+
+echo "Successfully deleted worktree: $SELECTED"
