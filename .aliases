@@ -65,3 +65,4 @@ function paste() {
     fi
 }
 alias nrs='sudo nixos-rebuild switch --flake ~/.config/nixos'
+alias hrs='home-manager switch --flake ~/.config/nixos#lance'

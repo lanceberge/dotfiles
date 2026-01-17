@@ -104,11 +104,6 @@ if [ -f $HOME/secrets/claude_key ]; then
     export ANTHROPIC_API_KEY=$(cat ~/secrets/claude_key | base64 -d)
 fi
 
-if [ -z "$TMUX" ]; then
-    # Start a new TMUX session named 'default' or attach to it if it already exists
-    tmux
-fi
-
 source <(fzf --zsh)
 
 # bindkey -s ^a "tmux-sessionizer\n"
