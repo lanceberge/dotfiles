@@ -8,6 +8,8 @@ export XDG_CONFIG_HOME=$HOME/dotfiles/.config
 # History
 unsetopt EXTENDED_HISTORY
 setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
 
 DISABLE_AUTOUPDATE=false
 
