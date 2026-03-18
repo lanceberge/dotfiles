@@ -57,6 +57,9 @@ LLM_COMMAND="${LLM_COMMAND:-claude --dangerously-skip-permissions}"
 
 tmux neww -n "$WINDOW_NAME" -c "$WORKTREE_PATH" "$LLM_COMMAND"
 tmux split-window -h -c "$WORKTREE_PATH"
-tmux select-pane -L
-tmux split-window -v -c "$WORKTREE_PATH"
-tmux select-pane -U
+if [ -f "$WORKTREE_PATH/mix.exs" ]; then
+    tmux split-window -v -c "$WORKTREE_PATH" "mix setup; exec \$SHELL"
+else
+    tmux split-window -v -c "$WORKTREE_PATH"
+fi
+tmux select-pane -t "${WINDOW_NAME}.1"

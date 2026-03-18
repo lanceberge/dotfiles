@@ -36,6 +36,8 @@ symlinks:
 	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
 	ln -sf ~/dotfiles/.ideavimrc          ~/.ideavimrc
 	ln -sf ~/secrets/.authinfo            ~/.authinfo
+	ln -sf ~/dotfiles/.claude/settings.json ~/.claude/settings.json
+	ln -sf ~/dotfiles/.claude/hooks         ~/.claude/hooks
 
 
 system_packages:

@@ -11,11 +11,11 @@ REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || {
 CURRENT_BRANCH=$(git branch --show-current)
 
 REMOTE_BRANCHES=($(
-    git branch -r |
+    git branch -r 2>/dev/null |
         sed 's/^[[:space:]]*//' |
         grep -v -- '->' |
         sed 's|^origin/||' |
-        grep -v "^$CURRENT_BRANCH$"
+        grep -v "^$CURRENT_BRANCH$" || true
 ))
 
 BRANCHES=("new branch" "${REMOTE_BRANCHES[@]}")
