@@ -2,6 +2,7 @@
 export XDG_CONFIG_HOME=~/dotfiles/.config
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
+export FZF_DEFAULT_OPTS="--bind 'ctrl-k:kill-line'"
 
 export HISTFILE=~/.bash_history
 export HISTSIZE=30000

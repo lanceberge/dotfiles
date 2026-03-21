@@ -4,6 +4,7 @@
 [core]
     editor = "emacsclient -t"
     ignorecase = false
+    excludesFile = ~/dotfiles/gitignore_global
 [alias]
     b   = branch
     co  = checkout
