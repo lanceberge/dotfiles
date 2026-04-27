@@ -38,6 +38,7 @@ symlinks:
 	ln -sf ~/secrets/.authinfo            ~/.authinfo
 	ln -sf ~/dotfiles/.claude/settings.json ~/.claude/settings.json
 	ln -sf ~/dotfiles/.claude/hooks         ~/.claude/hooks
+	mkdir -p ~/.config && ln -sfn ~/dotfiles/.config/jj ~/.config/jj
 
 
 system_packages:

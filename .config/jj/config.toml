@@ -1,0 +1,42 @@
+[user]
+name = "lanceberge"
+email = "bergeron.lance6@gmail.com"
+
+[ui]
+editor = "emacsclient -t"
+default-command = "log"
+diff-editor = ":builtin"
+pager = "less -FRX"
+
+[git]
+fetch = ["origin"]
+push = "origin"
+
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+tp = ["util", "exec", "--", "sh", "-c", "jj bookmark move --from 'heads(::@- & bookmarks())' --to @- && jj git push"]
+b = ["bookmark"]
+bl = ["bookmark", "list"]
+bs = ["bookmark", "set"]
+bd = ["bookmark", "delete"]
+
+l = ["log"]
+lag = ["log", "-r", "all()"]
+d = ["diff"]
+
+de = ["describe"]
+
+n = ["new"]
+co = ["edit"]
+e = ["edit"]
+
+r = ["rebase"]
+
+ab = ["abandon"]
+u = ["undo"]
+
+p = ["git", "push"]
+f = ["git", "fetch"]
+
+# [templates]
+# commit_trailers = TODO
