@@ -42,7 +42,7 @@ bindkey '^R' history-incremental-search-backward
 export TERM=xterm-256color
 
 setopt prompt_subst
-prompt='%F{109}%2~%F{brightwhite} %b# '
+prompt='%F{109}%2~$(prompt_jj)%F{brightwhite} %b# '
 PS2='> '
 
 export ZSH="$HOME/.oh-my-zsh"

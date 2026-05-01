@@ -66,6 +66,33 @@ function cdf() {
     fi
 }
 
+prompt_jj() {
+    command -v jj >/dev/null 2>&1 || return
+    jj root --ignore-working-copy >/dev/null 2>&1 || return
+
+    local raw bm_id bm
+    raw=$(jj log --ignore-working-copy --no-graph --limit 1 \
+        -r 'heads(::@ & bookmarks())' \
+        -T 'change_id.short() ++ "\t" ++ bookmarks.map(|b| b.name()).join(",")' 2>/dev/null)
+    bm_id="${raw%%	*}"
+    bm="${raw#*	}"
+
+    local count flags
+    count=$(jj log --ignore-working-copy --no-graph \
+        -r "${bm_id:-trunk()}..@" \
+        -T '"x\n"' 2>/dev/null | grep -c .)
+    flags=$(jj log --ignore-working-copy --no-graph -r @ \
+        -T 'if(empty, "", "+") ++ if(conflict, "!", "")' 2>/dev/null)
+
+    local s=""
+    if [ -n "$bm" ]; then
+        s="%F{208}on %F{106}${bm}"
+        [ "$count" -gt 0 ] && s="${s}+${count}"
+    fi
+    [ -n "$flags" ] && s="${s:+$s }%F{160}[${flags}]"
+    [ -n "$s" ] && printf ' %s' "$s"
+}
+
 function e() {
     if [ $# -ne 1 ]; then
         echo "Usage: $0 <filename>"
