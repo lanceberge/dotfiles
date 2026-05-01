@@ -41,15 +41,8 @@ bindkey '^R' history-incremental-search-backward
 # Prompt
 export TERM=xterm-256color
 
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
-precmd() {
-    vcs_info
-}
 setopt prompt_subst
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' formats " %F{208}on %F{106}%b%F{160}[%u%c]"
-prompt='%F{109}%2~${vcs_info_msg_0_}%F{brightwhite} %b# '
+prompt='%F{109}%2~%F{brightwhite} %b# '
 PS2='> '
 
 export ZSH="$HOME/.oh-my-zsh"

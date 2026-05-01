@@ -7,6 +7,7 @@ editor = "emacsclient -t"
 default-command = "log"
 diff-editor = ":builtin"
 pager = "less -FRX"
+conflict-marker-style = "git"
 
 [git]
 fetch = ["origin"]
