@@ -17,5 +17,5 @@ fi
 git merge --squash "$branch"
 git commit -m "$commit_message"
 git push
-worktree_delete "$branch"
+git_workspace_delete "$branch"
 git branch -D "$branch"

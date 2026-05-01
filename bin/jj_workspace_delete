@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CURRENT_ROOT=$(jj root 2>/dev/null) || {
+    tmux display-message "jj_workspace_delete: not in a jj repo"
+    exit 1
+}
+
+# If we're inside ~/jj-workspaces/<repo>/<name>, the repo name is one level up.
+if [[ "$CURRENT_ROOT" == "$HOME/jj-workspaces/"* ]]; then
+    REL="${CURRENT_ROOT#"$HOME"/jj-workspaces/}"
+    REPO_NAME="${REL%%/*}"
+else
+    REPO_NAME=$(basename "$CURRENT_ROOT")
+fi
+WORKSPACE_BASE="$HOME/jj-workspaces/$REPO_NAME"
+
+if [ ! -d "$WORKSPACE_BASE" ]; then
+    tmux display-message "jj_workspace_delete: no workspaces found at $WORKSPACE_BASE"
+    exit 1
+fi
+
+WORKSPACES=($(find "$WORKSPACE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;))
+
+if [ ${#WORKSPACES[@]} -eq 0 ]; then
+    tmux display-message "jj_workspace_delete: no workspaces found in $WORKSPACE_BASE"
+    exit 1
+fi
+
+if [ $# -eq 0 ]; then
+    SELECTED=$(printf "%s\n" "${WORKSPACES[@]}" | fzf --prompt="Delete workspace: ") || exit 0
+    [[ -z $SELECTED ]] && exit 0
+else
+    SELECTED="$1"
+    SELECTED=$(echo "$SELECTED" | tr '/' '_')
+
+    WORKSPACE_PATH="$WORKSPACE_BASE/$SELECTED"
+    if [ ! -d "$WORKSPACE_PATH" ]; then
+        echo "Error: Workspace '$1' not found at $WORKSPACE_PATH"
+        echo "Available workspaces:"
+        find "$WORKSPACE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;
+        exit 1
+    fi
+fi
+
+SELECTED=$(echo "$SELECTED" | tr '/' '_')
+WORKSPACE_PATH="$WORKSPACE_BASE/$SELECTED"
+
+echo "Removing workspace at $WORKSPACE_PATH..."
+
+if ! jj -R "$CURRENT_ROOT" workspace forget "$SELECTED" 2>/dev/null; then
+    echo "jj workspace forget failed (may already be forgotten); continuing."
+fi
+
+echo "Deleting directory: $WORKSPACE_PATH"
+rm -rf "$WORKSPACE_PATH"
+
+TMUX_WINDOW="workspace/${SELECTED}"
+
+if command -v tmux >/dev/null 2>&1 && [ -n "${TMUX:-}" ]; then
+    if tmux list-windows -F '#W' | grep -qx "$TMUX_WINDOW"; then
+        echo "Killing tmux window: $TMUX_WINDOW"
+        tmux kill-window -t "$TMUX_WINDOW"
+    fi
+fi
+
+echo "Successfully deleted workspace: $SELECTED"

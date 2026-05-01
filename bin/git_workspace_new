@@ -4,7 +4,7 @@
 set -euo pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || {
-    tmux display-message "worktree_new: not in a git repo"
+    tmux display-message "git_workspace_new: not in a git repo"
     exit 1
 }
 

@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+# Creates/selects a jj workspace and opens it in a tmux window with a 3-pane layout
+set -euo pipefail
+
+CURRENT_ROOT=$(jj root 2>/dev/null) || {
+    tmux display-message "jj_workspace: not in a jj repo"
+    exit 1
+}
+
+if [[ "$CURRENT_ROOT" == "$HOME/jj-workspaces/"* ]]; then
+    REL="${CURRENT_ROOT#"$HOME"/jj-workspaces/}"
+    REPO_NAME="${REL%%/*}"
+else
+    REPO_NAME=$(basename "$CURRENT_ROOT")
+fi
+WORKSPACE_BASE="$HOME/jj-workspaces/$REPO_NAME"
+mkdir -p "$WORKSPACE_BASE"
+
+EXISTING_WORKSPACES=($(
+    find "$WORKSPACE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; 2>/dev/null || true
+))
+
+REMOTE_BOOKMARKS=($(
+    jj bookmark list -r 'remote_bookmarks()' -T 'name ++ "\n"' 2>/dev/null | sort -u || true
+))
+
+# Build fzf list: existing workspaces first, then new bookmark, then remote bookmarks
+FZF_LIST=""
+for ws in "${EXISTING_WORKSPACES[@]+"${EXISTING_WORKSPACES[@]}"}"; do
+    FZF_LIST+="[open] $ws"$'\n'
+done
+FZF_LIST+="new bookmark"$'\n'
+for rb in "${REMOTE_BOOKMARKS[@]+"${REMOTE_BOOKMARKS[@]}"}"; do
+    TR_RB="$(echo "$rb" | tr '/' '_')"
+    found=false
+    for ws in "${EXISTING_WORKSPACES[@]+"${EXISTING_WORKSPACES[@]}"}"; do
+        if [[ "$ws" == "$TR_RB" ]]; then
+            found=true
+            break
+        fi
+    done
+    $found || FZF_LIST+="$rb"$'\n'
+done
+SELECTED=$(printf "%s" "$FZF_LIST" | fzf) || true
+[[ -z "${SELECTED:-}" ]] && exit 0
+
+if [[ "$SELECTED" == "[open]"* ]]; then
+    TR_NAME="${SELECTED#\[open\] }"
+    WORKSPACE_PATH="$WORKSPACE_BASE/$TR_NAME"
+    WINDOW_NAME="workspace/$TR_NAME"
+elif [[ "$SELECTED" == "new bookmark" ]]; then
+    read -rp "New bookmark name: " BOOKMARK_NAME
+    [[ -z "$BOOKMARK_NAME" ]] && exit 1
+
+    TR_NAME="$(echo "$BOOKMARK_NAME" | tr '/' '_')"
+    WORKSPACE_PATH="$WORKSPACE_BASE/$TR_NAME"
+    WINDOW_NAME="workspace/$TR_NAME"
+
+    if [ ! -d "$WORKSPACE_PATH" ]; then
+        jj workspace add --name "$TR_NAME" "$WORKSPACE_PATH"
+        jj -R "$WORKSPACE_PATH" bookmark create "$BOOKMARK_NAME"
+    fi
+else
+    BOOKMARK_NAME="$SELECTED"
+
+    TR_NAME="$(echo "$BOOKMARK_NAME" | tr '/' '_')"
+    WORKSPACE_PATH="$WORKSPACE_BASE/$TR_NAME"
+    WINDOW_NAME="workspace/$TR_NAME"
+
+    jj workspace add --name "$TR_NAME" "$WORKSPACE_PATH" -r "$BOOKMARK_NAME"
+fi
+
+if tmux list-windows -F "#{window_name}" | grep -qx "$WINDOW_NAME"; then
+    tmux select-window -t "$WINDOW_NAME"
+    exit 0
+fi
+
+LLM_COMMAND="${LLM_COMMAND:-claude --dangerously-skip-permissions}"
+
+tmux neww -n "$WINDOW_NAME" -c "$WORKSPACE_PATH" "$LLM_COMMAND"
+tmux split-window -h -c "$WORKSPACE_PATH"
+if [ -f "$WORKSPACE_PATH/mix.exs" ]; then
+    tmux split-window -v -c "$WORKSPACE_PATH" "mix setup; exec \$SHELL"
+else
+    tmux split-window -v -c "$WORKSPACE_PATH"
+fi
+tmux select-pane -t "${WINDOW_NAME}.1"

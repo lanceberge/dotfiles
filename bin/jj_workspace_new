@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Either creates a new jj workspace or finds an existing one then opens it in ~/jj-workspaces/${REPO_NAME}/${NAME}
+# and a new tmux pane named workspace/${NAME}
+set -euo pipefail
+
+CURRENT_ROOT=$(jj root 2>/dev/null) || {
+    tmux display-message "jj_workspace_new: not in a jj repo"
+    exit 1
+}
+
+REMOTE_BOOKMARKS=($(
+    jj bookmark list -r 'remote_bookmarks()' -T 'name ++ "\n"' 2>/dev/null | sort -u || true
+))
+
+BOOKMARKS=("new bookmark" "${REMOTE_BOOKMARKS[@]}")
+SELECTED_BOOKMARK=$(printf "%s\n" "${BOOKMARKS[@]}" | fzf) || exit 0
+[[ -z "$SELECTED_BOOKMARK" ]] && exit 0
+
+if [[ "$CURRENT_ROOT" == "$HOME/jj-workspaces/"* ]]; then
+    REL="${CURRENT_ROOT#"$HOME"/jj-workspaces/}"
+    REPO_NAME="${REL%%/*}"
+else
+    REPO_NAME=$(basename "$CURRENT_ROOT")
+fi
+WORKSPACE_BASE="$HOME/jj-workspaces/$REPO_NAME"
+mkdir -p "$WORKSPACE_BASE"
+
+if [[ "$SELECTED_BOOKMARK" == "new bookmark" ]]; then
+    read -rp "New bookmark name: " BOOKMARK_NAME
+    [[ -z "$BOOKMARK_NAME" ]] && exit 1
+
+    TR_NAME="$(echo "$BOOKMARK_NAME" | tr '/' '_')"
+    WORKSPACE_PATH="$WORKSPACE_BASE/$TR_NAME"
+    WINDOW_NAME="workspace/$TR_NAME"
+
+    if [ ! -d "$WORKSPACE_PATH" ]; then
+        jj workspace add --name "$TR_NAME" "$WORKSPACE_PATH"
+        jj -R "$WORKSPACE_PATH" bookmark create "$BOOKMARK_NAME"
+    fi
+else
+    BOOKMARK_NAME="$SELECTED_BOOKMARK"
+
+    TR_NAME="$(echo "$BOOKMARK_NAME" | tr '/' '_')"
+    WORKSPACE_PATH="$WORKSPACE_BASE/$TR_NAME"
+    WINDOW_NAME="workspace/$TR_NAME"
+
+    if [ ! -d "$WORKSPACE_PATH" ]; then
+        jj workspace add --name "$TR_NAME" "$WORKSPACE_PATH" -r "$BOOKMARK_NAME"
+    fi
+fi
+
+if [ -d "$WORKSPACE_PATH" ]; then
+    if tmux list-windows -F "#{window_name}" | grep -q "^${WINDOW_NAME}$"; then
+        tmux select-window -t "$WINDOW_NAME"
+        exit 0
+    fi
+fi
+
+if tmux list-windows -F "#{window_name}" | grep -qx "$WINDOW_NAME"; then
+    tmux select-window -t "$WINDOW_NAME"
+else
+    tmux neww -n "$WINDOW_NAME" bash -c "cd '$WORKSPACE_PATH'; exec \$SHELL"
+fi

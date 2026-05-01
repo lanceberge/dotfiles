@@ -5,7 +5,7 @@
 set -euo pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || {
-    tmux display-message "worktree_select: not in a git repo"
+    tmux display-message "git_workspace_find: not in a git repo"
     exit 1
 }
 
@@ -13,14 +13,14 @@ REPO_NAME=$(basename "$REPO_ROOT")
 WORKTREE_BASE="$HOME/worktrees/$REPO_NAME"
 
 if [ ! -d "$WORKTREE_BASE" ]; then
-    tmux display-message "worktree_select: no worktrees found at $WORKTREE_BASE"
+    tmux display-message "git_workspace_find: no worktrees found at $WORKTREE_BASE"
     exit 1
 fi
 
 WORKTREES=($(find "$WORKTREE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;))
 
 if [ ${#WORKTREES[@]} -eq 0 ]; then
-    tmux display-message "worktree_select: no worktrees found in $WORKTREE_BASE"
+    tmux display-message "git_workspace_find: no worktrees found in $WORKTREE_BASE"
     exit 1
 fi
 

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Opens an existing jj workspace in ~/jj-workspaces/${REPO_NAME}/${NAME}
+# and a new tmux pane named workspace/${NAME}
+
+set -euo pipefail
+
+CURRENT_ROOT=$(jj root 2>/dev/null) || {
+    tmux display-message "jj_workspace_find: not in a jj repo"
+    exit 1
+}
+
+if [[ "$CURRENT_ROOT" == "$HOME/jj-workspaces/"* ]]; then
+    REL="${CURRENT_ROOT#"$HOME"/jj-workspaces/}"
+    REPO_NAME="${REL%%/*}"
+else
+    REPO_NAME=$(basename "$CURRENT_ROOT")
+fi
+WORKSPACE_BASE="$HOME/jj-workspaces/$REPO_NAME"
+
+if [ ! -d "$WORKSPACE_BASE" ]; then
+    tmux display-message "jj_workspace_find: no workspaces found at $WORKSPACE_BASE"
+    exit 1
+fi
+
+WORKSPACES=($(find "$WORKSPACE_BASE" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;))
+
+if [ ${#WORKSPACES[@]} -eq 0 ]; then
+    tmux display-message "jj_workspace_find: no workspaces found in $WORKSPACE_BASE"
+    exit 1
+fi
+
+SELECTED=$(printf "%s\n" "${WORKSPACES[@]}" | fzf)
+
+[[ -z "$SELECTED" ]] && exit 0
+
+WORKSPACE_PATH="$WORKSPACE_BASE/$SELECTED"
+WINDOW_NAME="workspace/$(echo "$SELECTED" | tr '/' '_')"
+
+if tmux list-windows -F "#{window_name}" | grep -qx "$WINDOW_NAME"; then
+    tmux select-window -t "$WINDOW_NAME"
+else
+    tmux neww -n "$WINDOW_NAME" bash -c "cd '$WORKSPACE_PATH'; exec \$SHELL"
+fi
