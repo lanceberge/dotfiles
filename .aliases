@@ -5,7 +5,7 @@ alias v='nvim'
 alias s='sudo'
 alias jn="jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''"
 alias jl="jupyter lab"
-
+alias j='jj'
 # Navigation
 alias cddf='cd ~/dotfiles'
 alias dfc='cd ~/dotfiles/.config'

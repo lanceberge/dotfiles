@@ -15,7 +15,6 @@ push = "origin"
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
-tp = ["util", "exec", "--", "sh", "-c", "jj bookmark move --from 'heads(::@- & bookmarks())' --to @- && jj git push"]
 b = ["bookmark"]
 bl = ["bookmark", "list"]
 bs = ["bookmark", "set"]
@@ -25,7 +24,7 @@ l = ["log"]
 lag = ["log", "-r", "all()"]
 d = ["diff"]
 
-de = ["describe"]
+dm = ["describe", "-m"]
 
 n = ["new"]
 co = ["edit"]

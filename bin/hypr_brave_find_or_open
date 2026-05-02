@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Focus an existing brave window whose active tab title matches a pattern,
+# or switch to the given workspace and open the URL in brave.
+# Usage: hypr_brave_find_or_open <url> <workspace> [title-pattern]
+# If title-pattern is omitted, it's derived from the URL host (e.g. claude.com -> claude).
+
+set -euo pipefail
+
+URL="${1:?usage: hypr_brave_find_or_open <url> <workspace> [title-pattern]}"
+WORKSPACE="${2:?usage: hypr_brave_find_or_open <url> <workspace> [title-pattern]}"
+PATTERN="${3:-}"
+
+if [ -z "$PATTERN" ]; then
+    HOST=$(echo "$URL" | sed -E 's#^https?://##; s#/.*##')
+    PATTERN="${HOST%%.*}"
+fi
+
+ADDR=$(hyprctl clients -j \
+    | jq -r --arg p "$PATTERN" '.[]|select(.class=="brave-browser" and (.title|test($p;"i")))|.address' \
+    | head -1)
+
+if [ -n "$ADDR" ]; then
+    hyprctl dispatch focuswindow "address:$ADDR"
+else
+    hyprctl dispatch workspace "$WORKSPACE"
+    brave "$URL" &
+fi
