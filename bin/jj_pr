@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    echo "Usage: jj_pr -b <branch_name> [-r rev] [gh pr create flags]" >&2
+}
+
+REV="@-"
+BRANCH_NAME=""
+GH_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+    -b)
+        if [[ $# -lt 2 ]]; then
+            usage
+            exit 1
+        fi
+        BRANCH_NAME="$2"
+        shift 2
+        ;;
+    -r)
+        if [[ $# -lt 2 ]]; then
+            usage
+            exit 1
+        fi
+        REV="$2"
+        shift 2
+        ;;
+    -h | --help)
+        usage
+        exit 0
+        ;;
+    --)
+        shift
+        GH_ARGS+=("$@")
+        break
+        ;;
+    *)
+        GH_ARGS+=("$1")
+        shift
+        ;;
+    esac
+done
+
+if [[ -z "$BRANCH_NAME" ]]; then
+    usage
+    exit 1
+fi
+
+jj bookmark set "$BRANCH_NAME" -r "$REV"
+jj git push --bookmark "$BRANCH_NAME"
+alias gha='unset GH_TOKEN && cat ~/secrets/gh_token | base64 -d | gh auth login --with-token'
+gh pr create --head "$BRANCH_NAME" "${GH_ARGS[@]}"

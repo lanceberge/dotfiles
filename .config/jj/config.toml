@@ -7,7 +7,7 @@ bookmark-advance-to = "@-"
 
 [ui]
 editor = "emacsclient -t"
-default-command = "log"
+default-command = "status"
 diff-editor = ":builtin"
 pager = "less -FRX"
 conflict-marker-style = "git"
@@ -17,7 +17,7 @@ fetch = ["origin"]
 push = "origin"
 
 [aliases]
-ba = ["bookmark advance"]
+ba = ["bookmark", "advance"]
 b = ["bookmark"]
 bl = ["bookmark", "list"]
 bs = ["bookmark", "set"]
@@ -25,10 +25,10 @@ bd = ["bookmark", "delete"]
 
 l = ["log"]
 s = ["squash"]
-lag = ["log", "-r", "all()"]
+si = ["squash", "--ignore-immutable"]
 d = ["diff"]
 
-dm = ["describe", "-m"]
+m = ["describe", "-m"]
 
 n = ["new"]
 co = ["edit"]
