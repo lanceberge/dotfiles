@@ -7,13 +7,16 @@
 }
 
 #workspaces {
-  margin-left: 7px;
+  padding-top: 10px;
+  margin-left: 0;
 }
 
 #workspaces button {
   all: initial;
-  padding: 2px 6px;
-  margin-right: 3px;
+  min-width: 34px;
+  min-height: 18px;
+  padding: 2px 0;
+  margin-right: 0;
 }
 
 #custom-dropbox,
@@ -22,10 +25,35 @@
 #battery,
 #network,
 #bluetooth,
+#pulseaudio {
+  padding-top: 6px;
+}
+#custom-clock-hour,
+#custom-clock-separator,
+#custom-clock-minute {
+  min-width: 34px;
+  margin-right: 0;
+  padding: 0;
+}
+
+#custom-clock-separator {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+#battery {
+  min-width: 34px;
+  margin-right: 0;
+  padding-top: 6px;
+  padding-bottom: 10px;
+}
+
+#network,
 #pulseaudio,
-#clock {
-  min-width: 12px;
-  margin-right: 13px;
+#power-profiles-daemon,
+#bluetooth {
+  min-width: 34px;
+  margin-right: 0;
 }
 
 tooltip {
