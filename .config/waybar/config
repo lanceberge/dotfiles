@@ -74,13 +74,16 @@
         "on-click": "alacritty -e nmtui"
     },
     "battery": {
-        "format": "{capacity}%",
-        "format-discharging": "{capacity}%",
-        "format-charging": "{capacity}%",
+        "format": "{icon}",
+        "format-charging": "{icon}",
         "format-plugged": "",
         "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
         "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
         "interval": 5,
+        "format-icons": {
+            "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+            "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        },
         "states": {
             "warning": 20,
             "critical": 10
