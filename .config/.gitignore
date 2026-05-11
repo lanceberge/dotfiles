@@ -19,3 +19,6 @@
 !wofi/
 !pycodestyle
 !jj/config.toml
+!codex/
+!codex/rules
+!codex/rules/default.rules
