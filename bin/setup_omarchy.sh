@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-packages=(
+uninstall_packages=(
     1password-beta
     1password-cli
     aether
     cliamp
     kdenlive
     lazydocker
+    lazygit
     libreoffice-fresh
     localsend
     obsidian
@@ -34,7 +35,7 @@ desktop_entries=(
     "$HOME/.local/share/applications/X.desktop"
 )
 
-sudo pacman -Rns "${packages[@]}"
+sudo pacman -Rns "${uninstall_packages[@]}"
 rm -f "${desktop_entries[@]}"
 
 mkdir -p ~/.local/bin
@@ -42,11 +43,25 @@ gh release download nightly --pattern 'expert_linux_amd64' --repo expert-lsp/exp
 chmod +x ~/.local/bin/expert_linux_amd64
 
 install_packages=(
+    "bun"
     "elixir"
     "erlang-public_key"
     "erlang-ssl"
+    "inotify-tools"
+    "postgresql"
     "shfmt"
     "jujutsu"
 )
 sudo pacman -S "${install_packages[@]}"
 rm ~/.local/share/omarchy/default/hypr/bindings/tiling-v2.conf
+
+aur_install_packages=(
+    "watchman-bin"
+)
+
+yay -S "${aur_install_packages[@]}"
+
+# setup postgres
+sudo -iu postgres initdb -D /var/lib/postgres/data
+sudo systemctl enable --now postgresql
+sudo -iu postgres createuser --superuser lance

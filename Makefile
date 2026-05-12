@@ -16,28 +16,28 @@ endif
 
 clones:
 	git clone git@github.com:lanceberge/.emacs.d.git ~/.emacs.d
-	git clone git@github.com:lanceberge/org.git      ~/org
+	git clone git@github.com:lanceberge/org.git ~/org
 	git clone git@github.com:lanceberge/roam-private.git ~/org-roam
-	git clone git@github.com:lanceberge/org-roam.git    ~/org-roam/public
-	git clone git@github.com:lanceberge/scripts.git  ~/code/scripts
-	git clone git@github.com:lanceberge/secrets.git  ~/code/secrets
+	git clone git@github.com:lanceberge/org-roam.git ~/org-roam/public
+	git clone git@github.com:lanceberge/scripts.git ~/code/scripts
+	git clone git@github.com:lanceberge/secrets.git ~/code/secrets
 
 
 # TODO use GNU stow
 symlinks:
-	ln -sf ~/dotfiles/.zshrc              ~/.zshrc
-	ln -sf ~/dotfiles/.gitconfig          ~/.gitconfig
-	ln -sf ~/dotfiles/.bashrc             ~/.bashrc
-	ln -sf ~/dotfiles/.bash_profile       ~/.bash_profile
-	ln -sf ~/dotfiles/.zshenv             ~/.zshenv
+	ln -sf ~/dotfiles/.zshrc ~/.zshrc
+	ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
+	ln -sf ~/dotfiles/.bashrc ~/.bashrc
+	ln -sf ~/dotfiles/.bash_profile ~/.bash_profile
+	ln -sf ~/dotfiles/.zshenv ~/.zshenv
 	ln -sf ~/dotfiles/.vimrc ~/.vimrc
-	ln -sf ~/dotfiles/.config             ~/.config
-	ln -sf ~/dotfiles/.osx                ~/.osx
-	ln -sf ~/dotfiles/.tmux.conf          ~/.tmux.conf
-	ln -sf ~/dotfiles/.ideavimrc          ~/.ideavimrc
-	ln -sf ~/secrets/.authinfo            ~/.authinfo
+	ln -sf ~/dotfiles/.config ~/.config
+	ln -sf ~/dotfiles/.osx ~/.osx
+	ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
+	ln -sf ~/dotfiles/.ideavimrc ~/.ideavimrc
+	ln -sf ~/secrets/.authinfo ~/.authinfo
 	ln -sf ~/dotfiles/.claude/settings.json ~/.claude/settings.json
-	ln -sf ~/dotfiles/.claude/hooks         ~/.claude/hooks
+	ln -sf ~/dotfiles/.claude/hooks ~/.claude/hooks
 	mkdir -p ~/.config && ln -sfn ~/dotfiles/.config/jj ~/.config/jj
 
 
