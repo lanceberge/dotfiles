@@ -1,5 +1,5 @@
 {
-    "output": ["eDP-1", "HDMI-A-2"],
+    "output": ["eDP-1", "HDMI-A-2", "DP-2"],
     "layer": "top",
     "position": "left",
     "spacing": 0,
@@ -69,7 +69,6 @@
         "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
         "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
-        "interval": 3,
         "nospacing": 1,
         "on-click": "alacritty -e nmtui"
     },

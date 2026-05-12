@@ -16,6 +16,7 @@
 !sxhkd/
 !tmux-sessionizer/
 !waybar/
+!waybar/config.jsonc
 !wofi/
 !pycodestyle
 !jj/config.toml
