@@ -45,17 +45,22 @@ setopt prompt_subst
 prompt='%F{109}%2~$(prompt_jj)%F{brightwhite} %b# '
 PS2='> '
 
-export ZSH="$HOME/.oh-my-zsh"
+if [ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
+    export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    # vi-mode
-    git
-)
+    plugins=(
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+    )
 
-if [ -f $ZSH/oh-my-zsh.sh ]; then
-    source $ZSH/oh-my-zsh.sh
+    source "$ZSH/oh-my-zsh.sh"
+else
+    for file in \
+        /usr/share/zsh/plugins/zsh-autosuggestions/*.zsh \
+        /usr/share/zsh/plugins/zsh-syntax-highlighting/*.zsh
+    do
+        [ -f "$file" ] && source "$file"
+    done
 fi
 
 # bindkey '^K' autosuggest-accept
@@ -88,7 +93,7 @@ if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
 fi
 
 # Set up autocompletions
-complete -C aws_completer aws
+# complete -C aws_completer aws
 
 # PHP
 export PATH="/Users/lance/.config/herd-lite/bin:$PATH"
