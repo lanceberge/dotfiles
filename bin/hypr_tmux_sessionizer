@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    echo "Usage: hypr_tmux_sessionizer <directory>" >&2
+}
+
+die() {
+    echo "hypr_tmux_sessionizer: $*" >&2
+    exit 1
+}
+
+require_cmd() {
+    command -v "$1" >/dev/null 2>&1 || die "$1 is not installed"
+}
+
+hydrate() {
+    local session_name="$1"
+    local dir="$2"
+
+    if [ -f "$dir/.tmux-sessionizer" ]; then
+        tmux send-keys -t "$session_name" "source $(printf "%q" "$dir/.tmux-sessionizer")" c-M
+    elif [ -f "$HOME/.tmux-sessionizer" ]; then
+        tmux send-keys -t "$session_name" "source $HOME/.tmux-sessionizer" c-M
+    fi
+}
+
+has_session() {
+    local session_name="$1"
+    tmux list-sessions -F "#{session_name}" 2>/dev/null | grep -Fxq "$session_name"
+}
+
+descendant_tmux_client_tty() {
+    local root_pid="$1"
+    local ps_output
+    local changed=1
+    declare -A seen=()
+
+    ps_output=$(ps -eo pid=,ppid=,tty=,args=)
+    seen["$root_pid"]=1
+
+    while [ "$changed" -eq 1 ]; do
+        changed=0
+        while read -r pid ppid tty args; do
+            [ -n "${pid:-}" ] || continue
+            if [ -z "${seen[$pid]+x}" ] && [ -n "${seen[$ppid]+x}" ]; then
+                seen["$pid"]=1
+                changed=1
+            fi
+        done <<<"$ps_output"
+    done
+
+    while read -r pid _ppid tty args; do
+        [ -n "${pid:-}" ] || continue
+        if [ -n "${seen[$pid]+x}" ] && [[ "$args" == tmux* ]] && [ "$tty" != "?" ]; then
+            printf "/dev/%s\n" "$tty"
+            return 0
+        fi
+    done <<<"$ps_output"
+
+    return 1
+}
+
+[ "$#" -eq 1 ] || {
+    usage
+    exit 2
+}
+
+require_cmd hyprctl
+require_cmd jq
+require_cmd tmux
+
+target_dir="$1"
+if [[ "$target_dir" == "~" ]]; then
+    target_dir="$HOME"
+elif [[ "$target_dir" == "~/"* ]]; then
+    target_dir="$HOME/${target_dir#"~/"}"
+fi
+
+[ -d "$target_dir" ] || die "directory does not exist: $target_dir"
+target_dir="$(cd "$target_dir" && pwd -P)"
+session_name="$(basename "$target_dir" | tr . _)"
+
+client_info="$(
+    hyprctl clients -j |
+        jq -r 'first(.[] | select(.class == "Alacritty" and .workspace.id == 1) | "\(.address) \(.pid)") // empty'
+)"
+
+[ -n "$client_info" ] || die "no Alacritty window found on Hyprland workspace 1"
+
+read -r alacritty_addr alacritty_pid <<<"$client_info"
+client_tty="$(descendant_tmux_client_tty "$alacritty_pid")" ||
+    die "workspace-1 Alacritty is not running a tmux client"
+
+if ! tmux list-clients -F "#{client_tty}" 2>/dev/null | grep -Fxq "$client_tty"; then
+    die "no tmux client found for $client_tty"
+fi
+
+if ! has_session "$session_name"; then
+    tmux new-session -ds "$session_name" -c "$target_dir"
+    hydrate "$session_name" "$target_dir"
+fi
+
+hyprctl dispatch focuswindow "address:$alacritty_addr" >/dev/null
+tmux switch-client -c "$client_tty" -t "$session_name"

@@ -2,7 +2,11 @@
 set -euo pipefail
 
 usage() {
-    echo "Usage: jj_pr -b <branch_name> [-r rev] [gh pr create flags]" >&2
+    echo "Usage: jj_pr [-b branch_name] [-r rev] [gh pr create flags]" >&2
+}
+
+script_dir() {
+    cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd
 }
 
 REV="@-"
@@ -44,8 +48,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$BRANCH_NAME" ]]; then
-    usage
-    exit 1
+    DEFAULT_BRANCH_NAME=$("$(script_dir)/jj_latest_bookmark")
+    read -rp "Branch name [$DEFAULT_BRANCH_NAME]: " BRANCH_NAME
+    BRANCH_NAME="${BRANCH_NAME:-$DEFAULT_BRANCH_NAME}"
 fi
 
 jj bookmark set "$BRANCH_NAME" -r "$REV"

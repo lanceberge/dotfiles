@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+NEAREST_BOOKMARK_REVSET='heads(::@- & bookmarks())'
+
+mapfile -t BOOKMARKS < <(
+    jj log -r "$NEAREST_BOOKMARK_REVSET" --no-graph \
+        -T 'bookmarks.map(|b| b.name()).join("\n") ++ "\n"'
+)
+
+if [[ ${#BOOKMARKS[@]} -eq 0 || -z "${BOOKMARKS[0]}" ]]; then
+    echo "jj_latest_bookmark: no bookmark found with revset: $NEAREST_BOOKMARK_REVSET" >&2
+    exit 1
+fi
+
+if [[ ${#BOOKMARKS[@]} -gt 1 ]]; then
+    echo "jj_latest_bookmark: multiple nearest bookmarks found:" >&2
+    printf '  %s\n' "${BOOKMARKS[@]}" >&2
+    exit 1
+fi
+
+printf '%s\n' "${BOOKMARKS[0]}"
