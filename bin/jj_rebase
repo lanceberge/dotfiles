@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NEAREST_BOOKMARK_REVSET='heads(::@- & bookmarks())'
-
 usage() {
     echo "Usage: jj_rebase [-d destination] [jj rebase flags]" >&2
+}
+
+script_dir() {
+    cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd
 }
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
@@ -63,23 +65,9 @@ if [[ -z "$DESTINATION" ]]; then
     DESTINATION=$(default_destination)
 fi
 
-mapfile -t BOOKMARKS < <(
-    jj log -r "$NEAREST_BOOKMARK_REVSET" --no-graph \
-        -T 'bookmarks.map(|b| b.name()).join("\n") ++ "\n"'
-)
+BOOKMARK=$("$(script_dir)/jj_latest_bookmark")
 
-if [[ ${#BOOKMARKS[@]} -eq 0 || -z "${BOOKMARKS[0]}" ]]; then
-    echo "jj_rebase: no bookmark found with revset: $NEAREST_BOOKMARK_REVSET" >&2
-    exit 1
-fi
-
-if [[ ${#BOOKMARKS[@]} -gt 1 ]]; then
-    echo "jj_rebase: multiple nearest bookmarks found:" >&2
-    printf '  %s\n' "${BOOKMARKS[@]}" >&2
-    exit 1
-fi
-
-CMD=(jj rebase -b "${BOOKMARKS[0]}" -d "$DESTINATION" "${REBASE_ARGS[@]}")
+CMD=(jj rebase -b "$BOOKMARK" -d "$DESTINATION" "${REBASE_ARGS[@]}")
 
 printf "run"
 printf " %q" "${CMD[@]}"

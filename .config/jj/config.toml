@@ -24,23 +24,20 @@ bs = ["bookmark", "set"]
 bd = ["bookmark", "delete"]
 
 l = ["log"]
+la = ["log", "-r", "ancestors(@)"]
 s = ["squash"]
 si = ["squash", "--ignore-immutable"]
 d = ["diff"]
-
-m = ["describe", "-m"]
-
+a = ["absorb"]
 n = ["new"]
 c = ["util", "exec", "--", "sh", "-c", "jj commit -m \"$*\" && jj new && jj bookmark advance", ""]
 e = ["edit"]
-
 r = ["rebase"]
-
 ab = ["abandon"]
 u = ["undo"]
-
 p = ["git", "push"]
 f = ["git", "fetch"]
+m = ["describe", "-m"]
 
-# [templates]
-# commit_trailers = TODO
+t = ["tag"]
+tr = ["tag", "list", "--sort", "author-date-"]
