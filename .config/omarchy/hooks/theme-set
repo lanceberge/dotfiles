@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  exit 0
+fi
+
+emacsclient --eval "(+themes-load-omarchy-theme \"$1\")" >/dev/null 2>&1 || true
+
+colors_file="$HOME/.config/omarchy/current/theme/colors.toml"
+
+color_value() {
+  local key=$1
+  awk -F'"' -v key="$key" '$1 ~ "^" key "[[:space:]]*=" { print $2; exit }' "$colors_file"
+}
+
+if [[ -f $colors_file ]] && command -v tmux >/dev/null 2>&1 && tmux list-clients >/dev/null 2>&1; then
+  foreground=$(color_value foreground)
+  background=$(color_value background)
+
+  if [[ $foreground == \#?????? && $background == \#?????? ]]; then
+    tmux set-option -g window-style "fg=$foreground,bg=$background" >/dev/null 2>&1 || true
+    tmux set-option -g window-active-style "fg=$foreground,bg=$background" >/dev/null 2>&1 || true
+  fi
+fi
