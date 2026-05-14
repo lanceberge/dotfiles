@@ -5,6 +5,10 @@ export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
 export FZF_DEFAULT_OPTS="--bind 'ctrl-k:kill-line'"
 
+if [ -f "$HOME/.config/omarchy/current/theme/prompt-colors.sh" ]; then
+    source "$HOME/.config/omarchy/current/theme/prompt-colors.sh"
+fi
+
 export HISTFILE=~/.bash_history
 export HISTSIZE=30000
 export HISTFILESIZE=30000
@@ -87,10 +91,10 @@ prompt_jj() {
 
     local s=""
     if [ -n "$bm" ]; then
-        s="%F{208}on %F{106}${bm}"
+        s="%F{${OMARCHY_PROMPT_ACCENT:-#e68e0d}}on %F{${OMARCHY_PROMPT_BRANCH:-#ffc107}}${bm}"
         [ "$count" -gt 0 ] && s="${s}+${count}"
     fi
-    [ -n "$flags" ] && s="${s:+$s }%F{160}[${flags}]"
+    [ -n "$flags" ] && s="${s:+$s }%F{${OMARCHY_PROMPT_WARNING:-#d35f5f}}[${flags}]"
     [ -n "$s" ] && printf ' %s' "$s"
 }
 

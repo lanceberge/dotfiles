@@ -47,6 +47,7 @@ install_packages=(
     "elixir"
     "erlang-public_key"
     "erlang-ssl"
+    "extra/bash-language-server"
     "inotify-tools"
     "postgresql"
     "shfmt"
@@ -65,3 +66,19 @@ yay -S "${aur_install_packages[@]}"
 sudo -iu postgres initdb -D /var/lib/postgres/data
 sudo systemctl enable --now postgresql
 sudo -iu postgres createuser --superuser lance
+
+mkdir -p "$HOME/.local/share/themes"
+ln -sfn "$HOME/dotfiles/.config/gtk-key-themes/EmacsNoCtrlW" "$HOME/.local/share/themes/EmacsNoCtrlW"
+gsettings set org.gnome.desktop.interface gtk-key-theme 'EmacsNoCtrlW'
+
+mkdir -p "$HOME/.config/omarchy/hooks"
+ln -sfn "$HOME/dotfiles/.config/omarchy/hooks/theme-set" "$HOME/.config/omarchy/hooks/theme-set"
+
+mkdir -p "$HOME/.config/omarchy/themed"
+ln -sfn "$HOME/dotfiles/.config/omarchy/themed/prompt-colors.sh.tpl" "$HOME/.config/omarchy/themed/prompt-colors.sh.tpl"
+
+mkdir -p "$HOME/.config/omarchy/themes"
+ln -sfn "$HOME/dotfiles/.config/omarchy/themes/matte-black" "$HOME/.config/omarchy/themes/matte-black"
+
+mkdir -p "$HOME/.local/state/omarchy/toggles"
+touch "$HOME/.local/state/omarchy/toggles/screensaver-off"

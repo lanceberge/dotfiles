@@ -29,6 +29,8 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 _comp_options+=(globdots) # include dotfiles
+compinit
+source <(jj util completion zsh)
 
 # Vim keys in tab complete menu
 bindkey -M menuselect 'h' vi-backward-char
@@ -42,7 +44,7 @@ bindkey '^R' history-incremental-search-backward
 export TERM=xterm-256color
 
 setopt prompt_subst
-prompt='%F{109}%2~$(prompt_jj)%F{brightwhite} %b# '
+prompt='%F{${OMARCHY_PROMPT_ACCENT:-#e68e0d}}%2~$(prompt_jj)%F{${OMARCHY_PROMPT_FOREGROUND:-#bebebe}} %b# '
 PS2='> '
 
 if [ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
