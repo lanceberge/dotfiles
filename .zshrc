@@ -6,10 +6,16 @@ setopt autocd # change dir without typing cd
 export XDG_CONFIG_HOME=$HOME/dotfiles/.config
 
 # History
-unsetopt EXTENDED_HISTORY
-setopt SHARE_HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
 setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 DISABLE_AUTOUPDATE=false
 
