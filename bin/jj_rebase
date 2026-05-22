@@ -15,10 +15,10 @@ if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
 fi
 
 default_destination() {
-    local git_head
-    git_head=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)
+    local git_trunk
+    git_trunk=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)
 
-    git_head=$(echo $git_head | sed 's#origin/##')
+    git_trunk=$(echo $git_trunk | sed 's#origin/##')
     local bookmarks
     bookmarks=$(jj bookmark list -T 'name ++ "\n"')
 
@@ -62,23 +62,32 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$DESTINATION" ]]; then
-    DESTINATION=$(default_destination)
-fi
+    TRUNK_DESTINATION=$(default_destination)
+    BOOKMARK=$("$(script_dir)/jj_latest_bookmark")
+    CURRENT_REMOTE_DESTINATION="$BOOKMARK@origin"
 
-BOOKMARK=$("$(script_dir)/jj_latest_bookmark")
+    printf "rebase %s on:\n" "$BOOKMARK"
+    printf "1. %s (default)\n" "$TRUNK_DESTINATION"
+    printf "2. %s\n" "$CURRENT_REMOTE_DESTINATION"
+    printf "> "
+    read -r DESTINATION_CHOICE
+
+    case "$DESTINATION_CHOICE" in
+    "" | 1)
+        DESTINATION="$TRUNK_DESTINATION"
+        ;;
+    2)
+        DESTINATION="$CURRENT_REMOTE_DESTINATION"
+        ;;
+    *)
+        echo "jj_rebase: invalid destination choice: $DESTINATION_CHOICE" >&2
+        exit 1
+        ;;
+    esac
+else
+    BOOKMARK=$("$(script_dir)/jj_latest_bookmark")
+fi
 
 CMD=(jj rebase -b "$BOOKMARK" -d "$DESTINATION" "${REBASE_ARGS[@]}")
 
-printf "run"
-printf " %q" "${CMD[@]}"
-printf "? [y/N] "
-read -r CONFIRM
-
-case "$CONFIRM" in
-y | Y | yes | YES)
-    exec "${CMD[@]}"
-    ;;
-*)
-    exit 0
-    ;;
-esac
+exec "${CMD[@]}"
