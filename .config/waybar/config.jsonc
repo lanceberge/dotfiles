@@ -70,7 +70,7 @@
         "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
         "nospacing": 1,
-        "on-click": "alacritty -e nmtui"
+        "on-click": "omarchy-launch-wifi"
     },
     "battery": {
         "format": "{icon}",
