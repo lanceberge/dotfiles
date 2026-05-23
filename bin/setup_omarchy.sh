@@ -67,9 +67,7 @@ sudo -iu postgres initdb -D /var/lib/postgres/data
 sudo systemctl enable --now postgresql
 sudo -iu postgres createuser --superuser lance
 
-mkdir -p "$HOME/.local/share/themes"
-ln -sfn "$HOME/dotfiles/.config/gtk-key-themes/EmacsNoCtrlW" "$HOME/.local/share/themes/EmacsNoCtrlW"
-gsettings set org.gnome.desktop.interface gtk-key-theme 'EmacsNoCtrlW'
+XDG_CONFIG_HOME="$HOME/.config" gsettings set org.gnome.desktop.interface gtk-key-theme 'Emacs'
 
 mkdir -p "$HOME/.config/omarchy/hooks"
 ln -sfn "$HOME/dotfiles/.config/omarchy/hooks/theme-set" "$HOME/.config/omarchy/hooks/theme-set"
