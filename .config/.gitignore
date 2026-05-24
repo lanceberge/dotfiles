@@ -1,7 +1,7 @@
 # Exclude everything by default
 *
 
-
+# Then include
 !.gitignore
 !.opencode/
 !bspwm/

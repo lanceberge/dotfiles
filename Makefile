@@ -28,11 +28,9 @@ symlinks:
 	ln -sf ~/dotfiles/.zshrc ~/.zshrc
 	ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
 	ln -sf ~/dotfiles/.bashrc ~/.bashrc
-	ln -sf ~/dotfiles/.bash_profile ~/.bash_profile
-	ln -sf ~/dotfiles/.zshenv ~/.zshenv
+	ln -sf ~/dotfiles/.bashrc ~/.bash_profile
 	ln -sf ~/dotfiles/.vimrc ~/.vimrc
 	ln -sf ~/dotfiles/.config ~/.config
-	ln -sf ~/dotfiles/.osx ~/.osx
 	ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 	ln -sf ~/dotfiles/.ideavimrc ~/.ideavimrc
 	ln -sf ~/secrets/.authinfo ~/.authinfo

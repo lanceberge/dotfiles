@@ -22,6 +22,7 @@ b = ["bookmark"]
 bl = ["bookmark", "list"]
 bs = ["bookmark", "set"]
 bd = ["bookmark", "delete"]
+my_bookmarks = ["bookmark", "list", "-r", "mine()", "--sort", "committer-date-"]
 
 l = ["log"]
 la = ["log", "-r", "ancestors(@)"]
