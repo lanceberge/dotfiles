@@ -1,10 +1,11 @@
+;; Emacs setup w/ no plugins -- i use this in the terminal only
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode  -1)
+(scroll-bar-mode -1)
 
 (setq make-backup-files nil
-      auto-save-default nil
-      create-lockfiles nil)
+ auto-save-default nil
+ create-lockfiles nil)
 
 (setq
  inhibit-startup-screen t
@@ -27,7 +28,7 @@
 (column-number-mode 1)
 
 (set-language-environment "UTF-8")
-(prefer-coding-system       'utf-8-unix)
+(prefer-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
 (set-terminal-coding-system 'utf-8-unix)
 (set-keyboard-coding-system 'utf-8-unix)
@@ -38,27 +39,27 @@
 (recentf-mode)
 
 (setq ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length -1
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-default-buffer-method 'selected-window
-      ido-confirm-unique-completion nil
-      ido-use-faces t)
+ ido-auto-merge-work-directories-length -1
+ ido-use-filename-at-point 'guess
+ ido-use-virtual-buffers t
+ ido-default-buffer-method 'selected-window
+ ido-confirm-unique-completion nil
+ ido-use-faces t)
 
 (setq ido-vertical-define-keys 'C-n-C-p-up-and-down
-      ido-vertical-show-count t)
+ ido-vertical-show-count t)
 
 (setq completion-cycle-threshold 3
-      completions-detailed t
-      completions-format 'one-column
-      completions-header-format nil
-      completions-max-height 15)
+ completions-detailed t
+ completions-format 'one-column
+ completions-header-format nil
+ completions-max-height 15)
 
-(global-set-key (kbd "C-x k")   'kill-this-buffer)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 (defun reload-init-file ()
-  (interactive)
-  (load-file user-init-file))
+ (interactive)
+ (load-file user-init-file))
 (global-set-key (kbd "C-c r") 'reload-init-file)
 
 (global-set-key (kbd "C-c fr") 'recentf)

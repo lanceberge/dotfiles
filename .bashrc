@@ -1,13 +1,13 @@
-# source aliases, prompt, ...
-for file in ~/dotfiles/.{aliases,bash_prompt,local,sharedrc}; do
-    [ -r "$file" ] && [ -f "$file" ] &&
-        source "$file"
+for file in "$HOME"/dotfiles/common_shell_config/*.sh "$HOME"/dotfiles/bash_config/*.sh; do
+    [ -f "$file" ] && source "$file"
 done
-unset file
 
-shopt -s autocd     # change directory without typing cd
+shopt -s autocd # change directory without typing cd
 shopt -s histappend # append to history file
-set -o vi           # vim style keys
 bind -x $'"\C-l":clear;'
-
+export HISTFILE=~/.bash_history
 eval "$(fzf --bash)"
+
+function cd {
+    builtin cd "$@" && ls -F --color=tty
+}

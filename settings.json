@@ -1,8 +1,0 @@
-{
-    "workbench.colorTheme": "GrunBoxTheme",
-    "vim.handleKeys": { "<C-f>": false, 
-    "editor.lineNumbers": "relative",
-    "git.suggestSmartCommit": false,
-    "explorer.confirmDelete": false,
-    "window.zoomLevel": 1
-}
