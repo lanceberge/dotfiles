@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
+__omarchy_source_prompt_colors() {
+    local colors_file="$HOME/.config/omarchy/current/theme/prompt-colors.sh"
+
+    [ -f "$colors_file" ] && source "$colors_file"
+}
+
+__omarchy_register_prompt_shell() {
+    local state_dir="${XDG_RUNTIME_DIR:-/tmp}/omarchy"
+    local state_file="$state_dir/prompt-shells"
+
+    mkdir -p "$state_dir"
+    printf '%s\t%s\n' "$$" zsh >>"$state_file"
+}
+
+TRAPUSR1() {
+    __omarchy_source_prompt_colors
+    zle reset-prompt 2>/dev/null || true
+}
+
 prompt_jj() {
     command -v jj >/dev/null 2>&1 || return
     jj root --ignore-working-copy >/dev/null 2>&1 || return
@@ -27,5 +46,11 @@ prompt_jj() {
     [ -n "$s" ] && printf ' %s' "$s"
 }
 
+__omarchy_source_prompt_colors
+
+if [[ -o interactive ]]; then
+    __omarchy_register_prompt_shell
+fi
+
 setopt prompt_subst
-prompt='%F{${OMARCHY_PROMPT_ACCENT:-#e68e0d}}%2~$(prompt_jj)%F{${OMARCHY_PROMPT_FOREGROUND:-#bebebe}} %b# '
+prompt='$(__omarchy_source_prompt_colors)%F{${OMARCHY_PROMPT_ACCENT:-#e68e0d}}%2~$(prompt_jj)%F{${OMARCHY_PROMPT_FOREGROUND:-#bebebe}} %b# '

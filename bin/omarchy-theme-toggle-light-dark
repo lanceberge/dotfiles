@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+light_theme="ochre-light"
+dark_theme="matte-black"
+colors_file="$HOME/.config/omarchy/current/theme/colors.toml"
+theme_name_file="$HOME/.config/omarchy/current/theme.name"
+
+current_background() {
+    awk -F'"' '$1 ~ "^background[[:space:]]*=" { print $2; exit }' "$colors_file"
+}
+
+is_light_mode() {
+    local background hex red green blue luminance
+
+    if [ -f "$colors_file" ]; then
+        background="$(current_background)"
+    fi
+
+    if [[ ${background:-} == \#?????? ]]; then
+        hex="${background#\#}"
+        red=$((16#${hex:0:2}))
+        green=$((16#${hex:2:2}))
+        blue=$((16#${hex:4:2}))
+        luminance=$(((2126 * red + 7152 * green + 722 * blue) / 10000))
+
+        [ "$luminance" -gt 128 ]
+        return
+    fi
+
+    [ -f "$theme_name_file" ] && [[ $(<"$theme_name_file") == *light* ]]
+}
+
+main() {
+    if is_light_mode; then
+        omarchy-theme-set "$dark_theme"
+    else
+        omarchy-theme-set "$light_theme"
+    fi
+}
+
+if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
+    main "$@"
+fi

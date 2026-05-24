@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+__omarchy_source_prompt_colors() {
+    local colors_file="$HOME/.config/omarchy/current/theme/prompt-colors.sh"
+
+    [ -f "$colors_file" ] && source "$colors_file"
+}
+
+__omarchy_register_prompt_shell() {
+    local state_dir="${XDG_RUNTIME_DIR:-/tmp}/omarchy"
+    local state_file="$state_dir/prompt-shells"
+
+    mkdir -p "$state_dir"
+    printf '%s\t%s\n' "$$" bash >>"$state_file"
+}
+
 __prompt_color() {
     local hex="${1#\#}"
     printf '\001\033[38;2;%d;%d;%dm\002' \
@@ -53,4 +67,11 @@ prompt_jj() {
     [ -n "$s" ] && printf ' %s' "$s"
 }
 
-PS1='$(__prompt_color "${OMARCHY_PROMPT_ACCENT:-#e68e0d}")$(__prompt_pwd)$(prompt_jj)$(__prompt_color "${OMARCHY_PROMPT_FOREGROUND:-#bebebe}") # \[\033[0m\]'
+__omarchy_source_prompt_colors
+
+if [[ $- == *i* ]]; then
+    __omarchy_register_prompt_shell
+    trap '__omarchy_source_prompt_colors' USR1
+fi
+
+PS1='$(__omarchy_source_prompt_colors)$(__prompt_color "${OMARCHY_PROMPT_ACCENT:-#e68e0d}")$(__prompt_pwd)$(prompt_jj)$(__prompt_color "${OMARCHY_PROMPT_FOREGROUND:-#bebebe}") # \[\033[0m\]'

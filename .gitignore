@@ -5,3 +5,6 @@ bin/apply_diffs
 bin/create_diffs
 bin/phpactor
 .claude
+zsh_config/zsh-local.sh
+bash_config/bash-local.sh
+common_shell_config/common-local.sh
