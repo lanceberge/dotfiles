@@ -44,11 +44,13 @@ chmod +x ~/.local/bin/expert_linux_amd64
 
 install_packages=(
     "bun"
+    "difftastic"
     "elixir"
     "erlang-public_key"
     "erlang-ssl"
     "extra/bash-language-server"
     "inotify-tools"
+    "pastel"
     "postgresql"
     "shfmt"
     "jujutsu"
@@ -61,6 +63,8 @@ aur_install_packages=(
 )
 
 yay -S "${aur_install_packages[@]}"
+
+omarchy-theme-install https://github.com/bjarneo/omarchy-ochre-light-theme
 
 # setup postgres
 sudo -iu postgres initdb -D /var/lib/postgres/data

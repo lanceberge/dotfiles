@@ -4,6 +4,7 @@ export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
 export FZF_DEFAULT_OPTS="--bind 'ctrl-k:kill-line'"
+export LESS='-R' # preserves colors in inputs
 
 # history
 export HISTSIZE=100000

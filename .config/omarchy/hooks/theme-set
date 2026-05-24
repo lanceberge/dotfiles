@@ -22,3 +22,27 @@ if [[ -f $colors_file ]] && command -v tmux >/dev/null 2>&1 && tmux list-clients
     tmux set-option -g window-active-style "fg=$foreground,bg=$background" >/dev/null 2>&1 || true
   fi
 fi
+
+if [[ -n $BASH_VERSION && -f "$HOME/dotfiles/bash_config/bash_prompt.sh" ]]; then
+  source "$HOME/dotfiles/bash_config/bash_prompt.sh"
+elif [[ -n $ZSH_VERSION && -f "$HOME/dotfiles/zsh_config/zsh_prompt.sh" ]]; then
+  source "$HOME/dotfiles/zsh_config/zsh_prompt.sh"
+fi
+
+prompt_shells_file="${XDG_RUNTIME_DIR:-/tmp}/omarchy/prompt-shells"
+
+# update active shells to reload the prompts w/ new colors
+if [[ -f $prompt_shells_file ]]; then
+  prompt_shells_active="${prompt_shells_file}.active"
+  : >"$prompt_shells_active"
+
+  while IFS=$'\t' read -r prompt_pid prompt_shell; do
+    if [[ $prompt_pid =~ ^[0-9]+$ ]] && [[ $prompt_shell == bash || $prompt_shell == zsh ]] && kill -0 "$prompt_pid" 2>/dev/null; then
+      printf '%s\t%s\n' "$prompt_pid" "$prompt_shell" >>"$prompt_shells_active"
+      kill -USR1 "$prompt_pid" 2>/dev/null || true
+    fi
+  done <"$prompt_shells_file"
+
+  sort -u "$prompt_shells_active" >"$prompt_shells_file"
+  rm -f "$prompt_shells_active"
+fi
