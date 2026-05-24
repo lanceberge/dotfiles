@@ -2,21 +2,19 @@
 
 #--------------------Aliases--------------------
 alias v='nvim'
-alias s='sudo'
 alias jn="jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''"
 alias jl="jupyter lab"
 alias j='jj'
+
 # Navigation
-alias cddf='cd ~/dotfiles'
-alias dfc='cd ~/dotfiles/.config'
+alias cd_df='cd ~/dotfiles'
+alias cdr='cd $(git rev-parse --show-toplevel)' # cd to the git root
+
 alias ..='cd ..'
 alias 2..='cd ../..'
 alias 3..='cd ../../..'
 alias 4..='cd ../../../..'
 alias 5..='cd ../../../../..'
-alias hg='history |grep'
-alias pg='ps aux |grep'
-alias cdr='cd $(git rev-parse --show-toplevel)' # cd to the git root
 
 alias gha='unset GH_TOKEN && cat ~/secrets/gh_token | base64 -d | gh auth login --with-token'
 
@@ -26,6 +24,13 @@ alias ll='ls -lF'
 alias lsa='ls -aF'
 alias la='ls -lAF'
 alias lsd="ls -lF| grep --color=never '^d'"
+
+alias ff='vc_list_files | fzf --preview "bat --style=numbers --color=always {}"'
+
+if command -v eza >/dev/null 2>&1; then
+    alias ls="eza --color=always"
+    alias lt='eza --color=always --tree --level=2 --long --icons --git'
+fi
 
 # Docker
 alias dps='docker ps'
@@ -55,19 +60,5 @@ alias mci='mvn clean install'
 alias hse='helmfile sync -e'
 alias hde='helmfile destroy -e'
 
-function paste() {
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        xclip -o | sed -e "s/$/\n/"
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        pbpaste | sed -e "s/$/\n/"
-    fi
-}
 alias nrs='sudo nixos-rebuild switch --flake ~/.config/nixos'
 alias hrs='home-manager switch --flake ~/.config/nixos#lance'
-
-alias ff='git ls-files | fzf --preview "bat --style=numbers --color=always {}"'
-
-if command -v eza >/dev/null 2>&1; then
-    alias ls="eza --color=always"
-    alias lt='eza --color=always --tree --level=2 --long --icons --git'
-fi

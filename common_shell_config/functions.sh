@@ -118,7 +118,7 @@ function eff() {
     local file
 
     file=$(
-        git ls-files --cached --others --exclude-standard |
+        vc_list_files --cached --others --exclude-standard |
         fzf --exit-0 --preview 'bat --style=numbers --color=always {}'
     ) || return
 
@@ -143,5 +143,13 @@ sb() {
         source ~/.bashrc
     elif [ -n "$ZSH_VERSION" ]; then
         source ~/.zshrc
+    fi
+}
+
+function paste() {
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        xclip -o | sed -e "s/$/\n/"
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        pbpaste | sed -e "s/$/\n/"
     fi
 }
