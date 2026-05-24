@@ -20,10 +20,6 @@ alias cdr='cd $(git rev-parse --show-toplevel)' # cd to the git root
 
 alias gha='unset GH_TOKEN && cat ~/secrets/gh_token | base64 -d | gh auth login --with-token'
 
-# Source Files
-alias sb='source ~/.bashrc'
-alias sz='source ~/.zshrc'
-
 # Listing Files
 alias ls='ls -F'
 alias ll='ls -lF'
@@ -68,3 +64,10 @@ function paste() {
 }
 alias nrs='sudo nixos-rebuild switch --flake ~/.config/nixos'
 alias hrs='home-manager switch --flake ~/.config/nixos#lance'
+
+alias ff='git ls-files | fzf --preview "bat --style=numbers --color=always {}"'
+
+if command -v eza >/dev/null 2>&1; then
+    alias ls="eza --color=always"
+    alias lt='eza --color=always --tree --level=2 --long --icons --git'
+fi
