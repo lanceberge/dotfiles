@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TARGET_MONITOR="HDMI-A-2"
+TARGET_MONITOR="DP-2"
 
 MONITORS=$(hyprctl monitors -j | jq -r '.[] | .name')
 
