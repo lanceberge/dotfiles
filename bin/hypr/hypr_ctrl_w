@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+class=$(hyprctl activewindow -j | jq -r '.class | ascii_downcase')
+
+case "$class" in
+chromium)
+    hyprctl dispatch sendshortcut "CTRL,F4,activewindow"
+    ;;
+*)
+    hyprctl dispatch sendshortcut "CTRL,W,activewindow"
+    ;;
+esac
