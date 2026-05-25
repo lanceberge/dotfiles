@@ -8,7 +8,7 @@ alias j='jj'
 
 # Navigation
 alias cd_df='cd ~/dotfiles'
-alias cdr='cd $(git rev-parse --show-toplevel)' # cd to the git root
+alias cdr='cd $(project_root)' # cd to the jj/git root
 
 alias ..='cd ..'
 alias 2..='cd ../..'
@@ -62,3 +62,5 @@ alias hde='helmfile destroy -e'
 
 alias nrs='sudo nixos-rebuild switch --flake ~/.config/nixos'
 alias hrs='home-manager switch --flake ~/.config/nixos#lance'
+
+alias et='emacs -nw -q -l $HOME/dotfiles/.emacs'
