@@ -22,10 +22,14 @@
  scroll-conservatively 1000
  scroll-margin 2
  scroll-preserve-screen-position t
+ kill-whole-line t
  confirm-kill-emacs nil)
 
 (line-number-mode 1)
 (column-number-mode 1)
+
+(setq shift-select-mode t)
+(transient-mark-mode 1)
 
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8-unix)
@@ -55,16 +59,24 @@
  completions-header-format nil
  completions-max-height 15)
 
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
 (defun reload-init-file ()
  (interactive)
  (load-file user-init-file))
+
 (global-set-key (kbd "C-c r") 'reload-init-file)
-
+(global-set-key (kbd "C-c l") 'switch-to-prev-buffer)
+(global-set-key (kbd "C-c d") 'duplicate-line)
 (global-set-key (kbd "C-c fr") 'recentf)
-
+(global-set-key (kbd "C-c '") 'project-find-file)
+(global-set-key (kbd "C-c k") 'project-switch-project)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") 'other-window-previous)
+
+(with-eval-after-load 'icomplete
+  (define-key completion-in-region-mode-map (kbd "M-n")
+              #'minibuffer-next-completion)
+  (define-key completion-in-region-mode-map (kbd "M-p")
+              #'minibuffer-previous-completion))
 
 (load-theme 'tango-dark t)
