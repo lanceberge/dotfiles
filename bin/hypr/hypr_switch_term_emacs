@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+die() {
+    echo "hypr_switch_term_emacs: $*" >&2
+    exit 1
+}
+
+require_cmd() {
+    command -v "$1" >/dev/null 2>&1 || die "$1 is not installed"
+}
+
+source "$HOME/dotfiles/common_shell_config/functions.sh"
+
+descendant_tmux_client_tty() {
+    local root_pid="$1"
+    local ps_output
+    local changed=1
+    declare -A seen=()
+
+    ps_output=$(ps -eo pid=,ppid=,tty=,args=)
+    seen["$root_pid"]=1
+
+    while [ "$changed" -eq 1 ]; do
+        changed=0
+        while read -r pid ppid _tty _args; do
+            [ -n "${pid:-}" ] || continue
+            if [ -z "${seen[$pid]+x}" ] && [ -n "${seen[$ppid]+x}" ]; then
+                seen["$pid"]=1
+                changed=1
+            fi
+        done <<<"$ps_output"
+    done
+
+    while read -r pid _ppid tty args; do
+        [ -n "${pid:-}" ] || continue
+        if [ -n "${seen[$pid]+x}" ] && [[ "$args" == tmux* ]] && [ "$tty" != "?" ]; then
+            printf "/dev/%s\n" "$tty"
+            return 0
+        fi
+    done <<<"$ps_output"
+
+    return 1
+}
+
+descendant_cwd() {
+    local root_pid="$1"
+    local ps_output
+    local changed=1
+    local cwd=
+    declare -A seen=()
+
+    ps_output=$(ps -eo pid=,ppid=)
+    seen["$root_pid"]=1
+
+    while [ "$changed" -eq 1 ]; do
+        changed=0
+        while read -r pid ppid; do
+            [ -n "${pid:-}" ] || continue
+            if [ -z "${seen[$pid]+x}" ] && [ -n "${seen[$ppid]+x}" ]; then
+                seen["$pid"]=1
+                changed=1
+                if [ -r "/proc/$pid/cwd" ]; then
+                    cwd="$(readlink -f "/proc/$pid/cwd" 2>/dev/null || true)"
+                fi
+            fi
+        done <<<"$ps_output"
+    done
+
+    [ -n "$cwd" ] && printf "%s\n" "$cwd"
+}
+
+focus_emacs() {
+    local address
+
+    address="$(
+        hyprctl clients -j |
+            jq -r 'first(.[] | select(((.class // "") + " " + (.initialClass // "") | ascii_downcase | contains("emacs"))) | .address) // empty'
+    )"
+
+    if [ -n "$address" ]; then
+        hyprctl dispatch focuswindow "address:$address" >/dev/null
+    else
+        hyprctl dispatch workspace 2 >/dev/null
+        emacs >/dev/null 2>&1 &
+    fi
+}
+
+terminal_current_dir() {
+    local terminal_pid="$1"
+    local client_tty
+    local dir
+
+    if command -v tmux >/dev/null 2>&1 &&
+        client_tty="$(descendant_tmux_client_tty "$terminal_pid")" &&
+        tmux list-clients -F "#{client_tty}" 2>/dev/null | grep -Fxq "$client_tty"; then
+        dir="$(tmux display-message -c "$client_tty" -p "#{pane_current_path}" 2>/dev/null || true)"
+        if [ -n "$dir" ] && [ -d "$dir" ]; then
+            printf "%s\n" "$dir"
+            return 0
+        fi
+    fi
+
+    dir="$(descendant_cwd "$terminal_pid" || true)"
+    if [ -n "$dir" ] && [ -d "$dir" ]; then
+        printf "%s\n" "$dir"
+        return 0
+    fi
+
+    printf "%s\n" "$HOME"
+}
+
+emacs_current_dir() {
+    local encoded
+    local expr
+
+    expr='(let* ((frame (or (catch '"'"'focused (dolist (frame (frame-list)) (when (and (frame-visible-p frame) (frame-focus-state frame)) (throw '"'"'focused frame)))) (selected-frame))) (buffer (window-buffer (frame-selected-window frame))) (dir (with-current-buffer buffer (file-name-as-directory (expand-file-name (or (and buffer-file-name (file-name-directory buffer-file-name)) default-directory))))) (target-dir (file-name-as-directory (or (locate-dominating-file dir ".git") dir)))) (base64-encode-string (substring-no-properties target-dir) t))'
+    encoded="$(emacsclient --eval "$expr" 2>/dev/null | tr -d '"')"
+    [ -n "$encoded" ] || return 1
+
+    printf "%s" "$encoded" | base64 -d
+}
+
+open_emacs_for_dir() {
+    local dir="$1"
+
+    if ! emacsclient -n "$dir" >/dev/null 2>&1; then
+        emacs "$dir" >/dev/null 2>&1 &
+    fi
+    focus_emacs
+}
+
+switch_to_project_in_emacs() {
+    local dir="$1"
+    local encoded
+    local expr
+
+    encoded="$(printf "%s" "$dir" | base64 -w 0)"
+    expr="(run-at-time 0 nil (lambda () (let ((dir (file-name-as-directory (expand-file-name (base64-decode-string \"$encoded\"))))) (condition-case nil (+switch-to-project 1 dir) (wrong-number-of-arguments (let ((project-prompter (lambda () dir))) (+switch-to-project 1)))))))"
+    emacsclient --eval "$expr" >/dev/null
+}
+
+require_cmd hyprctl
+require_cmd jq
+require_cmd base64
+
+active_window="$(hyprctl activewindow -j)"
+active_class="$(
+    jq -r '((.class // "") + " " + (.initialClass // "") | ascii_downcase)' <<<"$active_window"
+)"
+active_pid="$(jq -r '.pid // empty' <<<"$active_window")"
+
+case "$active_class" in
+*alacritty*)
+    [ -n "$active_pid" ] || die "active Alacritty window has no pid"
+    dir="$(terminal_current_dir "$active_pid")"
+    open_emacs_for_dir "$dir"
+    if root="$(project_root "$dir")"; then
+        switch_to_project_in_emacs "$root"
+    fi
+    ;;
+*emacs*)
+    dir="$(emacs_current_dir || true)"
+    [ -n "$dir" ] || die "could not get current directory from Emacs"
+    "$HOME/dotfiles/bin/hypr/hypr_tmux_sessionizer" "$dir"
+    ;;
+*)
+    focus_emacs
+    ;;
+esac
