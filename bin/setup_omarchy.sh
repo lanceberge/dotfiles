@@ -84,3 +84,4 @@ ln -sfn "$HOME/dotfiles/.config/omarchy/themes/matte-black" "$HOME/.config/omarc
 
 mkdir -p "$HOME/.local/state/omarchy/toggles"
 touch "$HOME/.local/state/omarchy/toggles/screensaver-off"
+# systemctl --user disable --now emacs.service #maybe?
