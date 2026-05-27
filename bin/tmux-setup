@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+die() {
+    echo "tmux-setup: $*" >&2
+    exit 1
+}
+
+usage() {
+    echo "Usage: tmux-setup <directory>" >&2
+}
+
+require_cmd() {
+    command -v "$1" >/dev/null 2>&1 || die "$1 is not installed"
+}
+
+if [ "$#" -ne 1 ]; then
+    usage
+    exit 2
+fi
+
+target_dir="$1"
+session_name="$(basename "$target_dir" | tr . _)"
+
+# TODO: Configure window names and bash lines to evaluate here.
+window_names=(
+    "window-1"
+    "window-2"
+    "window-3"
+)
+
+window_commands=(
+    ""
+    ""
+    ""
+)
+
+has_session() {
+    tmux list-sessions -F "#{session_name}" 2>/dev/null | grep -Fxq "$session_name"
+}
+
+switch_to() {
+    if [[ -z "${TMUX:-}" ]]; then
+        tmux attach-session -t "$session_name"
+    else
+        tmux switch-client -t "$session_name"
+    fi
+}
+
+run_window_cmd() {
+    local window_id="$1"
+    local cmd="$2"
+
+    if [[ -n "$cmd" ]]; then
+        tmux send-keys -t "$window_id" "$cmd" C-m
+    fi
+}
+
+setup_session() {
+    local idx window_id
+
+    tmux new-session -ds "$session_name" -c "$target_dir" -n "${window_names[0]}"
+    window_id="$(tmux display-message -p -t "$session_name:0" "#{window_id}")"
+    run_window_cmd "$window_id" "${window_commands[0]:-}"
+
+    for ((idx = 1; idx < ${#window_names[@]}; idx++)); do
+        window_id="$(tmux new-window -dt "$session_name:" -c "$target_dir" -n "${window_names[$idx]}" -P -F "#{window_id}")"
+        run_window_cmd "$window_id" "${window_commands[$idx]:-}"
+    done
+
+    tmux select-window -t "$session_name:0"
+}
+
+require_cmd tmux
+[ -d "$target_dir" ] || die "directory does not exist: $target_dir"
+[ "${#window_names[@]}" -eq "${#window_commands[@]}" ] || die "window_names and window_commands must have the same length"
+[ "${#window_names[@]}" -gt 0 ] || die "at least one window must be configured"
+
+if ! has_session; then
+    setup_session
+fi
+
+switch_to
