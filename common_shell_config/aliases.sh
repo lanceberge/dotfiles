@@ -5,6 +5,8 @@ alias v='nvim'
 alias jn="jupyter notebook --ip='*' --NotebookApp.token='' --NotebookApp.password=''"
 alias jl="jupyter lab"
 alias j='jj'
+alias codexp='codex -p local'
+alias codex-yolo='codex -p local --ask-for-approval never --sandbox workspace-write'
 
 # Navigation
 alias cd_df='cd ~/dotfiles'

@@ -46,3 +46,15 @@ if [[ -f $prompt_shells_file ]]; then
   sort -u "$prompt_shells_active" >"$prompt_shells_file"
   rm -f "$prompt_shells_active"
 fi
+
+# Codex caches terminal default colors and refreshes them on focus-gained events.
+# Inject that event into tmux panes running Codex so active sessions update live.
+if command -v tmux >/dev/null 2>&1 && tmux list-panes -a >/dev/null 2>&1; then
+  while IFS=$'\t' read -r pane_id pane_tty; do
+    tty_name=${pane_tty#/dev/}
+
+    if [[ -n $pane_id && -n $tty_name ]] && ps -t "$tty_name" -o args= 2>/dev/null | grep -Eq 'codex-linux-.*/bin/codex|node_modules/@openai/codex'; then
+      tmux send-keys -t "$pane_id" Escape "[I" >/dev/null 2>&1 || true
+    fi
+  done < <(tmux list-panes -a -F '#{pane_id}	#{pane_tty}' 2>/dev/null || true)
+fi
