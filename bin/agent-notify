@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+agent=${1:-Agent}
+shift || true
+
+# Codex passes the JSON payload as the next argv; Claude pipes it on stdin.
+if [[ $# -gt 0 ]]; then
+  payload=$1
+else
+  payload=$(cat 2>/dev/null || true)
+fi
+
+# If there's a `type` field, only fire on turn completion (codex convention).
+type=$(printf '%s' "$payload" | jq -r '.type // empty' 2>/dev/null)
+[[ -n $type && $type != "agent-turn-complete" ]] && exit 0
+
+# Under Hyprland: only consider suppressing when the focused window is the
+# terminal (Alacritty). If the user is on any other window, always notify.
+# When Hyprland isn't running, fall through to the tmux check unconditionally.
+terminal_focused=true
+if command -v hyprctl >/dev/null 2>&1; then
+  active_class=$(hyprctl activewindow -j 2>/dev/null | jq -r '.class // empty')
+  if [[ -n $active_class && $active_class != "Alacritty" ]]; then
+    terminal_focused=false
+  fi
+fi
+
+# Skip if the agent's tmux pane lives in the active window of an attached
+# session (the user is looking at that window, regardless of which pane).
+if $terminal_focused && [[ -n ${TMUX_PANE:-} ]]; then
+  if tmux list-panes -a -F '#{pane_id} #{window_active} #{session_attached}' 2>/dev/null \
+      | awk '$2==1 && $3>=1 {print $1}' \
+      | grep -qFx "$TMUX_PANE"; then
+    exit 0
+  fi
+fi
+
+session=""
+if [[ -n ${TMUX_PANE:-} ]]; then
+  session=$(tmux display -p -t "$TMUX_PANE" '#S' 2>/dev/null || true)
+fi
+
+title="$agent finished"
+[[ -n $session ]] && title="$title — $session"
+
+notify-send -u low "$title"
