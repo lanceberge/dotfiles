@@ -1,3 +1,5 @@
+notify = ["/home/lance/dotfiles/bin/agent-notify", "Codex"]
+
 [tui]
 theme = "ansi"
 
