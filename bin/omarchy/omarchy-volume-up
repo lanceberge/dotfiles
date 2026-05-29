@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if pactl get-sink-mute @DEFAULT_SINK@ | rg -q 'yes'; then
+  pactl set-sink-mute @DEFAULT_SINK@ 0
+fi
+
+exec omarchy-swayosd-client --output-volume raise

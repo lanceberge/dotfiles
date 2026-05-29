@@ -10,7 +10,7 @@ alias codex-yolo='codex -p local --ask-for-approval never --sandbox workspace-wr
 
 # Navigation
 alias cd_df='cd ~/dotfiles'
-alias cdr='cd $(project_root)' # cd to the jj/git root
+alias cdr='cd $(vc_root_dir)' # cd to the jj/git root
 
 alias ..='cd ..'
 alias 2..='cd ../..'
