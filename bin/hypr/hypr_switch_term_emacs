@@ -155,7 +155,7 @@ case "$active_class" in
     [ -n "$active_pid" ] || die "active Alacritty window has no pid"
     dir="$(terminal_current_dir "$active_pid")"
     open_emacs_for_dir "$dir"
-    if root="$(project_root "$dir")"; then
+    if root="$(vc_root_dir "$dir")"; then
         switch_to_project_in_emacs "$root"
     fi
     ;;

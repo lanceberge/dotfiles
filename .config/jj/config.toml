@@ -5,6 +5,9 @@ email = "bergeron.lance6@gmail.com"
 [revsets]
 bookmark-advance-to = "@-"
 
+[remotes.origin]
+auto-track-bookmarks = "*"
+
 [ui]
 editor = "emacsclient -t"
 default-command = "status"
@@ -26,19 +29,30 @@ my_bookmarks = ["bookmark", "list", "-r", "mine()", "--sort", "committer-date-"]
 
 l = ["log"]
 la = ["log", "-r", "ancestors(@)"]
+
 s = ["squash"]
 si = ["squash", "--ignore-immutable"]
+
 d = ["diff"]
-a = ["absorb"]
+sh = ["show", "@-"]
+shr = ["show"]
+
+# modifying commits
 n = ["new"]
-c = ["util", "exec", "--", "sh", "-c", "jj commit -m \"$*\" && jj new && jj bookmark advance", ""]
+c = ["util", "exec", "--", "sh", "-c", "jj commit -m \"$*\" && jj bookmark advance", ""]
 e = ["edit"]
+mr = ["util", "exec", "--", "sh", "-c", "jj describe -r \"$1\" -m \"$2\"", ""]
+m = ["describe", "-m"]
+a = ["absorb"]
 r = ["rebase"]
+
 ab = ["abandon"]
 u = ["undo"]
+
 p = ["git", "push"]
 f = ["git", "fetch"]
-m = ["describe", "-m"]
 
 t = ["tag"]
 tr = ["tag", "list", "--sort", "author-date-"]
+
+filelog = ["log", "-r", 'files("$1")']

@@ -1,3 +1,6 @@
+# [[ -o interactive ]] || return
+# [[ -t 0 && -t 1 ]] || return
+
 for file in "$HOME"/dotfiles/common_shell_config/*.sh "$HOME"/dotfiles/zsh_config/*.sh; do
     [ -f "$file" ] && source "$file"
 done
