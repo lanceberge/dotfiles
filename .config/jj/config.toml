@@ -11,9 +11,13 @@ auto-track-bookmarks = "*"
 [ui]
 editor = "emacsclient -t"
 default-command = "status"
-diff-editor = ":builtin"
+diff-editor = "emacs"
 pager = "less -FRX"
 conflict-marker-style = "git"
+
+[merge-tools.emacs]
+program = "jj_emacs_diffedit"
+edit-args = ["$left", "$right"]
 
 [git]
 fetch = ["origin"]

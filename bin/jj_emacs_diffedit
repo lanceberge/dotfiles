@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Wrapper jj invokes as its diff-editor. Opens an emacsclient frame
+# running `jj-diffedit` (see ~/.emacs.d/editor/vc/jj-diffedit.el) and
+# propagates abort by checking for the sentinel file written by
+# `jj-diffedit-abort'.
+set -euo pipefail
+
+LEFT="$1"
+RIGHT="$2"
+
+emacsclient -c \
+    -F '((name . "jj-diffedit"))' \
+    -e "(jj-diffedit \"${LEFT}\" \"${RIGHT}\")"
+
+SENTINEL="${RIGHT}/.jj-diffedit-aborted"
+if [[ -f "$SENTINEL" ]]; then
+    rm -f "$SENTINEL"
+    exit 1
+fi
