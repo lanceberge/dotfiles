@@ -84,6 +84,12 @@ ln -sfn "$HOME/dotfiles/.config/omarchy/themed/prompt-colors.sh.tpl" "$HOME/.con
 mkdir -p "$HOME/.config/omarchy/themes"
 ln -sfn "$HOME/dotfiles/.config/omarchy/themes/matte-black" "$HOME/.config/omarchy/themes/matte-black"
 
+mkdir -p "$HOME/.claude/skills"
+ln -sfn "$HOME/dotfiles/.agents/skills/trace" "$HOME/.claude/skills/trace"
+
+mkdir -p "$HOME/.agents/skills"
+ln -sfn "$HOME/dotfiles/.agents/skills/trace" "$HOME/.agents/skills/trace"
+
 mkdir -p "$HOME/.local/state/omarchy/toggles"
 touch "$HOME/.local/state/omarchy/toggles/screensaver-off"
 # systemctl --user disable --now emacs.service #maybe?

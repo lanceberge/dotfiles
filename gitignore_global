@@ -1,1 +1,4 @@
 .change-context.md
+.agent-shell/
+
+**/.claude/settings.local.json

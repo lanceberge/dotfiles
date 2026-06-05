@@ -37,6 +37,8 @@ symlinks:
 	ln -sf ~/dotfiles/.claude/settings.json ~/.claude/settings.json
 	ln -sf ~/dotfiles/.claude/hooks ~/.claude/hooks
 	mkdir -p ~/.config && ln -sfn ~/dotfiles/.config/jj ~/.config/jj
+	mkdir -p ~/.claude/skills && ln -sfn ~/dotfiles/.agents/skills/trace ~/.claude/skills/trace
+	mkdir -p ~/.agents/skills && ln -sfn ~/dotfiles/.agents/skills/trace ~/.agents/skills/trace
 
 
 system_packages:
