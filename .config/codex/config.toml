@@ -1,4 +1,6 @@
-notify = ["/home/lance/dotfiles/bin/agent-notify", "Codex"]
+approval_policy = "untrusted"
+sandbox_mode = "workspace-write"
+notify = ["/home/lance/dotfiles/bin/agents/agent-notify", "Codex"]
 
 [tui]
 theme = "ansi"
@@ -7,4 +9,7 @@ theme = "ansi"
 "gpt-5.5" = 4
 
 [projects."/home/lance/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/lance/.emacs.d"]
 trust_level = "trusted"

@@ -24,7 +24,7 @@ When the user invokes this skill with code paths, walk them through the requeste
 Evaluate:
 
 ```sh
-emacsclient --eval "(progn (+agent-shell-trace '((:file \"/abs/path/abc/thing.el\" :line 95 :mark 97 :description \"Builds the prompt payload.\") (:file \"/abs/path/abc/thing2.el\" :line 10 :description \"Dispatches the request.\"))) (when (executable-find \"hyprctl\") (call-process \"hyprctl\" nil nil nil \"dispatch\" \"focuswindow\" \"class:Emacs\")))"
+emacsclient --eval "(progn (+agent-lisp-trace '((:file \"/abs/path/abc/thing.el\" :line 95 :mark 97 :description \"Builds the prompt payload.\") (:file \"/abs/path/abc/thing2.el\" :line 10 :description \"Dispatches the request.\"))) (when (executable-find \"hyprctl\") (call-process \"hyprctl\" nil nil nil \"dispatch\" \"focuswindow\" \"class:Emacs\")))"
 ```
 
 The `hyprctl` call is intentionally inside the evaluated Emacs expression so Claude and Codex can use a single `emacsclient --eval` command.

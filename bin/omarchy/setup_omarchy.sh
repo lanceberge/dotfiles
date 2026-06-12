@@ -56,8 +56,9 @@ install_packages=(
     "pastel"
     "postgresql"
     "shfmt"
+    "typst"
 )
-sudo pacman -S "${install_packages[@]}"
+pacman -S "${install_packages[@]}"
 rm ~/.local/share/omarchy/default/hypr/bindings/tiling-v2.conf
 
 aur_install_packages=(
@@ -73,6 +74,11 @@ sudo -iu postgres initdb -D /var/lib/postgres/data
 sudo systemctl enable --now postgresql
 sudo -iu postgres createuser --superuser lance
 
+# nix
+sudo systemctl enable --now nix-daemon.socket
+nix-channel --add https://channels.nixos.org/nixos-25.11 nixpkgs
+nix-channel --update
+
 XDG_CONFIG_HOME="$HOME/.config" gsettings set org.gnome.desktop.interface gtk-key-theme 'Emacs'
 
 mkdir -p "$HOME/.config/omarchy/hooks"
@@ -84,12 +90,14 @@ ln -sfn "$HOME/dotfiles/.config/omarchy/themed/prompt-colors.sh.tpl" "$HOME/.con
 mkdir -p "$HOME/.config/omarchy/themes"
 ln -sfn "$HOME/dotfiles/.config/omarchy/themes/matte-black" "$HOME/.config/omarchy/themes/matte-black"
 
-mkdir -p "$HOME/.claude/skills"
-ln -sfn "$HOME/dotfiles/.agents/skills/trace" "$HOME/.claude/skills/trace"
+mkdir -p "$HOME/.claude"
+ln -sfnT "$HOME/dotfiles/.agents/skills" "$HOME/.claude/skills"
 
-mkdir -p "$HOME/.agents/skills"
-ln -sfn "$HOME/dotfiles/.agents/skills/trace" "$HOME/.agents/skills/trace"
+mkdir -p "$HOME/.agents"
+ln -sfnT "$HOME/dotfiles/.agents/skills" "$HOME/.agents/skills"
 
 mkdir -p "$HOME/.local/state/omarchy/toggles"
 touch "$HOME/.local/state/omarchy/toggles/screensaver-off"
 # systemctl --user disable --now emacs.service #maybe?
+
+# cargo install --git https://github.com/Myriad-Dreamin/tinymist --locked tinymist-cli

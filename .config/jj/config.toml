@@ -33,12 +33,21 @@ la = ["log", "-r", "ancestors(@)"]
 s = ["squash"]
 si = ["squash", "--ignore-immutable"]
 
+# -i
+ri = ["restore", "-i"]
+sii = ["squash", "-i" , "--ignore-immutable"]
+spi = ["split", "-i"]
+
 d = ["diff"]
 sh = ["show", "@-"]
 shr = ["show"]
 
 # modifying commits
 n = ["new"]
+
+# find the latest commit matching a description
+fd = ["util", "exec", "--", "sh", "-c", "jj log -r \"latest(description(regex:\\\"$*\\\"))\" --no-graph -T 'commit_id.short() ++ \"\\n\"'", ""]
+
 c = ["util", "exec", "--", "sh", "-c", "jj commit -m \"$*\" && jj bookmark advance", ""]
 e = ["edit"]
 mr = ["util", "exec", "--", "sh", "-c", "jj describe -r \"$1\" -m \"$2\"", ""]

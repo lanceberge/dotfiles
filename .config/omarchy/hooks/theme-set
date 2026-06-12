@@ -4,7 +4,7 @@ if [[ -z $1 ]]; then
   exit 0
 fi
 
-emacsclient --eval "(+themes-load-omarchy-theme \"$1\")" >/dev/null 2>&1 || true
+emacsclient --eval "(+theme-rotate-load-omarchy-theme \"$1\")" >/dev/null 2>&1 || true
 
 colors_file="$HOME/.config/omarchy/current/theme/colors.toml"
 

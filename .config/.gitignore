@@ -8,6 +8,7 @@
 !fish/
 !ghostty/
 !hypr/
+!hypr/*.conf
 !i3/
 !misc/
 !nix/
