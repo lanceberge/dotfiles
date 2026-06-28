@@ -12,7 +12,7 @@ auto-track-bookmarks = "*"
 editor = "emacsclient -t"
 default-command = "status"
 diff-editor = ":builtin"
-pager = "less -FRX"
+pager = "less -FR"
 conflict-marker-style = "git"
 
 [git]
@@ -46,8 +46,7 @@ shr = ["show"]
 n = ["new"]
 
 # find the latest commit matching a description
-fd = ["util", "exec", "--", "sh", "-c", "jj log -r \"latest(description(regex:\\\"$*\\\"))\" --no-graph -T 'commit_id.short() ++ \"\\n\"'", ""]
-
+fd = ["util", "exec", "--", "sh", "-c", "jj --color never --no-pager log -r \"latest(description(regex:\\\"$*\\\"))\" --no-graph -T 'commit_id.short() ++ \"\\n\"'", ""]
 c = ["util", "exec", "--", "sh", "-c", "jj commit -m \"$*\" && jj bookmark advance", ""]
 e = ["edit"]
 mr = ["util", "exec", "--", "sh", "-c", "jj describe -r \"$1\" -m \"$2\"", ""]
@@ -63,5 +62,8 @@ f = ["git", "fetch"]
 
 t = ["tag"]
 tr = ["tag", "list", "--sort", "author-date-"]
+
+# workspaces
+wu = ["workspace", "update-stale"]
 
 filelog = ["log", "-r", 'files("$1")']

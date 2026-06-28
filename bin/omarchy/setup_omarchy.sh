@@ -43,20 +43,23 @@ gh release download nightly --pattern 'expert_linux_amd64' --repo expert-lsp/exp
 chmod +x ~/.local/bin/expert_linux_amd64
 
 install_packages=(
-    "bun"
-    "difftastic"
-    "elixir"
-    "erlang-public_key"
-    "erlang-ssl"
-    "extra/bash-language-server"
-    "hunspell"
-    "hunspell-en_us"
-    "inotify-tools"
-    "jujutsu"
-    "pastel"
-    "postgresql"
-    "shfmt"
-    "typst"
+    difftastic
+    elixir
+    erlang-public_key
+    erlang-ssl
+    extra/bash-language-server
+    hunspell
+    hunspell-en_us
+    inotify-tools
+    isync
+    jujutsu
+    mstmp
+    notmuch
+    pastel
+    postgresql
+    shfmt
+    typst
+    bun
 )
 pacman -S "${install_packages[@]}"
 rm ~/.local/share/omarchy/default/hypr/bindings/tiling-v2.conf

@@ -14,7 +14,7 @@ function vc_root_dir() {
     local root
 
     if command -v jj >/dev/null 2>&1; then
-        root="$(jj root --ignore-working-copy --at-operation @ --repository "$dir" 2>/dev/null || true)"
+        root="$(jj workspace root || true)"
         if [ -n "$root" ] && [ -d "$root" ]; then
             printf "%s\n" "$root"
             return 0
@@ -100,9 +100,31 @@ sb() {
 }
 
 function paste() {
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        xclip -o | sed -e "s/$/\n/"
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
+    if command -v pbpaste > /dev/null; then
         pbpaste | sed -e "s/$/\n/"
+    elif command -v wl-paste > /dev/null; then
+        wl-paste | sed -e "s/$/\n/"
+    elif command -v xclip > /dev/null; then
+        xclip -selection clipboard -o | sed -e "s/$/\n/"
+    elif command -v xsel > /dev/null; then
+        xsel --clipboard --output | sed -e "s/$/\n/"
+    else
+        printf 'paste: no clipboard command found\n' >&2
+        return 1
+    fi
+}
+
+function copy() {
+    if command -v pbcopy > /dev/null; then
+        pbcopy
+    elif command -v wl-copy > /dev/null; then
+        wl-copy
+    elif command -v xclip > /dev/null; then
+        xclip -selection clipboard
+    elif command -v xsel > /dev/null; then
+        xsel --clipboard --input
+    else
+        printf 'copy: no clipboard command found\n' >&2
+        return 1
     fi
 }

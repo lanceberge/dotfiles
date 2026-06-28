@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <ssh-config-host>" >&2
+  exit 2
+fi
+
+host="$1"
+local_eat_dir="${HOME}/.emacs.d/elpaca/builds/eat"
+remote_dir="~/dotfiles/emacs-eat-config"
+
+if [ ! -d "${local_eat_dir}/terminfo" ]; then
+  echo "Missing Eat terminfo directory: ${local_eat_dir}/terminfo" >&2
+  exit 1
+fi
+
+if [ ! -f "${local_eat_dir}/eat.ti" ]; then
+  echo "Missing Eat terminfo source: ${local_eat_dir}/eat.ti" >&2
+  exit 1
+fi
+
+if [ ! -d "${local_eat_dir}/integration" ]; then
+  echo "Missing Eat integration directory: ${local_eat_dir}/integration" >&2
+  exit 1
+fi
+
+ssh "$host" "mkdir -p ${remote_dir}"
+scp -r "${local_eat_dir}/eat.ti" "${local_eat_dir}/terminfo" "${local_eat_dir}/integration" "${host}:${remote_dir}/"
+
+ssh "$host" "tic -x ${remote_dir}/eat.ti"
+
+cat <<EOF
+Installed Eat terminfo and shell integration on ${host}.
+
+Remote shell integration directory:
+  ${remote_dir}/integration
+
+Add one of these on ${host}:
+
+Bash:
+  if [ -n "\${INSIDE_EMACS:-}" ]; then
+    export EAT_SHELL_INTEGRATION_DIR="\$HOME/dotfiles/emacs-eat-config/integration"
+    if [ -r /usr/share/bash-completion/bash_completion ]; then
+      source /usr/share/bash-completion/bash_completion
+    fi
+    [ -r "\$EAT_SHELL_INTEGRATION_DIR/bash" ] && source "\$EAT_SHELL_INTEGRATION_DIR/bash"
+  fi
+
+Zsh:
+  if [ -n "\${INSIDE_EMACS:-}" ]; then
+    export EAT_SHELL_INTEGRATION_DIR="\$HOME/dotfiles/emacs-eat-config/integration"
+    : "\${HISTFILE:=\$HOME/.zsh_history}"
+    touch "\$HISTFILE"
+    [ -r "\$EAT_SHELL_INTEGRATION_DIR/zsh" ] && source "\$EAT_SHELL_INTEGRATION_DIR/zsh"
+  fi
+EOF

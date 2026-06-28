@@ -30,7 +30,9 @@ bindkey '^[v' edit-command-line # M-v
 bindkey '^R' history-incremental-search-backward
 
 # Prompt
-export TERM=xterm-256color
+if [[ "$TERM" != eat-* ]]; then
+    export TERM=xterm-256color
+fi
 
 if [ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
     export ZSH="$HOME/.oh-my-zsh"
@@ -54,3 +56,5 @@ bindkey '^[^M' autosuggest-execute
 bindkey '^W' kill-region
 
 source <(fzf --zsh)
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && source "$EAT_SHELL_INTEGRATION_DIR/zsh"
