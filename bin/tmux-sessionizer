@@ -13,6 +13,8 @@ PANE_CACHE_FILE="$PANE_CACHE_DIR/panes.cache"
 # # If set this add additional search paths to the default TS_SEARCH_PATHS
 # # The number prefix is the depth for the Path [OPTIONAL]
 # TS_EXTRA_SEARCH_PATHS=(~/ghq:3 ~/Git:3 ~/.config:2)
+# # If set this add exact directories to the picker without searching inside them
+# TS_EXACT_PATHS=(~/dotfiles ~/dotfiles/.config)
 # # if set this override the TS_MAX_DEPTH (1)
 # TS_MAX_DEPTH=2
 # This is not meant to override .tmux-sessionizer.  At first i thought this
@@ -229,6 +231,10 @@ find_dirs() {
     else
         tmux list-sessions -F "[TMUX] #{session_name}" 2>/dev/null
     fi
+
+    for path in "${TS_EXACT_PATHS[@]}"; do
+        [[ -d "$path" ]] && printf '%s\n' "$path"
+    done
 
     # note: TS_SEARCH_PATHS is an array of paths to search for directories
     # if the path ends with :number, it will search for directories with a max depth of number ;)
