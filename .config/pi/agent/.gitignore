@@ -1,0 +1,5 @@
+*.lock
+auth.json
+git/
+npm/
+sessions/

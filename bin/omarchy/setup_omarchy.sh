@@ -42,6 +42,9 @@ mkdir -p ~/.local/bin
 gh release download nightly --pattern 'expert_linux_amd64' --repo expert-lsp/expert --dir ~/.local/bin
 chmod +x ~/.local/bin/expert_linux_amd64
 
+mkdir -p ~/.pi/agent
+ln -sfnT ~/dotfiles/.config/pi/agent/lsp.json ~/.pi/agent/lsp.json
+
 install_packages=(
     difftastic
     elixir

@@ -1,0 +1,20 @@
+{
+  "defaultProjectTrust": "ask",
+  "enableInstallTelemetry": false,
+  "theme": "dark",
+  "skills": [
+    "~/dotfiles/.agents/skills"
+  ],
+  "enableSkillCommands": true,
+  "lastChangelogVersion": "0.80.6",
+  "packages": [
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-mono-context-guard",
+    "npm:@ayulab/pi-rewind",
+    "npm:pi-mono-multi-edit",
+    "~/code/pi-extensions"
+  ],
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-fable-5"
+}

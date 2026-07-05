@@ -1,0 +1,19 @@
+{
+  "installMode": "off",
+  "warmup": true,
+  "servers": {
+    "expert": {
+      "displayName": "Expert",
+      "filetypes": ["elixir", "eelixir", "heex"],
+      "rootMarkers": ["mix.exs", ".git"],
+      "install": {
+        "type": "system",
+        "command": ["~/.local/bin/expert_linux_amd64", "--stdio"]
+      },
+      "command": ["~/.local/bin/expert_linux_amd64", "--stdio"],
+      "settings": {},
+      "initializationOptions": {},
+      "lazy": true
+    }
+  }
+}

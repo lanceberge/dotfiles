@@ -14,3 +14,9 @@ trust_level = "trusted"
 
 [projects."/home/lance/.emacs.d"]
 trust_level = "trusted"
+
+[projects."/home/lance/jj-workspaces/vault-landing-page/subscriptions"]
+trust_level = "trusted"
+
+[projects."/home/lance/jj-workspaces/vault-landing-page/subscriptions/.scratch/subscriptions/issues"]
+trust_level = "trusted"

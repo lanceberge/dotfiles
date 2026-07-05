@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 export XDG_CONFIG_HOME=~/dotfiles/.config
 export CODEX_HOME="$XDG_CONFIG_HOME/codex"
+export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
 export FZF_DEFAULT_OPTS="--bind 'ctrl-k:kill-line'"

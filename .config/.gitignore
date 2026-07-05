@@ -36,3 +36,7 @@
 !codex/rules/default.rules
 !eca/
 !eca/config.json
+!pi/
+!pi/agent/
+!pi/agent/settings.json
+!pi/agent/lsp.json
