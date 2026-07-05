@@ -1,0 +1,23 @@
+;; One-shot modifiers.
+;;
+;; Tap: apply the modifier to the next key pressed within 300 milliseconds.
+;; Hold: behave like a normal modifier until released.
+
+(defcfg
+    process-unmapped-keys yes)
+
+(defalias
+    os-lsft (one-shot 300 lsft)
+    os-lctl (one-shot 300 lctl)
+    os-lalt (one-shot 300 lalt)
+    os-lmet (one-shot 300 lmet)
+    os-rmet (one-shot 300 rmet)
+    os-ralt (one-shot 300 ralt)
+    os-rctl (one-shot 300 rctl)
+    os-rsft (one-shot 300 rsft))
+
+(defsrc
+    caps lsft lctl lalt lmet rmet ralt rctl rsft)
+
+(deflayer base
+    @os-lctl @os-lsft @os-lctl @os-lalt @os-lmet @os-rmet @os-ralt @os-rctl @os-rsft)

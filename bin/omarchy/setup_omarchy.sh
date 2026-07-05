@@ -66,6 +66,7 @@ rm ~/.local/share/omarchy/default/hypr/bindings/tiling-v2.conf
 
 aur_install_packages=(
     "watchman-bin"
+    "kanata-bin"
 )
 
 yay -S "${aur_install_packages[@]}"
@@ -92,6 +93,15 @@ ln -sfn "$HOME/dotfiles/.config/omarchy/themed/prompt-colors.sh.tpl" "$HOME/.con
 
 mkdir -p "$HOME/.config/omarchy/themes"
 ln -sfn "$HOME/dotfiles/.config/omarchy/themes/matte-black" "$HOME/.config/omarchy/themes/matte-black"
+
+mkdir -p "$HOME/.config/kanata"
+ln -sfn "$HOME/dotfiles/.config/kanata/kanata.kbd" "$HOME/.config/kanata/kanata.kbd"
+
+sudo mkdir -p /etc/kanata /etc/systemd/system
+sudo ln -sfn "$HOME/dotfiles/.config/kanata/kanata.kbd" /etc/kanata/kanata.kbd
+sudo ln -sfn "$HOME/dotfiles/systemd/system/kanata.service" /etc/systemd/system/kanata.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now kanata.service
 
 mkdir -p "$HOME/.claude"
 ln -sfnT "$HOME/dotfiles/.agents/skills" "$HOME/.claude/skills"

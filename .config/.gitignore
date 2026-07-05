@@ -29,6 +29,8 @@
 !wofi/
 !pycodestyle
 !jj/config.toml
+!kanata/
+!kanata/kanata.kbd
 !codex/
 !codex/rules
 !codex/rules/default.rules
