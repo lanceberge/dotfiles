@@ -1,0 +1,89 @@
+{
+  "providers": {
+    "openai": {
+      "url": "https://api.openai.com"
+    }
+  },
+  "defaultModel": "openai/gpt-5.6-sol",
+  "skills": [
+    {
+      "path": "~/.agents/skills"
+    }
+  ],
+  "toolCall": {
+    "approval": {
+      "byDefault": "ask",
+      "allow": {
+        "eca__directory_tree": {},
+        "eca__read_file": {},
+        "eca__grep": {},
+        "eca__preview_file_change": {},
+        "eca__editor_diagnostics": {},
+        "eca__edit_file": {},
+        "eca__write_file": {},
+        "eca__move_file": {},
+        "eca__shell_command": {
+          "argsMatchers": {
+            "command": [
+              ".*(&&|\\|\\|)?\\s*pwd\\b.*",
+              ".*(&&|\\|\\|)?\\s*ls\\b.*",
+              ".*(&&|\\|\\|)?\\s*rg\\b.*",
+              ".*(&&|\\|\\|)?\\s*grep\\b.*",
+              "(?!.*\\s-exec\\b).*(&&|\\|\\|)?\\s*find\\b.*",
+              ".*(&&|\\|\\|)?\\s*cat\\b.*",
+              ".*(&&|\\|\\|)?\\s*head\\b.*",
+              ".*(&&|\\|\\|)?\\s*tail\\b.*",
+              ".*(&&|\\|\\|)?\\s*wc\\b.*",
+              ".*(&&|\\|\\|)?\\s*jq\\b.*",
+              ".*(&&|\\|\\|)?\\s*emacsclient\\b.*",
+              ".*(&&|\\|\\|)?\\s*git\\s+(diff|log|show|status)\\b.*",
+              ".*(&&|\\|\\|)?\\s*jj\\s+(diff|status|log)\\b.*"
+            ]
+          }
+        }
+      },
+      "ask": {},
+      "deny": {}
+    },
+    "readFile": {
+      "maxLines": 2000
+    },
+    "shellCommand": {
+      "summaryMaxLength": 30
+    }
+  },
+  "agent": {
+    "code": {
+      "prompts": {
+        "chat": "${classpath:prompts/code_agent.md}"
+      },
+      "disabledTools": ["preview_file_change"]
+    },
+    "plan": {
+      "prompts": {
+        "chat": "${classpath:prompts/plan_agent.md}"
+      },
+      "disabledTools": ["edit_file", "write_file", "move_file"],
+      "toolCall": {
+        "approval": {
+          "deny": {
+            "eca__shell_command": {
+              "argsMatchers": {
+                "command": [
+                  ".*[12&]?>>?\\s*(?!/dev/null($|\\s))(?!&\\d+($|\\s))\\S+.*",
+                  ".*\\|\\s*(tee|dd|xargs).*",
+                  ".*\\b(sed|awk|perl)\\s+.*-i.*",
+                  ".*\\b(rm|mv|cp|touch|mkdir)\\b.*",
+                  ".*git\\s+(add|commit|push).*",
+                  ".*npm\\s+install.*",
+                  ".*-c\\s+[\"'].*open.*[\"']w[\"'].*",
+                  ".*bash.*-c.*[12&]?>>?\\s*(?!/dev/null($|\\s))(?!&\\d+($|\\s))\\S+.*"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

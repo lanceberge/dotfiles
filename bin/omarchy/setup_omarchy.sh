@@ -96,12 +96,14 @@ ln -sfn "$HOME/dotfiles/.config/omarchy/themes/matte-black" "$HOME/.config/omarc
 
 mkdir -p "$HOME/.config/kanata"
 ln -sfn "$HOME/dotfiles/.config/kanata/kanata.kbd" "$HOME/.config/kanata/kanata.kbd"
-
 sudo mkdir -p /etc/kanata /etc/systemd/system
 sudo ln -sfn "$HOME/dotfiles/.config/kanata/kanata.kbd" /etc/kanata/kanata.kbd
 sudo ln -sfn "$HOME/dotfiles/systemd/system/kanata.service" /etc/systemd/system/kanata.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now kanata.service
+
+mkdir -p "$HOME/.config/eca"
+ln -sfn "$HOME/dotfiles/.config/eca" "$HOME/.config/eca"
 
 mkdir -p "$HOME/.claude"
 ln -sfnT "$HOME/dotfiles/.agents/skills" "$HOME/.claude/skills"

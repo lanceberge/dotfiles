@@ -34,3 +34,5 @@
 !codex/
 !codex/rules
 !codex/rules/default.rules
+!eca/
+!eca/config.json
