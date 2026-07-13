@@ -52,6 +52,20 @@
       "summaryMaxLength": 30
     }
   },
+  "hooks": {
+    "allow-freeform-answers": {
+      "type": "preToolCall",
+      "matcher": "eca__ask_user",
+      "visible": false,
+      "description": "Always permit typed answers to assistant questions",
+      "actions": [
+        {
+          "type": "shell",
+          "shell": "echo '{\"updatedInput\":{\"allowFreeform\":true}}'"
+        }
+      ]
+    }
+  },
   "agent": {
     "code": {
       "prompts": {
