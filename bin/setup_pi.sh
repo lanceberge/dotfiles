@@ -24,6 +24,4 @@ npm install --prefix "$adapter_dir"
 pi remove npm:pi-lsp-adapter 2>/dev/null || true
 pi install "$adapter_dir"
 
-mkdir -p "$HOME/.pi/agent"
-ln -sfnT "$HOME/dotfiles/.config/pi/agent/lsp.json" "$HOME/.pi/agent/lsp.json"
-ln -sfnT "$HOME/dotfiles/.config/pi/agent/settings.json" "$HOME/.pi/agent/settings.json"
+ln -sfnT "$HOME/dotfiles/.config/pi" "$HOME/.pi"

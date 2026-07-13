@@ -1,0 +1,10 @@
+# herdr configuration
+# Reference: https://herdr.dev/docs/config-reference/
+
+[keys]
+focus_agent = "prefix+ctrl+1..9"   # ctrl+b then alt+N -> jump to agent N
+next_agent = "prefix+alt+n"       # cycle to next agent in the panel
+previous_agent = "prefix+alt+p"   # cycle to previous agent
+
+# Jump directly to a workspace (worktree) by index.
+switch_workspace = "prefix+shift+1..9"

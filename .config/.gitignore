@@ -7,6 +7,8 @@
 !bspwm/
 !fish/
 !ghostty/
+!herdr/
+!herdr/config.toml
 !hypr/
 !hypr/*.conf
 !i3/
@@ -40,3 +42,4 @@
 !pi/agent/
 !pi/agent/settings.json
 !pi/agent/lsp.json
+!pi/agent/web-search.json

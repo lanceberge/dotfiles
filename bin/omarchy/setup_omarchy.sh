@@ -42,8 +42,6 @@ mkdir -p ~/.local/bin
 gh release download nightly --pattern 'expert_linux_amd64' --repo expert-lsp/expert --dir ~/.local/bin
 chmod +x ~/.local/bin/expert_linux_amd64
 
-mkdir -p ~/.pi/agent
-ln -sfnT ~/dotfiles/.config/pi/agent/lsp.json ~/.pi/agent/lsp.json
 
 install_packages=(
     difftastic
@@ -107,6 +105,9 @@ sudo systemctl enable --now kanata.service
 
 mkdir -p "$HOME/.config/eca"
 ln -sfn "$HOME/dotfiles/.config/eca" "$HOME/.config/eca"
+
+mkdir -p "$HOME/.config"
+ln -sfnT "$HOME/dotfiles/.config/herdr" "$HOME/.config/herdr"
 
 mkdir -p "$HOME/.claude"
 ln -sfnT "$HOME/dotfiles/.agents/skills" "$HOME/.claude/skills"
