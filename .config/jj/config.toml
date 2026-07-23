@@ -12,7 +12,7 @@ auto-track-bookmarks = "*"
 editor = "emacsclient -t"
 default-command = "status"
 diff-editor = ":builtin"
-pager = "less -FR"
+pager = "less -FRX"
 conflict-marker-style = "git"
 
 [git]
