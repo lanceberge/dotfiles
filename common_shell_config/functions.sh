@@ -133,7 +133,7 @@ function copy() {
 function _set_kubeconfig() {
     [ -d "$HOME/.kube" ] || return 0
     local configs
-    configs="$(find "$HOME/.kube" -type f -print | command paste -sd ':' -)" || return
+    configs="$(find "$HOME/.kube" -type f -print -maxdepth 1 | command paste -sd ':' -)" || return
     if [ -n "$configs" ]; then
         export KUBECONFIG="$configs"
     fi
@@ -165,7 +165,10 @@ function _read_numbered_result() {
     REPLY=
 
     if [ "$#" -eq 3 ]; then
-        [ -n "$results" ] || { printf '%s: no %s available\n' "$command_name" "$label" >&2; return 1; }
+        [ -n "$results" ] || {
+            printf '%s: no %s available\n' "$command_name" "$label" >&2
+            return 1
+        }
         printf '%s\n' "$results" | awk '{printf "%d. %s\n", NR, $0}'
         [ -t 0 ] && printf '%s: ' "$label" >&2
         read -r choice || [ -n "$choice" ] || return 0
@@ -187,7 +190,10 @@ function _read_numbered_result() {
 
 # With no argument, list contexts and read a name or number from stdin.
 function kx() {
-    [ "$#" -le 1 ] || { printf 'Usage: kx [context]\n' >&2; return 2; }
+    [ "$#" -le 1 ] || {
+        printf 'Usage: kx [context]\n' >&2
+        return 2
+    }
     _set_kubeconfig || return
     local contexts REPLY
     contexts="$(kubectl config get-contexts -o name)" || return
@@ -198,7 +204,10 @@ function kx() {
 
 # similar interface to kx but for setting the current namespace
 function set_ns() {
-    [ "$#" -le 1 ] || { printf 'Usage: set_ns [namespace]\n' >&2; return 2; }
+    [ "$#" -le 1 ] || {
+        printf 'Usage: set_ns [namespace]\n' >&2
+        return 2
+    }
     _set_kubeconfig || return
     local namespaces REPLY
     namespaces="$(kubectl get namespaces --no-headers -o custom-columns=:metadata.name)" || return
