@@ -53,7 +53,10 @@ alias dll='docker logs $(docker ps -l -q)' # last docker logs
 
 # Kubernetes
 alias k='kubectl'
-alias kqa='kc delete all --all -n $(whoami)'
+alias kqa='kubectl delete all --all -n $(whoami)'
+alias kp='kubectl get po'
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
 
 #Maven
 alias mcs='mvn clean install -DskipTests'
