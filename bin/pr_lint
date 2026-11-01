@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ${1:-} == --help || ${1:-} == -h ]]; then
+  echo "usage: pr_lint (run from a project root)"
+  exit 0
+fi
+if (( $# > 0 )); then
+  echo "pr_lint: no arguments expected" >&2
+  exit 2
+fi
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+if [[ -f go.mod ]]; then
+  exec "$script_dir/linters/go_linter.sh"
+fi
+
+echo "pr_lint: unsupported project root (expected go.mod)" >&2
+exit 2
