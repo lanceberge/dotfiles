@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Only CLI sessions launched by +ghostel-llm carry this original buffer name.
+[[ -n ${GHOSTEL_LLM_BUFFER_NAME:-} ]] || exit 0
+
+payload_file=$(mktemp /tmp/ghostel-llm-prompt.XXXXXX) || exit 0
+trap 'rm -f -- "$payload_file"' EXIT
+jq -c --arg name "$GHOSTEL_LLM_BUFFER_NAME" \
+  '. + {ghostel_buffer_name: $name}' > "$payload_file" || exit 0
+
+# Emacs claims the first prompt before it starts the async title request.
+emacsclient -e "(+agent-lisp-ghostel-first-prompt \"$payload_file\")" \
+  >/dev/null 2>&1 || true

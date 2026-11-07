@@ -1,6 +1,5 @@
 approval_policy = "untrusted"
 sandbox_mode = "workspace-write"
-notify = ["/home/lance/dotfiles/bin/agents/agent-notify", "Codex"]
 
 [tui]
 theme = "ansi"

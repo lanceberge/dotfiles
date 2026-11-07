@@ -37,6 +37,16 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/agents/ghostel-first-prompt-hook"
+          }
+        ]
+      }
     ]
   }
 }
