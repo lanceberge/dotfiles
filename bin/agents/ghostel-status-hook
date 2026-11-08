@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Only CLI sessions launched by +ghostel-llm carry this stable identity.
+[[ -n ${GHOSTEL_LLM_BUFFER_NAME:-} ]] || exit 0
+status=${1:-running}
+
+expression=$(jq -nr --arg name "$GHOSTEL_LLM_BUFFER_NAME" --arg status "$status" \
+  '"(+agent-lisp-ghostel-update \($name | tojson) \($status | tojson))"') || exit 0
+emacsclient -e "$expression" >/dev/null 2>&1 || true

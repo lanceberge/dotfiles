@@ -23,6 +23,10 @@
           {
             "type": "command",
             "command": "$HOME/dotfiles/bin/agents/agent-notify Claude"
+          },
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/agents/ghostel-status-hook ready"
           }
         ]
       }
@@ -43,7 +47,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/dotfiles/bin/agents/ghostel-first-prompt-hook"
+            "command": "$HOME/dotfiles/bin/agents/ghostel-status-hook"
           }
         ]
       }

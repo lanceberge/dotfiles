@@ -4,6 +4,7 @@ sandbox_mode = "workspace-write"
 [tui]
 theme = "ansi"
 session_picker_view = "dense"
+screen_reader_detection_done = true
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4

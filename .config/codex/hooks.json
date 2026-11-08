@@ -1,11 +1,32 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/agents/block-git-use-jj.sh"
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/dotfiles/bin/agents/ghostel-first-prompt-hook"
+            "command": "$HOME/dotfiles/bin/agents/ghostel-status-hook"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/agents/ghostel-status-hook ready"
           }
         ]
       }
