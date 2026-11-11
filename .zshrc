@@ -23,6 +23,7 @@ DISABLE_AUTOUPDATE=false
 export KEYTIMEOUT=20
 
 bindkey -e # emacs keys
+autoload -U select-word-style && select-word-style bash # more emacs-style M-f, M-b, M-d, etc. in shells
 
 autoload edit-command-line
 zle -N edit-command-line

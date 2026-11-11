@@ -7,6 +7,7 @@ alias jl="jupyter lab"
 alias j='jj'
 alias codexp='codex -p local'
 alias codex-yolo='codex -p local --ask-for-approval never --sandbox workspace-write'
+alias date-iso='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 
 # Navigation
 alias cd_df='cd ~/dotfiles'
